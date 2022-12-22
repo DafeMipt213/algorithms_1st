@@ -36,7 +36,8 @@ RUN LANG="C.UTF-8" \
 
 # Verify expected build and debug tools are present
 RUN apt-get update \
-    && apt-get -y install build-essential cmake cppcheck valgrind clang clang-format lldb llvm gdb python3-dev \
+    && apt-get -y install build-essential cmake cppcheck valgrind \
+                          clang clang-format  lldb llvm gdb python3-dev \
     # Install tools and shells not in common script
     && apt-get install -yq vim vim-doc xtail software-properties-common libsecret-1-dev \
     # Install additional tools (useful for 'puppeteer' project)

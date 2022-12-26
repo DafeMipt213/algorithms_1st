@@ -7,7 +7,7 @@
 		// Update 'VARIANT' to pick an Debian / Ubuntu OS version: debian-11, debian-10, debian-9, ubuntu-21.04, ubuntu-20.04, ubuntu-18.04
 		// Use Debian 11, Debian 9, Ubuntu 18.04 or Ubuntu 21.04 on local arm64/Apple Silicon
 		"args": {
-			"VARIANT": "ubuntu-20.04"
+			"VARIANT": "ubuntu-22.04"
 		}
 	},
 	"runArgs": [
@@ -20,7 +20,13 @@
 		// Configure properties specific to VS Code.
 		"vscode": {
 			// Set *default* container specific settings.json values on container create.
-			"settings": {},
+			"settings": {
+				"editor.formatOnSave": true,
+				"clang-format.fallbackStyle": "Google",
+				"C_Cpp.clang_format_fallbackStyle": "Google",
+				"C_Cpp.formatting": "clangFormat",
+				"C_Cpp.clang_format_path": "clang-format"
+			},
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"ms-vscode.cpptools",

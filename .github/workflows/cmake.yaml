@@ -37,7 +37,10 @@ jobs:
       - name: Test task 03
         working-directory: ${{github.workspace}}/build
         run: ./task_03/tests_03
+<<<<<<< HEAD
 
       - name: Test task 04
         working-directory: ${{github.workspace}}/build
         run: ./task_04/tests_04
+=======
+>>>>>>> 60297e3 (add ci for task 3)

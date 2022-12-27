@@ -4,3 +4,4 @@ project(homeworks)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/task_01)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/task_02)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/task_03)

@@ -1,0 +1,20 @@
+name: clang-tidy-review
+
+on:
+  push: {}
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: clang-tidy review
+        uses: ZedThree/clang-tidy-review@v0.10.1
+        id: review
+
+      - if: steps.review.outputs.total_comments > 0
+        run: exit 1

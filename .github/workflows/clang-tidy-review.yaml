@@ -1,9 +1,7 @@
 name: clang-tidy-review
 
-on:
-  push: {}
-  pull_request:
-    branches: ["main"]
+# You can be more specific, but it currently only works on pull requests
+on: [pull_request]
 
 jobs:
   build:
@@ -12,12 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: clang-tidy review
-        uses: ZedThree/clang-tidy-review@v0.10.1
-        id: review
+      # Optionally generate compile_commands.json
+
+      - uses: ZedThree/clang-tidy-review@v0.10.0
         with:
-          apt_packages: "libgtest-dev"
           split_workflow: true
 
-      - if: steps.review.outputs.total_comments > 0
-        run: exit 1
+      - uses: actions/upload-artifact@v3
+        with:
+          name: clang-tidy-review
+          path: |
+            clang-tidy-review-output.json
+            clang-tidy-review-metadata.json

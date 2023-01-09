@@ -1,7 +1,7 @@
 #include <iostream>
 
 int main() {
-  auto bar = new int[10];
+  auto foo = new int[10];
 
   return 0;
 }

@@ -34,3 +34,5 @@ jobs:
           path: |
             clang-tidy-review-output.json
             clang-tidy-review-metadata.json
+
+      - uses: ZedThree/clang-tidy-review/post@v0.10.1

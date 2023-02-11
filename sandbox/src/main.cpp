@@ -1,3 +1,10 @@
 #include <iostream>
 
-int main() { return 0; }
+class Vector {
+ private:
+  int *data_;
+};
+
+int main() {
+  return 0;
+}

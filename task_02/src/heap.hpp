@@ -19,8 +19,8 @@ class MinHeap {
 };
 
 template<typename T>
-void MinHeap<T>::Push(T n) { 
-  data_.push_back(n);
+void MinHeap<T>::Push(T value) { 
+  data_.push_back(value);
   this->SiftUp(this->Size() - 1);
 }
 

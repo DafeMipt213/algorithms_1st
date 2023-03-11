@@ -7,9 +7,10 @@ class Stack {
  public:
   void Push(int value);
   int Pop();
+  bool IsEmpty();
 
  private:
-  std::stack<int> data_;
+  std::vector<int> data_;
 };
 
 class MinStack {
@@ -19,5 +20,6 @@ class MinStack {
   int GetMin();
 
  private:
-  std::vector<int> data_;
+  Stack data_;
+  Stack minData_;
 };

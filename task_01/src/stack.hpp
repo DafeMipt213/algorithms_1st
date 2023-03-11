@@ -15,6 +15,7 @@ class Stack {
 class MinStack {
  public:
   void Push(int value);
+
   int Pop();
   int GetMin();
 

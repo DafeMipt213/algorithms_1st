@@ -17,9 +17,8 @@ class MinStack {
   int Pop();
   int GetMin();
   int GetFirst();
-  
 
  private:
-  std::vector<int> data_ = {};    //stack data
+  std::vector<int> data_ = {};  // stack data
   Stack min_stack_;
 };

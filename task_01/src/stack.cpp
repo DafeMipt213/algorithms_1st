@@ -1,14 +1,15 @@
 #include "stack.hpp"
-#include <exception>
+
 #include <algorithm>
+#include <exception>
 #include <iostream>
 
 void Stack::Push(int value) { data_.push_back(value); }
 
 int Stack::Pop() {
-  if(data_.size() == 0)
-  {
-    throw std::range_error("can't delete the element of Stack, because it's empty");
+  if (data_.size() == 0) {
+    throw std::range_error(
+        "can't delete the element of Stack, because it's empty");
   }
   auto result = data_[data_.size() - 1];
   data_.pop_back();

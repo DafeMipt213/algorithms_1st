@@ -34,7 +34,8 @@ std::vector<int> Merge(const std::vector<int>& data1,
 
 std::vector<int> SplitLeft(const std::vector<int>& data) {
   std::vector<int> left = {};
-  for (int i = 0; i < data.size() / 2; ++i) {
+  left.reserve(data.size() / 2);
+  for (unsigned long i = 0; i < data.size() / 2; ++i) {
     left.push_back(data[i]);
   }
   return left;
@@ -42,7 +43,8 @@ std::vector<int> SplitLeft(const std::vector<int>& data) {
 
 std::vector<int> SplitRight(const std::vector<int>& data) {
   std::vector<int> right = {};
-  for (int i = data.size() / 2; i < data.size(); ++i) {
+  right.reserve(data.size() / 2);
+  for (unsigned long i = data.size() / 2; i < data.size(); ++i) {
     right.push_back(data[i]);
   }
   return right;

@@ -31,6 +31,9 @@ int MedianOfMedians(const std::vector<int>& data) {
   }
   std::vector<int> last = {};
   if (data.size() % 5 != 0) {
+    if (data.size() - cnt - 1 > 5) {
+      cnt += 5;
+    }
     for (int i = cnt; i < data.size(); ++i) {
       last.push_back(data[i]);
     }
@@ -56,11 +59,18 @@ int GetOrderStatistics(const std::vector<int>& data, size_t n) {
   int pivot = 0;
   int elem = MedianOfMedians(data);
   for (int curr = 0; curr < tmp.size(); ++curr) {
-    if (tmp[curr] <= elem) {
+    if (tmp[curr] < elem) {
       std::swap(tmp[pivot], tmp[curr]);
       pivot += 1;
     }
   }
+  int elem_index = 0;
+  for (int i = 0; i < data.size(); ++i) {
+    if (tmp[i] == elem) {
+      elem_index = i;
+    }
+  }
+  std::swap(tmp[elem_index], tmp[pivot]);
   if (pivot != 0)
     pivot -= 1;
   else
@@ -73,7 +83,7 @@ int GetOrderStatistics(const std::vector<int>& data, size_t n) {
     for (int i = 0; i < pivot; ++i) {
       tmp2[i] = tmp[i];
     }
-    return GetOrderStatistics(tmp2, n);
+    for (int i = 0; i < pivot; ++i) return GetOrderStatistics(tmp2, n);
   } else {
     std::vector<int> tmp2;
     tmp2.resize(tmp.size() - pivot - 1);

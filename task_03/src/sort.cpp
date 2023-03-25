@@ -7,29 +7,20 @@ std::vector<int> Merge(const std::vector<int>& data1,
                        const std::vector<int>& data2) {
   int i = 0;
   int j = 0;
-  std::vector<int> DataMerged = {};
-  while (i != data1.size() and j != data2.size()) {
+  std::vector<int> data_merged;
+  data_merged.reserve(data1.size() + data2.size());
+  while (i != data1.size() && j != data2.size()) {
     if (data1[i] > data2[j]) {
-      DataMerged.push_back(data2[j]);
+      data_merged.push_back(data2[j]);
       j++;
     } else {
-      DataMerged.push_back(data1[i]);
+      data_merged.push_back(data1[i]);
       i++;
     }
   }
-  while (i != data1.size()) {
-    {
-      DataMerged.push_back(data1[i]);
-      i++;
-    }
-  }
-  while (j != data2.size()) {
-    {
-      DataMerged.push_back(data2[j]);
-      j++;
-    }
-  }
-  return DataMerged;
+  data_merged.insert(data_merged.end(), data1.begin() + i, data1.end());
+  data_merged.insert(data_merged.end(), data2.begin() + j, data2.end());
+  return data_merged;
 }
 
 std::vector<int> SplitLeft(const std::vector<int>& data) {

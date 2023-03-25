@@ -11,6 +11,6 @@ int main() {
   heap2.Push(2);
   heap2.Push(3);
   heap2.Push(5);
-  heap1 = heap1.Merge(heap2); //{1, 2, 5, 4, 3, 7}
+  heap1 = heap1.Merge(heap2);  //{1, 2, 5, 4, 3, 7}
   return 0;
 }

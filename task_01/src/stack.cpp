@@ -18,8 +18,7 @@ int Stack::Pop() {
 int Stack::Top() { return data_.back(); }
 
 bool Stack::Empty() {
-  if(data_.size() == 0)
-  {
+  if (data_.size() == 0) {
     return true;
   }
   return false;

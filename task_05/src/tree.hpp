@@ -23,5 +23,4 @@ class Tree {
   bool Insert(int key, int value);
   void InsertOrUpdate(int key, int value);
   int Find(int key) const;
-  void Remove(int key);
 };

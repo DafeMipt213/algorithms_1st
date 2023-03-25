@@ -1,4 +1,5 @@
 #include "tree.hpp"
+
 #include <stdexcept>
 
 Tree::Tree() {}
@@ -29,8 +30,7 @@ bool Tree::Insert(int key, int value) {
         }
       } else if (key == tmpnode->key) {
         return false;
-      } else
-      {
+      } else {
         if (root->left_child == nullptr) {
           Node* temp = new Node;
           temp->parent = tmpnode;
@@ -75,8 +75,7 @@ void Tree::InsertOrUpdate(int key, int value) {
       } else if (key == tmpnode->key) {
         tmpnode->data = value;
         return;
-      } else
-      {
+      } else {
         if (root->left_child == nullptr) {
           Node* temp = new Node;
           temp->parent = tmpnode;

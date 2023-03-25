@@ -18,6 +18,7 @@ class MinStack {
   int Pop();
   int GetMin();
   int Top();
+
  private:
   Stack data_;  // stack data
   Stack min_stack_;

@@ -1,21 +1,54 @@
 #include "stack.hpp"
+#include <iostream>
 
-#include <algorithm>
-
-void Stack::Push(int value) { data_.push(value); }
+void Stack::Push(int value) { 
+  Node* n = new Node();
+  n-> val = value;
+  n-> prev = last;
+  last = n;
+};
 
 int Stack::Pop() {
-  auto result = data_.top();
-  data_.pop();
-  return result;
-}
+  if (last == nullptr){
+    return 0;
+    std::cout << "Error";
+  }
+  int result = last->val;
+  last  = last->prev;
 
-void MinStack::Push(int value) { data_.push_back(value); }
+  return result;
+};
+
+void MinStack::Push(int value) { 
+        Node* n = new Node();
+    n->val = value;
+    if (last == nullptr) {
+        n->minn = value;
+    }
+    else {
+        if (value < last->minn) {
+            n->minn = value;
+        }
+        else {
+            n->minn = last->minn;
+        }
+    }
+    n->prev = last;
+    last = n;
+}
 
 int MinStack::Pop() {
-  auto result = data_.back();
-  data_.pop_back();
-  return result;
-}
+  if (last == nullptr){
+    return 0;
+    std::cout << "Error";
+  }
+  int result = last->val;
+  last  = last->prev;
 
-int MinStack::GetMin() { return *std::min_element(data_.begin(), data_.end()); }
+  return result;
+};
+
+int MinStack::GetMin() {
+  if (last != nullptr)
+    return last->minn;
+};

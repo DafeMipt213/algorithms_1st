@@ -1,4 +1,18 @@
 #include <iostream>
 #include <vector>
 
-int main() { return 0; }
+class Tree{
+
+private:
+    struct Node{
+        Node* parent = ;
+        Node* left_child = ;
+        Node* right_child = ;
+        int Key;
+    }
+}
+
+int main() { 
+    
+    return 0; 
+    }

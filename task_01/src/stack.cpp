@@ -1,5 +1,6 @@
 #include "stack.hpp"
 #include <iostream>
+#include <exception>
 
 void Stack::Push(int value) { 
   Node* n = new Node();
@@ -8,16 +9,21 @@ void Stack::Push(int value) {
   last = n;
 };
 
+
+
+
 int Stack::Pop() {
   if (last == nullptr){
     return 0;
-    std::cout << "Error";
+    throw std::range_error("Error");
   }
   int result = last->val;
   last  = last->prev;
 
   return result;
-};
+}; 
+
+
 
 void MinStack::Push(int value) { 
         Node* n = new Node();
@@ -40,7 +46,7 @@ void MinStack::Push(int value) {
 int MinStack::Pop() {
   if (last == nullptr){
     return 0;
-    std::cout << "Error";
+    throw std::range_error("Error");
   }
   int result = last->val;
   last  = last->prev;

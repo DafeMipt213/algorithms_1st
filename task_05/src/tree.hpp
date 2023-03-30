@@ -2,6 +2,7 @@
 
 
 class Tree {
+/*
 private:
   enum class Color {Red, Black};
   struct Node{
@@ -12,9 +13,11 @@ private:
         // 0 - red, 
         Color c = Color::Red;
   };
+*/
 public:
+/*
   Node* root = nullptr;
-
+*/
   Tree();
 
   bool Insert(int key, int value);

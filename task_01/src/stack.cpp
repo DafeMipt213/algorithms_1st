@@ -27,12 +27,15 @@ void MinStack::Push(int value) {
     if (minimum_.Get() >= value)
       minimum_.Push(value);
   }
-  catch(std::out_of_range) {
+  catch(std::out_of_range&) {
     minimum_.Push(value);
   }
 }
 
 int MinStack::Pop() {
+  if (data_.empty())
+    throw std::out_of_range("");
+    
   auto result = data_[data_.size() - 1];
   data_.pop_back();
   return result;

@@ -20,6 +20,8 @@ TEST(SortTest, EvenInt) {
 
 TEST(SortTest, SimpleChar) {
   ASSERT_EQ(Sort<char>({'a', 'a'}), (std::vector<char>{'a', 'a'}));
-  ASSERT_EQ(Sort<char>({'c', 'a', 'd', 'b'}), (std::vector<char>{'a', 'b', 'c', 'd'}));
-  ASSERT_EQ(Sort<char>({'d', 'a', 'd', 'a'}), (std::vector<char>{'a', 'a', 'd', 'd'}));
+  ASSERT_EQ(Sort<char>({'c', 'a', 'd', 'b'}),
+            (std::vector<char>{'a', 'b', 'c', 'd'}));
+  ASSERT_EQ(Sort<char>({'d', 'a', 'd', 'a'}),
+            (std::vector<char>{'a', 'a', 'd', 'd'}));
 }

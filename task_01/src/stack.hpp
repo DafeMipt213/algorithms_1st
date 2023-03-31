@@ -11,7 +11,7 @@ struct Dot {
   T value = T();
 
  public:
-  Dot<T>(Dot *finish1, T value1) : back(finish1), value(value1) {}
+  Dot<T>(Dot<T> *finish1, T value1) : back(finish1), value(value1) {}
   Dot<T>(T value1) : value(value1) {}
   Dot<T>() {}
   Dot<T> *GetBack() { return this->back; }
@@ -85,17 +85,9 @@ struct DotWithMin {
   T value;
   T min_value;
   DotWithMin<T>(DotWithMin<T> *finish1, T value1, T value2)
-      : next(nullptr), back(finish1), value(value1), min_value(value2) {
-    // value = value1;
-    // min_value = value2;
-  }
+      : next(nullptr), back(finish1), value(value1), min_value(value2) {}
   DotWithMin<T>(T value1)
-      : back(nullptr), next(nullptr), value(value1), min_value(value1) {
-    // back = nullptr;
-    // next = nullptr;
-    // value = value1;
-    // min_value = value1;
-  }
+      : back(nullptr), next(nullptr), value(value1), min_value(value1) {}
 };
 
 template <typename T>

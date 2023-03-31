@@ -65,7 +65,6 @@ TEST(MinStackTest, SimpleInt) {
   ASSERT_EQ(stack.Pop(), 1);  // Stack []
 }
 
-
 TEST(MinStackTest, SimpleChar) {
   MinStack<char> stack;
   stack.Push('a');  // Stack [a]

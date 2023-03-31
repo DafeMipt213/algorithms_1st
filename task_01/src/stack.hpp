@@ -11,11 +11,11 @@ struct Dot {
   T value = T();
 
  public:
-  Dot<T>(Dot<T> *finish1, T value1) : back(finish1), value(value1) {}
-  Dot<T>(T value1) : value(value1) {}
-  Dot<T>() {}
-  Dot<T> *GetBack() { return this->back; }
-  Dot<T> *GetNext() { return this->next; }
+  Dot(Dot *finish1, T value1) : back(finish1), value(value1) {}
+  Dot(T value1) : value(value1) {}
+  Dot() {}
+  Dot *GetBack() { return this->back; }
+  Dot *GetNext() { return this->next; }
   T GetValue() { return this->value; }
 };
 
@@ -84,9 +84,9 @@ struct DotWithMin {
   DotWithMin<T> *next;
   T value;
   T min_value;
-  DotWithMin<T>(DotWithMin<T> *finish1, T value1, T value2)
+  DotWithMin(DotWithMin *finish1, T value1, T value2)
       : next(nullptr), back(finish1), value(value1), min_value(value2) {}
-  DotWithMin<T>(T value1)
+  DotWithMin(T value1)
       : back(nullptr), next(nullptr), value(value1), min_value(value1) {}
 };
 

@@ -1,6 +1,6 @@
 #include "tree.hpp"
 
-Tree::Tree() {}
+/*Tree::Tree() {}
 
 bool Tree::Insert(int key, int value) { 
         if (root == nullptr)
@@ -36,3 +36,4 @@ bool Tree::Insert(int key, int value) {
 void Tree::InsertOrUpdate(int key, int value) {}
 
 int Tree::Find(int key) const { return 0; }
+*/

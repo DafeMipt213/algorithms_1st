@@ -1,5 +1,5 @@
 #pragma once
-struct Node{
+/*struct Node{
   int key;
   Node* parent;
   Node* left;
@@ -29,3 +29,4 @@ private:
   Color data;
   int Key;
 };
+*/

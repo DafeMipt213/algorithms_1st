@@ -95,7 +95,6 @@ TEST(HeapTest, EqualDouble) {
   ASSERT_EQ(heap.Pop(), 2.2);
 }
 
-
 TEST(HeapTest, EmptyDouble) {
   MinHeap<double> heap;
   ASSERT_ANY_THROW(heap.Pop());

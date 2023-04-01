@@ -6,8 +6,7 @@
 void Stack::Push(int value) { data_.push_back(value); }
 
 int Stack::Pop() {
-  if (data_.empty())
-    throw std::out_of_range("");
+  if (data_.empty()) throw std::out_of_range("");
 
   auto result = data_[data_.size() - 1];
   data_.pop_back();
@@ -21,27 +20,24 @@ int Stack::Get() {
     return data_[data_.size() - 1];
 }
 
-void MinStack::Push(int value) { 
-  data_.push_back(value); 
+void MinStack::Push(int value) {
+  data_.push_back(value);
   try {
-    if (minimum_.Get() >= value)
-      minimum_.Push(value);
-  }
-  catch(std::out_of_range&) {
+    if (minimum_.Get() >= value) minimum_.Push(value);
+  } catch (std::out_of_range&) {
     minimum_.Push(value);
   }
 }
 
 int MinStack::Pop() {
-  if (data_.empty())
-    throw std::out_of_range("");
-    
+  if (data_.empty()) throw std::out_of_range("");
+
   auto result = data_[data_.size() - 1];
   data_.pop_back();
   return result;
 }
 
-int MinStack::GetMin() { 
+int MinStack::GetMin() {
   auto result = minimum_.Get();
   return result;
 }

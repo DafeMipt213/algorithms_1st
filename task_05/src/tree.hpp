@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 class Tree {
     private:
@@ -16,3 +16,4 @@ class Tree {
     void InsertOrUpdate(int key, int value);
     int Find(int key) const;
 };
+*/

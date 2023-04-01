@@ -14,6 +14,6 @@ class MinHeap {
   void Sift_up(int index);
   void Sift_down(int index);
 
- public:
+ private:
   std::vector<int> array;
 };

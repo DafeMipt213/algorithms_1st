@@ -1,16 +1,16 @@
-#include "tree.hpp"
+// #include "tree.hpp"
 
-#include <stdexcept>
+// #include <stdexcept>
 
-Tree::Tree() {}
+// Tree::Tree() {}
 
-bool Tree::Insert(int key, Color value) {
-  return 0;
-}  // 1 - получилось, 0 - нет
+// bool Tree::Insert(int key, Color value) {
+//   return 0;
+// }  // 1 - получилось, 0 - нет
 
-void Tree::InsertOrUpdate(int key, int value) {}
+// void Tree::InsertOrUpdate(int key, int value) {}
 
-int Tree::Find(int key) const {
-  if (root == nullptr) throw std::out_of_range("Tree is empty");
-  return 0;
-}
+// int Tree::Find(int key) const {
+//   if (root == nullptr) throw std::out_of_range("Tree is empty");
+//   return 0;
+// }

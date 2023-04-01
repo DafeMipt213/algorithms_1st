@@ -10,7 +10,9 @@ class MinHeap {
   void Push(int value);
   int Pop();
   size_t Size();
-
+  std::vector<int> heap;
  private:
-  std::priority_queue<int, std::vector<int>, std::greater<int>> data_;
+  
+  void SiftUp(int i);
+  void SiftDown(int i);
 };

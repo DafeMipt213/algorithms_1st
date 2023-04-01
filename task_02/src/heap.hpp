@@ -11,7 +11,6 @@ class MinHeap {
   int Pop();
   size_t Size();
 
-
  private:
   std::vector<int> data_;
   void SiftUp();

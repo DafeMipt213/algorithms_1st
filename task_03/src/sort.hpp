@@ -5,9 +5,8 @@
 template <typename T>
 std::vector<T> QuickSort(const std::vector<T>& data) {
   std::vector<T> result = data;
-  if (data.empty())
-    return result;
-  std::vector<int> LeftAndRight = {0, int(data.size())-1};
+  if (data.empty()) return result;
+  std::vector<int> LeftAndRight = {0, int(data.size()) - 1};
   int i{0}, j{0}, right{0}, left{0};
   T midElem;
   do {
@@ -18,32 +17,29 @@ std::vector<T> QuickSort(const std::vector<T>& data) {
 
     i = left;
     j = right;
-    
+
     midElem = result[(j + i) / 2];
-    do{
-      while (result[i] < midElem)
-        ++i;
-      while (result[j] > midElem)
-        --j;
-      if (i <= j){
+    do {
+      while (result[i] < midElem) ++i;
+      while (result[j] > midElem) --j;
+      if (i <= j) {
         std::swap(result[i], result[j]);
         ++i;
         --j;
       }
-    } while (i<=j);
+    } while (i <= j);
 
-    if (left < j){
+    if (left < j) {
       LeftAndRight.push_back(left);
       LeftAndRight.push_back(j);
     }
 
-    if (right > i){
+    if (right > i) {
       LeftAndRight.push_back(i);
       LeftAndRight.push_back(right);
     }
 
-
-  } while(!LeftAndRight.empty());
+  } while (!LeftAndRight.empty());
 
   return result;
 }

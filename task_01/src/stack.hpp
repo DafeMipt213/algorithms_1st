@@ -1,9 +1,8 @@
 #pragma once
 
+#include <cstddef>
 #include <stdexcept>
 #include <vector>
-#include <cstddef>
-
 
 template <typename T>
 class Stack {
@@ -20,8 +19,8 @@ class Stack {
 };
 
 template <typename T>
-void Stack<T>::Push(T value){ 
-  data_.push_back(value); 
+void Stack<T>::Push(T value) {
+  data_.push_back(value);
   ++size;
 }
 
@@ -36,7 +35,7 @@ T Stack<T>::Pop() {
 
 template <typename T>
 T Stack<T>::Back() {
-  return data_[size-1];
+  return data_[size - 1];
 }
 
 template <typename T>
@@ -49,11 +48,6 @@ void Stack<T>::Clear() {
   size = 0;
   data_.clear();
 }
-
-
-
-
-
 
 template <typename T>
 class MinStack {
@@ -72,11 +66,10 @@ class MinStack {
 };
 
 template <typename T>
-void MinStack<T>::Push(T value) { 
-  if (size == 0 || minValues.back() >= value)
-    minValues.push_back(value);
+void MinStack<T>::Push(T value) {
+  if (size == 0 || minValues.back() >= value) minValues.push_back(value);
 
-  data_.push_back(value); 
+  data_.push_back(value);
   ++size;
 }
 
@@ -86,21 +79,20 @@ T MinStack<T>::Pop() {
   T result = data_.back();
   data_.pop_back();
 
-  if (result == minValues.back())
-    minValues.pop_back();
+  if (result == minValues.back()) minValues.pop_back();
 
   --size;
   return result;
 }
 
 template <typename T>
-T MinStack<T>::GetMin() { 
-  return minValues.back();  
+T MinStack<T>::GetMin() {
+  return minValues.back();
 }
 
 template <typename T>
 T MinStack<T>::Back() {
-  return data_[size-1];
+  return data_[size - 1];
 }
 
 template <typename T>

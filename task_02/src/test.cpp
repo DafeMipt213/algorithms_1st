@@ -30,53 +30,53 @@ TEST(HeapTest, Empty) {
 TEST(HeapTest, minElement) {
   MinHeap<int> heap;
   ASSERT_ANY_THROW(heap.getMin());
-  heap.Push(6);              // [6]
-  heap.Push(2);              // [2, 6]
-  heap.Push(3);              // [2, 3, 6]
-  heap.Push(5);              // [2, 3, 5, 6]
-  heap.Push(4);              // [2, 3, 4, 5, 6]
-  ASSERT_EQ(heap.getMin(), 2); 
+  heap.Push(6);  // [6]
+  heap.Push(2);  // [2, 6]
+  heap.Push(3);  // [2, 3, 6]
+  heap.Push(5);  // [2, 3, 5, 6]
+  heap.Push(4);  // [2, 3, 4, 5, 6]
+  ASSERT_EQ(heap.getMin(), 2);
   heap.Clear();
-  ASSERT_EQ(heap.Size(), 0);  
+  ASSERT_EQ(heap.Size(), 0);
 }
 
 TEST(HeapTest, maxElement) {
   MinHeap<int> heap;
   ASSERT_ANY_THROW(heap.getMax());
-  heap.Push(6);              // [6]
-  heap.Push(2);              // [2, 6]
-  heap.Push(3);              // [2, 3, 6]
-  heap.Push(5);              // [2, 3, 5, 6]
-  heap.Push(4);              // [2, 3, 4, 5, 6]
-  ASSERT_EQ(heap.getMax(), 6); 
+  heap.Push(6);  // [6]
+  heap.Push(2);  // [2, 6]
+  heap.Push(3);  // [2, 3, 6]
+  heap.Push(5);  // [2, 3, 5, 6]
+  heap.Push(4);  // [2, 3, 4, 5, 6]
+  ASSERT_EQ(heap.getMax(), 6);
   heap.Clear();
-  ASSERT_EQ(heap.Size(), 0);  
+  ASSERT_EQ(heap.Size(), 0);
 }
 
 TEST(HeapTest, minElementChar) {
   MinHeap<char> heap;
   ASSERT_ANY_THROW(heap.getMin());
-  heap.Push('k');              // ['k']
-  heap.Push('l');              // ['k', 'l']
-  heap.Push('h');              // ['k', 'l', 'h']
-  heap.Push('b');              // ['k', 'l', 'h', 'b']
-  heap.Push('p');              // ['k', 'l', 'h', 'b', 'p']
-  ASSERT_EQ(heap.getMin(), 'b'); 
+  heap.Push('k');  // ['k']
+  heap.Push('l');  // ['k', 'l']
+  heap.Push('h');  // ['k', 'l', 'h']
+  heap.Push('b');  // ['k', 'l', 'h', 'b']
+  heap.Push('p');  // ['k', 'l', 'h', 'b', 'p']
+  ASSERT_EQ(heap.getMin(), 'b');
   heap.Clear();
-  ASSERT_EQ(heap.Size(), 0);  
+  ASSERT_EQ(heap.Size(), 0);
 }
 
 TEST(HeapTest, maxElementChar) {
   MinHeap<char> heap;
   ASSERT_ANY_THROW(heap.getMax());
-  heap.Push('k');              // ['k']
-  heap.Push('l');              // ['k', 'l']
-  heap.Push('h');              // ['k', 'l', 'h']
-  heap.Push('p');              // ['k', 'l', 'h', 'p']
-  heap.Push('b');              // ['k', 'l', 'h', 'p', 'b']
-  ASSERT_EQ(heap.getMax(), 'p'); 
+  heap.Push('k');  // ['k']
+  heap.Push('l');  // ['k', 'l']
+  heap.Push('h');  // ['k', 'l', 'h']
+  heap.Push('p');  // ['k', 'l', 'h', 'p']
+  heap.Push('b');  // ['k', 'l', 'h', 'p', 'b']
+  ASSERT_EQ(heap.getMax(), 'p');
   heap.Clear();
-  ASSERT_EQ(heap.Size(), 0);  
+  ASSERT_EQ(heap.Size(), 0);
 }
 
 TEST(HeapTest, Complex) {

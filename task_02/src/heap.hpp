@@ -16,7 +16,7 @@ class MinHeap<int> {
 public:
     void Push(int value) {
         data_.push_back(value);
-        SiftUp(data_.size()-1);
+        SiftUp((int)data_.size()-1);
     }
 
     int Pop() {
@@ -60,11 +60,11 @@ private:
         if (parent > std::min(data_[left_child_index], data_[right_child_index])) {
             if (data_[left_child_index] > data_[right_child_index]) {
                 std::swap(data_[index], data_[right_child_index]);
-                SiftDown(right_child_index);
+                SiftDown((int)right_child_index);
             }
             else {
                 std::swap(data_[index], data_[left_child_index]);
-                SiftDown(left_child_index);
+                SiftDown((int)left_child_index);
             }
         }
         return;
@@ -79,7 +79,7 @@ class MinHeap<double> {
 public:
     void Push(double value) {
         data_.push_back(value);
-        SiftUp(data_.size()-1);
+        SiftUp((int)data_.size()-1);
     }
 
     double Pop() {
@@ -124,11 +124,11 @@ private:
         if (parent > std::min(data_[left_child_index], data_[right_child_index])) {
             if (data_[left_child_index] > data_[right_child_index]) {
                 std::swap(data_[index], data_[right_child_index]);
-                SiftDown(right_child_index);
+                SiftDown((int)right_child_index);
             }
             else {
                 std::swap(data_[index], data_[left_child_index]);
-                SiftDown(left_child_index);
+                SiftDown((int)left_child_index);
             }
         }
         return;

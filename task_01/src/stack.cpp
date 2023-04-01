@@ -10,9 +10,7 @@ int Stack::Pop() {
   return result;
 }
 
-int Stack::Count(){
-  return data_.size();
-}
+int Stack::Count() { return data_.size(); }
 
 void MinStack::Push(int value) {
   data_.push_back(value);
@@ -30,8 +28,6 @@ int MinStack::Pop() {
   return result;
 }
 
-int MinStack::Count(){
-  return data_.size();
-}
+int MinStack::Count() { return data_.size(); }
 
 int MinStack::GetMin() { return minData_.back(); }

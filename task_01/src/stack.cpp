@@ -26,15 +26,15 @@ bool Stack::Is_empty() {
 int Stack::Peak() { return _data[_data.size() - 1]; }
 
 void MinStack::Push(int value) {
-  stack.Push(value);
-
   if (not stack.Is_empty()) {
+    stack.Push(value);
     if ((stack.Peak() < min.Peak())) {
       min.Push(stack.Peak());
     } else {
       min.Push(min.Peak());
     }
   } else {
+    stack.Push(value);
     min.Push(stack.Peak());
   }
 }

@@ -10,19 +10,16 @@ int Stack::Pop() {
   return result;
 }
 
-bool Stack::IsEmpty() {
-  return !data_.size();
-}
+bool Stack::IsEmpty() { return !data_.size(); }
 
 void MinStack::Push(int value) {
-   if (data_.IsEmpty()) {
+  if (data_.IsEmpty()) {
     minData_.Push(value);
-   }
-   else {
-    int minValue = std::min(value, GetMin() );
-    minData_.Push( minValue );
-   }
-   data_.Push(value);
+  } else {
+    int minValue = std::min(value, GetMin());
+    minData_.Push(minValue);
+  }
+  data_.Push(value);
 }
 
 int MinStack::Pop() {
@@ -30,7 +27,7 @@ int MinStack::Pop() {
   return data_.Pop();
 }
 
-int MinStack::GetMin() { 
+int MinStack::GetMin() {
   auto min_elem = minData_.Pop();
   minData_.Push(min_elem);
   return min_elem;

@@ -1,6 +1,7 @@
 #include "stack.hpp"
 
 #include <algorithm>
+#include <exception>
 
 void Stack::Push(int value) { _data.push_back(value); }
 

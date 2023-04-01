@@ -2,20 +2,33 @@
 
 #include <algorithm>
 
-void Stack::Push(int value) { data_.push(value); }
-
-int Stack::Pop() {
-  auto result = data_.top();
-  data_.pop();
-  return result;
+void Stack::Push(int value) { 
+  _data.push_back(value); 
 }
 
-void MinStack::Push(int value) { data_.push_back(value); }
+int Stack::Pop() { 
+  int ret_value = _data[_data.size()-1];
+  _data.erase(_data.begin() + _data.size() - 1);
+  return ret_value;
+}
+
+void MinStack::Push(int value) {
+  if (_data.size() > 0)
+  {
+    int min_num = std::min(value, _data[0].second);
+    _data.push_back(std::pair<int, int>(value, min_num));
+  }
+  else{
+    _data.push_back(std::pair<int, int>(value, value));
+  }
+}
 
 int MinStack::Pop() {
-  auto result = data_.back();
-  data_.pop_back();
-  return result;
+  int ret_value = _data[_data.size()-1].first;
+  _data.erase(_data.begin() + _data.size() - 1);
+  return ret_value;
 }
 
-int MinStack::GetMin() { return *std::min_element(data_.begin(), data_.end()); }
+int MinStack::GetMin() {
+    return _data[_data.size()-1].second;
+}

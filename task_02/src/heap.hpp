@@ -11,6 +11,9 @@ class MinHeap {
   int Pop();
   size_t Size();
 
- private:
-  std::priority_queue<int, std::vector<int>, std::greater<int>> data_;
+  void Sift_up(int index);
+  void Sift_down(int index);
+
+ public:
+  std::vector<int> array;
 };

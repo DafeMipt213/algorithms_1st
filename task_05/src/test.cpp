@@ -1,8 +1,8 @@
 
-// #include <gtest/gtest.h>
+#include <gtest/gtest.h>
 
-// #include <vector>
+#include <vector>
 
-// #include "tree.hpp"
+#include "tree.hpp"
 
 // TEST(Tree, Simple) {}

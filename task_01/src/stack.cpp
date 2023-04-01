@@ -5,8 +5,9 @@
 void Stack::Push(int value) { _data.push_back(value); }
 
 int Stack::Pop() {
+  if (_data.empty()) throw std::out_of_range("Empty Stack");
   int ret_value = _data[_data.size() - 1];
-  _data.erase(_data.begin() + _data.size() - 1);
+  _data.erase(_data.end() - 1);
   return ret_value;
 }
 
@@ -20,9 +21,13 @@ void MinStack::Push(int value) {
 }
 
 int MinStack::Pop() {
+  if (_data.empty()) throw std::out_of_range("Empty MinStack");
   int ret_value = _data[_data.size() - 1].first;
-  _data.erase(_data.begin() + _data.size() - 1);
+  _data.erase(_data.end() - 1);
   return ret_value;
 }
 
-int MinStack::GetMin() { return _data[_data.size() - 1].second; }
+int MinStack::GetMin() {
+  if (_data.empty()) throw std::out_of_range("Empty MinStack");
+  return _data[_data.size() - 1].second;
+}

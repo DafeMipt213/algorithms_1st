@@ -23,7 +23,7 @@ enable_testing()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-Link runTests with what we want to test and the GTest and pthread library
+# Link runTests with what we want to test and the GTest and pthread library
 add_executable(${PROJECT_NAME}_tests ${test_source_list})
 target_link_libraries(
   ${PROJECT_NAME}_tests

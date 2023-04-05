@@ -1,21 +1,55 @@
 #include "stack.hpp"
 
-#include <algorithm>
+bool Stack::isEmpty() { 
+    return top == -1; 
+} 
 
-void Stack::Push(int value) { data_.push(value); }
+bool Stack::isFull() { 
+    return top == MAX_SIZE - 1; 
+} 
 
-int Stack::Pop() {
-  auto result = data_.top();
-  data_.pop();
-  return result;
+void Stack::Push(int value) { 
+    if (Stack::isFull()) { 
+        return; 
+    } 
+    top++; 
+    data[top] = value; 
+} 
+
+int Stack::Pop() { 
+    if (Stack::isEmpty()) { 
+        return -1; 
+    } 
+    int value = data[top]; 
+    top--; 
+    return value; 
 }
 
-void MinStack::Push(int value) { data_.push_back(value); }
+bool MinStack::isEmpty() { 
+    return top == -1; 
+} 
 
-int MinStack::Pop() {
-  auto result = data_.back();
-  data_.pop_back();
-  return result;
+bool MinStack::isFull() { 
+    return top == MAX_SIZE - 1; 
+} 
+
+void MinStack::Push(int value) {
+    if (MinStack::isEmpty()) { 
+        min = value; 
+    } 
+    if (MinStack::isFull()) { 
+        return; 
+    } 
+    top++; 
+    data[top] = value; 
 }
 
-int MinStack::GetMin() { return *std::min_element(data_.begin(), data_.end()); }
+int MinStack::Pop() { 
+    if (MinStack::isEmpty()) { 
+        return -1; 
+    } 
+    int value = data[top]; 
+    top--; 
+    return value; 
+}
+int MinStack::GetMin() { return min; }

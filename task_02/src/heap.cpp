@@ -3,13 +3,26 @@
 #include <cstddef>
 #include <stdexcept>
 
-void MinHeap::Push(int n) { data_.push(n); }
+void MinHeap::Push(int val) { 
+    heap.push_back(val); 
+    siftUp(heap.size() - 1);  
+} 
 
-int MinHeap::Pop() {
-  if (data_.empty()) throw std::out_of_range("Empty heap");
-  auto result = data_.top();
-  data_.pop();
-  return result;
-}
+int MinHeap::Pop() { 
+    if (heap.empty()){
+      throw std::out_of_range("Empty heap");
+    } 
+    int maxVal = heap[0]; 
+    heap[0] = heap.back(); 
+    heap.pop_back(); 
+    siftDown(0); 
+    return maxVal; 
+} 
 
-size_t MinHeap::Size() { return data_.size(); }
+void MinHeap::printHeap() {
+    std::cout << "Heap: ";
+    for (int i = 0; i < heap.size(); i++) { 
+        std::cout << heap[i] << " "; 
+    } 
+    std::cout << std::endl; 
+} 

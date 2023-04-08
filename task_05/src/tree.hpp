@@ -34,6 +34,7 @@ class Tree {
   void InsertOrUpdate(int key, int value);
   int Find(int key);
   void Remove(int key);
+  void RemoveSplay(int key);
 };
 
 static std::string ch_hor = "\u2500" /*─*/, ch_ver = "\u2502" /*│*/,

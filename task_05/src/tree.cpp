@@ -558,3 +558,8 @@ void Tree::Splay(Node* curr) {
     curr->left_child->left_child->parent = curr->left_child;
   }
 }
+void Tree::RemoveSplay(int key)
+{
+  this->Find(key);
+  this->Remove(this->root->key);
+}

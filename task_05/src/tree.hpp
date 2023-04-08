@@ -4,11 +4,12 @@ class Tree {
  public:
   Tree();
   bool Insert(int key, int value);
-  // если такой эл есть - возвращаем false, если нет - возвращаем true  и вставляем
+  // если такой эл есть - возвращаем false, если нет - возвращаем true  и
+  // вставляем
   void InsertOrUpdate(int key, int value);
   int Find(int key) const;
 
-private:
+ private:
   struct Node {
     Node *parent = nullptr;
     Node *left_child = nullptr;
@@ -24,6 +25,4 @@ private:
   };
 
   Node *root = nullptr;
-
-
 };

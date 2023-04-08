@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stack>
-#include <vector>
 #include <stdexcept>
+#include <vector>
 
 class Stack {
  public:

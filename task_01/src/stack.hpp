@@ -2,14 +2,21 @@
 
 #include <stack>
 #include <vector>
+#include <stdexcept>
 
 class Stack {
  public:
+  Stack() = default;
+  Stack(std::vector<int> v);
+
   void Push(int value);
   int Pop();
 
+  size_t Size() { return data_.size(); }
+  int GetLast();
+
  private:
-  std::stack<int> data_;
+  std::vector<int> data_{};
 };
 
 class MinStack {
@@ -19,5 +26,6 @@ class MinStack {
   int GetMin();
 
  private:
-  std::vector<int> data_;
+  Stack data_;
+  Stack mins_;
 };

@@ -6,7 +6,8 @@
 std::vector<int> TakePartVector(const std::vector<int>& data, int first_index,
                                 int last_index) {
   if (data.size() == 0) throw std::out_of_range("TakePartVector: empty vector");
-  if (first_index >= data.size() || last_index >= data.size() || first_index > last_index) {
+  if (first_index >= data.size() || last_index >= data.size() ||
+      first_index > last_index) {
     throw std::out_of_range("TakePartVector: wrong indexes");
   }
   std::vector<int> part{};

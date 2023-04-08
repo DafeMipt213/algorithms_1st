@@ -15,7 +15,7 @@ TEST(HeapTest, Basic) {
   ASSERT_EQ(heap.Depth(), 1);
   heap.Push(2);
   ASSERT_EQ(heap.Depth(), 2);
-  heap.Push(3);              // [1, 2, 3]
+  heap.Push(3);  // [1, 2, 3]
   ASSERT_EQ(heap.Depth(), 2);
   ASSERT_EQ(heap.Pop(), 1);  // [2, 3] -> 1
   ASSERT_EQ(heap.Pop(), 2);  // [3] -> 2
@@ -33,12 +33,12 @@ TEST(HeapTest, Empty) {
 
 TEST(HeapTest, Complex) {
   MinHeap heap;
-  heap.Push(6);              // [6]
-  heap.Push(1);              // [1, 6]
-  heap.Push(2);              // [1, 2, 6]
-  heap.Push(3);              // [1, 2, 3, 6]
-  heap.Push(5);              // [1, 2, 3, 5, 6]
-  heap.Push(4);              // [1, 2, 3, 4, 5, 6]
+  heap.Push(6);  // [6]
+  heap.Push(1);  // [1, 6]
+  heap.Push(2);  // [1, 2, 6]
+  heap.Push(3);  // [1, 2, 3, 6]
+  heap.Push(5);  // [1, 2, 3, 5, 6]
+  heap.Push(4);  // [1, 2, 3, 4, 5, 6]
   ASSERT_EQ(heap.Depth(), 3);
   ASSERT_EQ(heap.Pop(), 1);  // [2, 3, 4, 5, 6] -> 1
   ASSERT_EQ(heap.Depth(), 3);

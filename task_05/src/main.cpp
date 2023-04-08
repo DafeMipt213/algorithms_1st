@@ -3,7 +3,7 @@
 #include "tree.hpp"
 int main() {
   Tree t1;
-  t1.Insert(10, 112123123); //NOLINT
+  t1.Insert(10, 112123123);  // NOLINT
   ShowTree(&t1);
   t1.Insert(12, 12312312);  // NOLINT
   ShowTree(&t1);

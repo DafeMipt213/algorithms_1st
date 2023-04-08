@@ -29,7 +29,7 @@ int MinHeap::Pop() {
 
 size_t MinHeap::Size() { return data_.size(); }
 
-int MinHeap::Depth() { return ceil(log2(data_.size())); }
+int MinHeap::Depth() { return ceil(log2(data_.size() + 1)); }
 
 void MinHeap::Sift_up(int index) {
   if (data_.empty()) return;
@@ -84,5 +84,6 @@ int MinHeap::right_child_index(int index) {
 void MinHeap::Print() {
   std::cout << "[ ";
   for (int i = 0; i < data_.size(); ++i) std::cout << data_[i] << ' ';
-  std::cout << ']' << std::endl;
+  std::cout << "] "
+            << "depth: " << Depth() << std::endl;
 }

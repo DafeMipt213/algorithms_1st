@@ -4,7 +4,9 @@
 
 int main() try {
   MinHeap h{};
+  h.Print();
   h.Push(8);
+  h.Print();
   h.Push(50);
   h.Push(-10);
   h.Print();

@@ -2,4 +2,8 @@
 
 #include <vector>
 
-std::vector<int> Sort(const std::vector<int>& data);
+std::vector<int> Sort(std::vector<int> data);
+
+void QuickSortRecursive(std::vector<int>& data, int left, int right);
+
+int Partition(std::vector<int>& data, int left, int right);

@@ -18,11 +18,3 @@ int MinHeap::Pop() {
   siftDown(0);
   return maxVal;
 }
-
-void MinHeap::printHeap() {
-  std::cout << "Heap: ";
-  for (int i = 0; i < heap.size(); i++) {
-    std::cout << heap[i] << " ";
-  }
-  std::cout << std::endl;
-}

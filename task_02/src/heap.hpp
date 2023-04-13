@@ -12,9 +12,9 @@ private:
     std::vector<int> heap;
  
     // Вспомогательные методы для работы с индексами 
-    int parent(unsigned long index) { return (index - 1) / 2; }
-    int leftChild(unsigned long index) { return 2 * index + 1; }
-    int rightChild(unsigned long index) { return 2 * index + 2; }
+    unsigned long parent(unsigned long index) { return (index - 1) / 2; }
+    unsigned long leftChild(unsigned long index) { return 2 * index + 1; }
+    unsigned long rightChild(unsigned long index) { return 2 * index + 2; }
  
     // Просеивание вверх (восстановление свойства мин-кучи сверху вниз)
     void siftUp(unsigned long index) {

@@ -11,12 +11,12 @@ class MinHeap {
   std::vector<int> heap;
 
   // Вспомогательные методы для работы с индексами
-  unsigned long parent(unsigned long index) { return (index - 1.0) / 2.0; }
-  unsigned long leftChild(unsigned long index) { return 2.0 * index + 1.0; }
-  unsigned long rightChild(unsigned long index) { return 2.0 * index + 2.0; }
+  int parent(int index) { return (index - 1) / 2; }
+  int leftChild(int index) { return 2 * index + 1; }
+  int rightChild(int index) { return 2 * index + 2; }
 
   // Просеивание вверх (восстановление свойства мин-кучи сверху вниз)
-  void siftUp(unsigned long index) {
+  void siftUp(int index) {
     while (index > 0 && heap[parent(index)] > heap[index]) {
       std::swap(heap[parent(index)], heap[index]);
       index = parent(index);
@@ -24,7 +24,7 @@ class MinHeap {
   }
 
   // Просеивание вниз (восстановление свойства мин-кучи снизу вверх)
-  void siftDown(unsigned long index) {
+  void siftDown(int index) {
     int minIndex = index;
     int left = leftChild(index);
     int right = rightChild(index);

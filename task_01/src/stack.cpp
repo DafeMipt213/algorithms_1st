@@ -39,7 +39,7 @@ void MinStack::Push(int value) {
         return; 
     } 
     top++; 
-    data[top] = value; 
+    data[(int)top] = value; 
 }
 
 int MinStack::Pop() { 

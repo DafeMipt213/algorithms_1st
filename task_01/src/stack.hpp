@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <array>
 const int MAX_SIZE = 100; 
 
 class Stack {
@@ -11,7 +12,7 @@ class Stack {
   bool isFull();
   
  private:
-  int data[MAX_SIZE]; 
+  std::array<int, MAX_SIZE> data;
   int top = -1;
 };
 

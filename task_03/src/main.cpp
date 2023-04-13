@@ -1,8 +1,6 @@
 #include <iostream>
-#include "sort.hpp"
 #include <vector>
 
-int main()
-{
-    return 0;
-}
+#include "sort.hpp"
+
+int main() { return 0; }

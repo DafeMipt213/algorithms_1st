@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vector>
 #include <array>
+#include <vector>
 const int MAX_SIZE = 100;
 
 class Stack {

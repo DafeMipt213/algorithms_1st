@@ -2,19 +2,18 @@
 
 #include <cstddef>
 #include <functional>
-#include <iostream> 
-#include <vector> 
-#include <algorithm> 
- 
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
-class MinHeap { 
-private: 
+class MinHeap {
+private:
     std::vector<int> heap;
- 
-    // Вспомогательные методы для работы с индексами 
-    unsigned long parent(unsigned long index) { return (index - 1.0) / 2.0; }
-    unsigned long leftChild(unsigned long index) { return 2.0 * index + 1.0; }
-    unsigned long rightChild(unsigned long index) { return 2.0 * index + 2.0; }
+
+    // Вспомогательные методы для работы с индексами
+    unsigned long parent(unsigned long index) {return (index - 1.0) / 2.0;}
+    unsigned long leftChild(unsigned long index) {return 2.0 * index + 1.0;}
+    unsigned long rightChild(unsigned long index) {return 2.0 * index + 2.0;}
  
     // Просеивание вверх (восстановление свойства мин-кучи сверху вниз)
     void siftUp(unsigned long index) {
@@ -34,7 +33,7 @@ private:
         }
  
         if (right < heap.size() && heap[right] < heap[minIndex]) {
-            minIndex = right; 
+            minIndex = right;
         }
  
         if (index != minIndex) {

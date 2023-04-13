@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <array>
-const int MAX_SIZE = 100; 
+const int MAX_SIZE = 100;
 
 class Stack {
  public:
@@ -10,7 +10,7 @@ class Stack {
   int Pop();
   bool isEmpty();
   bool isFull();
-  
+
  private:
   std::array<int, MAX_SIZE> data;
   int top = -1;

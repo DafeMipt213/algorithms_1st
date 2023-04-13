@@ -1,10 +1,8 @@
 #include "stack.hpp"
 
-bool Stack::isEmpty() { 
-    return top == -1; 
-} 
+  bool Stack::isEmpty(){ return top == -1; } 
 
-bool Stack::isFull() { 
+bool Stack::isFull(){ 
     return top == MAX_SIZE - 1; 
 } 
 

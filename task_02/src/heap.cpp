@@ -22,21 +22,16 @@ void MinHeap::SiftDown() {
           return;
         }
       } else {
-        int tmp = 0;
         if (data_[left_kid] > data_[right_kid]) {
           if (data_[right_kid] < data_[index]) {
-            tmp = data_[right_kid];
-            data_[right_kid] = data_[index];
-            data_[index] = tmp;
+            std::swap(data_[right_kid], data_[index]);
             index = right_kid;
           } else {
             return;
           }
         } else {
           if (data_[left_kid] < data_[index]) {
-            tmp = data_[left_kid];
-            data_[left_kid] = data_[index];
-            data_[index] = tmp;
+            std::swap(data_[left_kid], data_[index]);
             index = left_kid;
           } else {
             return;

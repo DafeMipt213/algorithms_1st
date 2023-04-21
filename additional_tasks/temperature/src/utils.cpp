@@ -4,8 +4,7 @@
 
 std::vector<int> CalculateDaysBeforWarmup(
     const std::vector<float>& temerature) {
-  unsigned int sz = temerature.size();
-  std::vector<int> warm_ups(sz);
+  std::vector<int> warm_ups(temerature.size());
   std::stack<float> higher_temps_stack;
   std::stack<int> index_stack;
   for (int i = temerature.size() - 1; i >= 0; --i) {

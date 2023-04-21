@@ -5,8 +5,8 @@
 
 std::vector<int> Merge(const std::vector<int>& data1,
                        const std::vector<int>& data2) {
-  int i = 0;
-  int j = 0;
+  size_t i = 0;
+  size_t j = 0;
   std::vector<int> data_merged;
   data_merged.reserve(data1.size() + data2.size());
   while (i != data1.size() && j != data2.size()) {

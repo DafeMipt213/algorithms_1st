@@ -18,7 +18,7 @@ std::vector<int> CalculateDaysBeforWarmup(
         warm_ups[i] = index_stack.top() - i;
         index_stack.push(i);
       } else if (higher_temps_stack.top() < temerature[i]) {
-        while (higher_temps_stack.size() > 0 &&
+        while (!higher_temps_stack.empty() &&
                higher_temps_stack.top() < temerature[i]) {
           higher_temps_stack.pop();
           index_stack.pop();

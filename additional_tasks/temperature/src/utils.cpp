@@ -1,6 +1,7 @@
 #include "utils.hpp"
 
 #include <algorithm>
+#include <stack>
 
 std::vector<int> CalculateDaysBeforWarmup(
     const std::vector<float>& temerature) {

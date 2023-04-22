@@ -2,8 +2,7 @@
 
 Tree::Tree() {}
 
-bool Tree::Insert(int key, int value) { return true;
-}
+bool Tree::Insert(int key, int value) { return true; }
 
 void Tree::InsertOrUpdate(int key, int value) {}
 

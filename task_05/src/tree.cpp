@@ -218,7 +218,6 @@ void Tree::Remove(int key) {
     }
   }
 }
-//Вывод дерева в консоль. Нашел в инете, немного изменил
 void Show(Tree* node, bool high, std::vector<std::string> const& lpref,
           std::vector<std::string> const& cpref,
           std::vector<std::string> const& rpref, bool root, bool left,
@@ -271,7 +270,6 @@ void Show(Tree* node, bool high, std::vector<std::string> const& lpref,
     for (size_t i = 0; i < out.size(); ++i) std::cout << out[i] << std::endl;
   }
 }
-// Это я сам написал)
 void ShowTree(Tree* node) {
   Show(node, true, std::vector<std::string>(), std::vector<std::string>(),
        std::vector<std::string>(), true, true, nullptr);

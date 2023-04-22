@@ -14,7 +14,7 @@ class Stack {
 
   size_t Size() { return data_.size(); }
   int GetLast();
-  bool Empty() {return data_.size() == 0;}
+  bool Empty() { return data_.size() == 0; }
 
  private:
   std::vector<int> data_{};

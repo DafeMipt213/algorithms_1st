@@ -8,7 +8,7 @@
 // Constructors:
 MinHeap::MinHeap() : data_{} {}
 
-MinHeap::MinHeap(std::vector<int> vec) : data_{vec} {
+MinHeap::MinHeap(std::vector<int> vec) : data_{std::move(vec)} {
   for (auto i = data_.size() - 1; i >= 0; --i) SiftUp(i);
 }
 

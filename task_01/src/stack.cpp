@@ -2,32 +2,28 @@
 
 #include <algorithm>
 
-Stack::Stack(std::vector<int> v) : data_{v} {}
+Stack::Stack(std::vector<int> v) : data_{std::move(v)} {}
 
 void Stack::Push(int value) { data_.push_back(value); }
 
 int Stack::Pop() {
-  if (data_.size() == 0) throw std::out_of_range("Stack::Pop: empty stack");
-  auto result = data_[data_.size() - 1];
+  if (data_.empty()) throw std::out_of_range("Stack::Pop: empty stack");
+  auto result = data_.back();
   data_.pop_back();
   return result;
 }
 
 int Stack::GetLast() {
-  if (data_.size() == 0) throw std::out_of_range("Stack::GetLast: empty stack");
-  return data_[data_.size() - 1];
+  if (data_.empty()) throw std::out_of_range("Stack::GetLast: empty stack");
+  return data_.back();
 }
 
 void MinStack::Push(int value) {
   data_.Push(value);
-  if (mins_.Size() == 0)
+  if (mins_.Empty())
     mins_.Push(value);
-  else {
-    if (value < mins_.GetLast())
-      mins_.Push(value);
-    else
-      mins_.Push(mins_.GetLast());
-  }
+  else
+    mins_.Push(std::min(value, mins_.GetLast()));
 }
 
 int MinStack::Pop() {

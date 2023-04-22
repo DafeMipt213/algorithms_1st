@@ -3,16 +3,15 @@
 #include <algorithm>
 #include <vector>
 
-std::vector<int> TakePartVector(const std::vector<int>& data, int first_index,
-                                int last_index) {
+std::vector<int> TakeVectorSlice(const std::vector<int>& data, int first_index,
+                                 int last_index) {
   if (data.size() == 0) throw std::out_of_range("TakePartVector: empty vector");
   if (first_index >= data.size() || last_index >= data.size() ||
       first_index > last_index) {
     throw std::out_of_range("TakePartVector: wrong indexes");
   }
-  std::vector<int> part{};
-  for (int i = first_index; i <= last_index; ++i) part.push_back(data[i]);
-  return part;
+  return std::vector<int>(data.begin() + first_index,
+                          data.begin() + last_index + 1);
 }
 
 std::vector<int> Merge(const std::vector<int>& left,
@@ -33,9 +32,9 @@ std::vector<int> Merge(const std::vector<int>& left,
 
 std::vector<int> MergeSort(const std::vector<int>& data) {
   if (data.size() <= 1) return data;
-  std::vector<int> left = TakePartVector(data, 0, data.size() / 2 - 1);
+  std::vector<int> left = TakeVectorSlice(data, 0, data.size() / 2 - 1);
   std::vector<int> right =
-      TakePartVector(data, data.size() / 2, data.size() - 1);
+      TakeVectorSlice(data, data.size() / 2, data.size() - 1);
   left = MergeSort(left);
   right = MergeSort(right);
   return Merge(left, right);

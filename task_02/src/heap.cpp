@@ -9,21 +9,21 @@
 MinHeap::MinHeap() : data_{} {}
 
 MinHeap::MinHeap(std::vector<int> vec) : data_{vec} {
-  for (int i = data_.size() - 1; i >= 0; --i) Sift_up(i);
+  for (auto i = data_.size() - 1; i >= 0; --i) SiftUp(i);
 }
 
 // Other functions:
 void MinHeap::Push(int value) {
   data_.push_back(value);
-  Sift_up(data_.size() - 1);
+  SiftUp(data_.size() - 1);
 }
 
 int MinHeap::Pop() {
   if (data_.empty()) throw std::out_of_range("Empty heap");
   auto result = data_[0];
-  data_[0] = data_[data_.size() - 1];
+  data_[0] = data_.back();
   data_.pop_back();
-  Sift_down(0);
+  SiftDown(0);
   return result;
 }
 
@@ -31,50 +31,46 @@ size_t MinHeap::Size() { return data_.size(); }
 
 int MinHeap::Depth() { return ceil(log2(data_.size() + 1)); }
 
-void MinHeap::Sift_up(int index) {
+void MinHeap::SiftUp(size_t index) {
   if (data_.empty()) return;
   if (index < 0 || index >= data_.size())
-    throw std::out_of_range("sift_up: Wrong index");
+    throw std::out_of_range("SiftUp: Wrong index");
   int i = index;
   while (i > 0) {
-    if (data_[i] < data_[parent_index(i)])
-      std::swap(data_[i], data_[parent_index(i)]);
-    i = parent_index(i);
+    if (data_[i] < data_[GetParentIndex(i)])
+      std::swap(data_[i], data_[GetParentIndex(i)]);
+    i = GetParentIndex(i);
   }
 }
 
-void MinHeap::Sift_down(int index) {
+void MinHeap::SiftDown(size_t index) {
   if (data_.empty() || data_.size() == 1) return;
   if (index < 0 || index >= data_.size())
-    throw std::out_of_range("sift_down: Wrong index");
+    throw std::out_of_range("SiftUp: Wrong index");
   int i = index;
-  while (i <= parent_index(data_.size() - 1)) {
-    int min_child_index = 0;
-    if (data_[left_child_index(i)] <= data_[right_child_index(i)])
-      min_child_index = left_child_index(i);
-    else
-      min_child_index = right_child_index(i);
+  while (i <= GetParentIndex(data_.size() - 1)) {
+    int min_child_index = MinChildIndex(i);
     if (data_[i] > data_[min_child_index])
       std::swap(data_[i], data_[min_child_index]);
     i = min_child_index;
   }
 }
 
-int MinHeap::parent_index(int index) {
+size_t MinHeap::GetParentIndex(size_t index) {
   if (index <= 0 || index >= data_.size())
-    throw std::out_of_range("parent_index: Wrong index");
+    throw std::out_of_range("GetParentIndex: Wrong index");
   return (index - 1) / 2;
 }
 
-int MinHeap::left_child_index(int index) {
-  if (index < 0 || index > parent_index(data_.size() - 1))
-    throw std::out_of_range("left_child_index: Wrong index");
+size_t MinHeap::GetLeftChildIndex(size_t index) {
+  if (index < 0 || index > GetParentIndex(data_.size() - 1))
+    throw std::out_of_range("GetLeftChildIndex: Wrong index");
   return 2 * index + 1;
 }
 
-int MinHeap::right_child_index(int index) {
-  if (index < 0 || index > parent_index(data_.size() - 1))
-    throw std::out_of_range("right_child_index: Wrong index");
+size_t MinHeap::GetRightChildIndex(size_t index) {
+  if (index < 0 || index > GetParentIndex(data_.size() - 1))
+    throw std::out_of_range("GetRightChildIndex: Wrong index");
   if (2 * index + 2 < data_.size())
     return 2 * index + 2;
   else
@@ -83,7 +79,16 @@ int MinHeap::right_child_index(int index) {
 
 void MinHeap::Print() {
   std::cout << "[ ";
-  for (int i = 0; i < data_.size(); ++i) std::cout << data_[i] << ' ';
+  for (auto i : data_) std::cout << i << ' ';
   std::cout << "] "
             << "depth: " << Depth() << std::endl;
+}
+
+size_t MinHeap::MinChildIndex(size_t i) {
+  int min_child_index = 0;
+  if (data_[GetLeftChildIndex(i)] <= data_[GetRightChildIndex(i)])
+    min_child_index = GetLeftChildIndex(i);
+  else
+    min_child_index = GetRightChildIndex(i);
+  return min_child_index;
 }

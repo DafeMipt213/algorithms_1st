@@ -20,10 +20,11 @@ class MinHeap {
  private:
   std::vector<int> data_;
 
-  void Sift_up(int index);
-  void Sift_down(int index);
+  void SiftUp(size_t index);
+  void SiftDown(size_t index);
 
-  int parent_index(int index);
-  int left_child_index(int index);
-  int right_child_index(int index);
+  size_t GetParentIndex(size_t index);
+  size_t GetLeftChildIndex(size_t index);
+  size_t GetRightChildIndex(size_t index);
+  size_t MinChildIndex(size_t index);
 };

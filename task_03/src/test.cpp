@@ -6,13 +6,13 @@
 #include "sort.hpp"
 
 TEST(TakePartVectorTest, Simple) {
-  EXPECT_THROW(TakePartVector({}, 5, 6), std::out_of_range);
-  EXPECT_THROW(TakePartVector({4, 5, 6}, 5, 6), std::out_of_range);
-  EXPECT_THROW(TakePartVector({4, 5, 6}, 2, 1), std::out_of_range);
-  ASSERT_EQ(TakePartVector({1}, 0, 0), (std::vector<int>{1}));
-  ASSERT_EQ(TakePartVector({1, 2, 3}, 0, 1), (std::vector<int>{1, 2}));
-  EXPECT_THROW(TakePartVector({3, 2, 1, 4, 7, 6}, 1, 10), std::out_of_range);
-  ASSERT_EQ(TakePartVector({3, 2, -1, 5, 6, 7, 9}, 3, 6),
+  EXPECT_THROW(TakeVectorSlice({}, 5, 6), std::out_of_range);
+  EXPECT_THROW(TakeVectorSlice({4, 5, 6}, 5, 6), std::out_of_range);
+  EXPECT_THROW(TakeVectorSlice({4, 5, 6}, 2, 1), std::out_of_range);
+  ASSERT_EQ(TakeVectorSlice({1}, 0, 0), (std::vector<int>{1}));
+  ASSERT_EQ(TakeVectorSlice({1, 2, 3}, 0, 1), (std::vector<int>{1, 2}));
+  EXPECT_THROW(TakeVectorSlice({3, 2, 1, 4, 7, 6}, 1, 10), std::out_of_range);
+  ASSERT_EQ(TakeVectorSlice({3, 2, -1, 5, 6, 7, 9}, 3, 6),
             (std::vector<int>{5, 6, 7, 9}));
 }
 

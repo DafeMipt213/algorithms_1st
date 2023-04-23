@@ -97,9 +97,9 @@ TEST(MinStackTest, ComplexInt) {
   ASSERT_EQ(stack.Size(), 4);
   stack.Clear();
   ASSERT_EQ(stack.Size(), 0);
-  stack.Push(5);  // Stack [5]
-  stack.Push(4);  // Stack [5, 4]
-  stack.Push(4);  // Stack [5, 4, 4]
+  stack.Push(5);              // Stack [5]
+  stack.Push(4);              // Stack [5, 4]
+  stack.Push(4);              // Stack [5, 4, 4]
   ASSERT_EQ(stack.Pop(), 4);  // Stack [5, 4]
   ASSERT_EQ(stack.GetMin(), 4);
 }

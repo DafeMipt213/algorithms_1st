@@ -27,8 +27,7 @@ void MinHeap<T>::SiftUp(T value) {
   int index = data_.size() - 1;
   int swap_index = (index - 1) / 2;
   while (value < data_[swap_index]) {
-    if (index == 0) 
-      break;
+    if (index == 0) break;
     data_[index] = data_[swap_index];
     data_[swap_index] = value;
     index = swap_index;
@@ -39,9 +38,8 @@ void MinHeap<T>::SiftUp(T value) {
 template <typename T>
 void MinHeap<T>::SiftDown() {
   int index = 0, swap_index_1 = 2 * index + 1, swap_index_2 = 2 * index + 2;
-  while (
-      (data_[index] > data_[swap_index_1] && swap_index_1 < data_.size()) ||
-      (data_[index] > data_[swap_index_2] && swap_index_2 < data_.size())) {
+  while ((data_[index] > data_[swap_index_1] && swap_index_1 < data_.size()) ||
+         (data_[index] > data_[swap_index_2] && swap_index_2 < data_.size())) {
     if (data_[swap_index_1] < data_[swap_index_2] ||
         swap_index_2 >= data_.size()) {
       std::swap(data_[index], data_[swap_index_1]);

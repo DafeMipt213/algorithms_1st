@@ -13,7 +13,7 @@ TEST(HeapTest, Basic) {
   MinHeap<int> heap;
   heap.Push(1);
   heap.Push(2);
-  heap.Push(3); // [1, 2, 3]
+  heap.Push(3);              // [1, 2, 3]
   ASSERT_EQ(heap.Pop(), 1);  // [2, 3] -> 1
   ASSERT_EQ(heap.Pop(), 2);  // [3] -> 2
   ASSERT_EQ(heap.Pop(), 3);  // [] -> 3
@@ -51,16 +51,16 @@ TEST(HeapTest, MaxElement) {
   ASSERT_EQ(heap.GetMax(), 6);
   heap.Clear();
   ASSERT_EQ(heap.Size(), 0);
-  heap.Push(4); // [4]
-  heap.Push(4); // [4 ,4]
-  ASSERT_EQ(heap.Pop(), 4); // [4]
+  heap.Push(4);              // [4]
+  heap.Push(4);              // [4 ,4]
+  ASSERT_EQ(heap.Pop(), 4);  // [4]
   ASSERT_EQ(heap.GetMax(), 4);
   heap.Clear();
   ASSERT_EQ(heap.Size(), 0);
-  heap.Push(1); // [1]
-  heap.Push(4); // [1, 4]
-  heap.Push(3); // [1, 4, 3]
-  ASSERT_EQ(heap.GetMax(), 4); 
+  heap.Push(1);  // [1]
+  heap.Push(4);  // [1, 4]
+  heap.Push(3);  // [1, 4, 3]
+  ASSERT_EQ(heap.GetMax(), 4);
 }
 
 TEST(HeapTest, MinElementChar) {

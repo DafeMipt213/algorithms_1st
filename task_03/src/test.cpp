@@ -21,7 +21,7 @@ TEST(SortTest, SimpleChar) {
 }
 
 TEST(SortTest, Even) {
-  ASSERT_EQ(QuickSort<int>({1, 1}), (std::vector<int>{1, 1}));
+  ASSERT_EQ(QuickSort<int>({1, 2}), (std::vector<int>{1, 2}));
   ASSERT_EQ(QuickSort<int>({1, 1, 2, 3}), (std::vector<int>{1, 1, 2, 3}));
   ASSERT_EQ(QuickSort<int>({1, 2, 1, 3}), (std::vector<int>{1, 1, 2, 3}));
   ASSERT_EQ(QuickSort<int>({1, 1, 2, 3, 2}), (std::vector<int>{1, 1, 2, 2, 3}));
@@ -29,7 +29,7 @@ TEST(SortTest, Even) {
 }
 
 TEST(SortTest, EvenChar) {
-  ASSERT_EQ(QuickSort<char>({'a', 'a'}), (std::vector<char>{'a', 'a'}));
+  ASSERT_EQ(QuickSort<char>({'a', 'b'}), (std::vector<char>{'a', 'b'}));
   ASSERT_EQ(QuickSort<char>({'a', 'a', 'b', 'c'}),
             (std::vector<char>{'a', 'a', 'b', 'c'}));
   ASSERT_EQ(QuickSort<char>({'a', 'b', 'a', 'c'}),

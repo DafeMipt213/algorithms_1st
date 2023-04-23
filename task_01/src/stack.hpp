@@ -10,18 +10,16 @@ class Stack {
   void Push(T value);
   T Pop();
   T Back();
-  int Size();
+  size_t Size();
   void Clear();
 
  private:
-  size_t size{0};
   std::vector<T> data_;
 };
 
 template <typename T>
 void Stack<T>::Push(T value) {
   data_.push_back(value);
-  ++size;
 }
 
 template <typename T>
@@ -29,23 +27,22 @@ T Stack<T>::Pop() {
   if (data_.empty()) throw std::out_of_range("Empty stack");
   T result = data_.back();
   data_.pop_back();
-  --size;
   return result;
 }
 
 template <typename T>
 T Stack<T>::Back() {
-  return data_[size - 1];
+  if (data_.empty()) throw std::out_of_range("Empty stack");
+  return data_.back();
 }
 
 template <typename T>
-int Stack<T>::Size() {
-  return size;
+size_t Stack<T>::Size() {
+  return data_.size();
 }
 
 template <typename T>
 void Stack<T>::Clear() {
-  size = 0;
   data_.clear();
 }
 
@@ -60,48 +57,44 @@ class MinStack {
   void Clear();
 
  private:
-  size_t size{0};
-  std::vector<T> minValues;
+  std::vector<T> min_values_;
   std::vector<T> data_;
 };
 
 template <typename T>
 void MinStack<T>::Push(T value) {
-  if (size == 0 || minValues.back() >= value) minValues.push_back(value);
-
+  if (data_.size() == 0 || min_values_.back() >= value) min_values_.push_back(value);
   data_.push_back(value);
-  ++size;
 }
 
 template <typename T>
 T MinStack<T>::Pop() {
-  if (data_.empty()) throw std::out_of_range("Empty heap");
+  if (data_.empty()) throw std::out_of_range("Empty stack");
   T result = data_.back();
   data_.pop_back();
 
-  if (result == minValues.back()) minValues.pop_back();
-
-  --size;
+  if (result == min_values_.back()) min_values_.pop_back();
   return result;
 }
 
 template <typename T>
 T MinStack<T>::GetMin() {
-  return minValues.back();
+  if (data_.empty()) throw std::out_of_range("Empty stack");
+  return min_values_.back();
 }
 
 template <typename T>
 T MinStack<T>::Back() {
-  return data_[size - 1];
+  if (data_.empty()) throw std::out_of_range("Empty stack");
+  return data_.back();
 }
 
 template <typename T>
 int MinStack<T>::Size() {
-  return size;
+  return data_.size();
 }
 
 template <typename T>
 void MinStack<T>::Clear() {
-  size = 0;
   data_.clear();
 }

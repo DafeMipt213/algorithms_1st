@@ -7,18 +7,16 @@ std::vector<T> QuickSort(const std::vector<T>& data) {
   std::vector<T> result = data;
   if (data.empty()) return result;
   std::vector<int> LeftAndRight = {0, int(data.size()) - 1};
-  int i{0}, j{0}, right{0}, left{0};
-  T midElem;
   do {
-    right = LeftAndRight.back();
+    int right = LeftAndRight.back();
     LeftAndRight.pop_back();
-    left = LeftAndRight.back();
+    int left = LeftAndRight.back();
     LeftAndRight.pop_back();
 
-    i = left;
-    j = right;
+    int i = left;
+    int j = right;
 
-    midElem = result[(j + i) / 2];
+    int midElem = result[(j + i) / 2];
     do {
       while (result[i] < midElem) ++i;
       while (result[j] > midElem) --j;

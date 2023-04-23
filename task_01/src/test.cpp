@@ -3,7 +3,7 @@
 
 #include "stack.hpp"
 
-TEST(StackTest, Complex_int) {
+TEST(StackTest, ComplexInt) {
   Stack<int> stack;
   ASSERT_ANY_THROW(stack.Pop());
   ASSERT_EQ(stack.Size(), 0);
@@ -30,7 +30,7 @@ TEST(StackTest, Complex_int) {
   ASSERT_EQ(stack.Size(), 0);
 }
 
-TEST(StackTest, Complex_float) {
+TEST(StackTest, ComplexFloat) {
   Stack<double> stack;
   ASSERT_ANY_THROW(stack.Pop());
   ASSERT_EQ(stack.Size(), 0);
@@ -57,7 +57,7 @@ TEST(StackTest, Complex_float) {
   ASSERT_EQ(stack.Size(), 0);
 }
 
-TEST(StackTest, Simple_char) {
+TEST(StackTest, SimpleChar) {
   Stack<char> stack;
   ASSERT_ANY_THROW(stack.Pop());
   stack.Push('h');  // Stack ['b']
@@ -69,7 +69,7 @@ TEST(StackTest, Simple_char) {
   ASSERT_EQ(stack.Size(), 0);
 }
 
-TEST(MinStackTest, Complex_int) {
+TEST(MinStackTest, ComplexInt) {
   MinStack<int> stack;
   ASSERT_ANY_THROW(stack.Pop());
   stack.Push(1);  // Stack [1]
@@ -97,9 +97,14 @@ TEST(MinStackTest, Complex_int) {
   ASSERT_EQ(stack.Size(), 4);
   stack.Clear();
   ASSERT_EQ(stack.Size(), 0);
+  stack.Push(5);  // Stack [5]
+  stack.Push(4);  // Stack [5, 4]
+  stack.Push(4);  // Stack [5, 4, 4]
+  ASSERT_EQ(stack.Pop(), 4);  // Stack [5, 4]
+  ASSERT_EQ(stack.GetMin(), 4);
 }
 
-TEST(MinStackTest, Complex_float) {
+TEST(MinStackTest, ComplexFloat) {
   MinStack<double> stack;
   ASSERT_ANY_THROW(stack.Pop());
   stack.Push(1.2);  // Stack [1.2]
@@ -129,7 +134,7 @@ TEST(MinStackTest, Complex_float) {
   ASSERT_EQ(stack.Size(), 0);
 }
 
-TEST(MinStackTest, Simple_char) {
+TEST(MinStackTest, SimpleChar) {
   MinStack<char> stack;
   ASSERT_ANY_THROW(stack.Pop());
   stack.Push('h');  // Stack ['b']

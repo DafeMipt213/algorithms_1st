@@ -8,55 +8,51 @@
 template <typename T>
 class MinHeap {
  public:
-  void Push(T);
+  void Push(T value);
   T Pop();
   size_t Size();
   void Clear();
-  T getMin();
-  T getMax();
+  T GetMin();
+  T GetMax();
 
  private:
-  void Siftup(T);
-  void Siftdown();
-  std::vector<T> maxValues;
+  void SiftUp(T value);
+  void SiftDown();
+  std::vector<T> max_values_;
   std::vector<T> data_;
 };
 
 template <typename T>
-void MinHeap<T>::Siftup(T value) {
+void MinHeap<T>::SiftUp(T value) {
   int index = data_.size() - 1;
-  T check;
-  while (value < data_[(index - 1) / 2]) {
-    check = data_[(index - 1) / 2];
-    data_[(index - 1) / 2] = value;
-    data_[index] = check;
-    if (index == 0) {
+  int swap_index = (index - 1) / 2;
+  while (value < data_[swap_index]) {
+    if (index == 0) 
       break;
-    }
-    index = (index - 1) / 2;
+    data_[index] = data_[swap_index];
+    data_[swap_index] = value;
+    index = swap_index;
+    swap_index = (index - 1) / 2;
   }
 }
 
 template <typename T>
-void MinHeap<T>::Siftdown() {
-  T check{0};
-  size_t index{0};
+void MinHeap<T>::SiftDown() {
+  int index = 0, swap_index_1 = 2 * index + 1, swap_index_2 = 2 * index + 2;
   while (
-      (data_[index] > data_[2 * index + 1] && (2 * index + 1) < data_.size()) ||
-      (data_[index] > data_[2 * index + 2] && (2 * index + 2) < data_.size())) {
-    if (data_[2 * index + 1] < data_[2 * index + 2] ||
-        (2 * index + 2) >= data_.size()) {
-      check = data_[2 * index + 1];
-      data_[2 * index + 1] = data_[index];
-      data_[index] = check;
-      index = 2 * index + 1;
+      (data_[index] > data_[swap_index_1] && swap_index_1 < data_.size()) ||
+      (data_[index] > data_[swap_index_2] && swap_index_2 < data_.size())) {
+    if (data_[swap_index_1] < data_[swap_index_2] ||
+        swap_index_2 >= data_.size()) {
+      std::swap(data_[index], data_[swap_index_1]);
+      index = swap_index_1;
+      swap_index_1 = 2 * index + 1;
     }
 
     else {
-      check = data_[2 * index + 2];
-      data_[2 * index + 2] = data_[index];
-      data_[index] = check;
-      index = 2 * index + 2;
+      std::swap(data_[index], data_[swap_index_2]);
+      index = swap_index_2;
+      swap_index_2 = 2 * index + 2;
     }
     if (data_.size() >= index) {
       break;
@@ -66,10 +62,10 @@ void MinHeap<T>::Siftdown() {
 
 template <typename T>
 void MinHeap<T>::Push(T value) {
-  if (data_.size() == 0 || value >= maxValues.back())
-    maxValues.push_back(value);
+  if (data_.size() == 0 || value >= max_values_.back())
+    max_values_.push_back(value);
   data_.push_back(value);
-  Siftup(value);
+  SiftUp(value);
 }
 
 template <typename T>
@@ -78,9 +74,9 @@ T MinHeap<T>::Pop() {
   T result = data_.front();
   data_.front() = data_.back();
   T key = data_.back();
-  if (key == maxValues.back()) maxValues.pop_back();
+  if (key == max_values_.back()) max_values_.pop_back();
   data_.pop_back();
-  Siftdown();
+  SiftDown();
   return result;
 }
 
@@ -95,13 +91,13 @@ void MinHeap<T>::Clear() {
 }
 
 template <typename T>
-T MinHeap<T>::getMin() {
+T MinHeap<T>::GetMin() {
   if (data_.empty()) throw std::out_of_range("Empty heap");
   return data_.front();
 }
 
 template <typename T>
-T MinHeap<T>::getMax() {
+T MinHeap<T>::GetMax() {
   if (data_.empty()) throw std::out_of_range("Empty heap");
-  return maxValues.back();
+  return max_values_.back();
 }

@@ -26,7 +26,7 @@ bool MinStack::isEmpty() { return top == -1; }
 bool MinStack::isFull() { return top == MAX_SIZE - 1; }
 
 void MinStack::Push(int value) {
-  if (MinStack::isEmpty()) {
+  if (MinStack::isEmpty() || min > value) {
     min = value;
   }
   if (MinStack::isFull()) {

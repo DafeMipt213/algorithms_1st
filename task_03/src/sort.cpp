@@ -35,12 +35,10 @@ std::vector<int> Sort(const std::vector<int>& data) {
     }
   }
   if (i < v1.size()) {
-    result.insert(std::next(result.begin(), i + j), std::next(v1.begin(), i),
-                  v1.end());
+    result.insert(result.end(), std::next(v1.begin(), i), v1.end());
   }
   if (j < v2.size()) {
-    result.insert(std::next(result.begin(), i + j), std::next(v2.begin(), j),
-                  v2.end());
+    result.insert(result.end(), std::next(v2.begin(), j), v2.end());
   }
   return result;
 }

@@ -1,15 +1,26 @@
-#include "heap.hpp"
+#include <algorithm>
+#include <vector>
 
-#include <cstddef>
-#include <stdexcept>
+class Heap {
+ public:
+  void push(int value) {
+    heap.push_back(value);  // добавляем элемент в конец вектора
+    std::push_heap(heap.begin(), heap.end());  // перестраиваем кучу
+  }
 
-void MinHeap::Push(int n) { data_.push(n); }
+  int pop() {
+    std::pop_heap(
+        heap.begin(),
+        heap.end());  // перемещаем максимальный элемент в конец вектора
+    int max_value = heap.back();  // сохраняем максимальный элемент
+    heap.pop_back();  // удаляем его из вектора
+    return max_value;  // возвращаем максимальный элемент
+  }
 
-int MinHeap::Pop() {
-  if (data_.empty()) throw std::out_of_range("Empty heap");
-  auto result = data_.top();
-  data_.pop();
-  return result;
-}
+  bool empty() const {
+    return heap.empty();  // проверяем, пуста ли куча
+  }
 
-size_t MinHeap::Size() { return data_.size(); }
+ private:
+  std::vector<int> heap;  // вектор, хранящий элементы кучи
+};

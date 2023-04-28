@@ -1,21 +1,32 @@
-#include "stack.hpp"
+#include <iostream>
+#include <vector>
 
-#include <algorithm>
+using namespace std;
 
-void Stack::Push(int value) { data_.push(value); }
+class StackWithMin {
+ public:
+  void push(int val) {
+    stack.push_back(val);
+    if (min_stack.empty() || val <= min_stack.back()) {
+      min_stack.push_back(val);
+    }
+  }
 
-int Stack::Pop() {
-  auto result = data_.top();
-  data_.pop();
-  return result;
-}
+  void pop() {
+    if (stack.empty()) {
+      return;
+    }
+    if (stack.back() == min_stack.back()) {
+      min_stack.pop_back();
+    }
+    stack.pop_back();
+  }
 
-void MinStack::Push(int value) { data_.push_back(value); }
+  int top() { return stack.back(); }
 
-int MinStack::Pop() {
-  auto result = data_.back();
-  data_.pop_back();
-  return result;
-}
+  int getMin() { return min_stack.back(); }
 
-int MinStack::GetMin() { return *std::min_element(data_.begin(), data_.end()); }
+ private:
+  vector<int> stack;
+  vector<int> min_stack;
+};

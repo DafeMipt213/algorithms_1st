@@ -8,53 +8,48 @@
 #include <iostream>
 #include <stdexcept>
 
-void MinHeap::siftUp(unsigned int ind) {
-  while (ind > 0 && ind < Size()) {
-    if (data_[ind] < data_[(ind - 1) / 2]) {
-      std::swap(data_[ind], data_[(ind - 1) / 2]);
+void MinHeap::SiftUp(size_t index) {
+  while (index > 0 && index < Size()) {
+    if (data_[index] < data_[(index - 1) / 2]) {
+      std::swap(data_[index], data_[(index - 1) / 2]);
     }
 
-    ind = (ind - 1) / 2;
+    index = (index - 1) / 2;
   }
 }
 
-void MinHeap::siftDown() {
-  unsigned long i = 0;
+void MinHeap::SiftDown() {
+  unsigned long cur = 0;
 
   if (Size() == 2) {
-    if (data_[0] > data_[1]) {
-      std::swap(data_[0], data_[1]);
-    }
+    if (data_[0] > data_[1]) std::swap(data_[0], data_[1]);
   }
 
-  while (i * 2 + 2 < Size()) {
-    if (2 * i < Size()) {
-      if (data_[2 * i + 1] < data_[2 * i + 2]) {
-        std::swap(data_[i], data_[2 * i + 1]);
-        i = 2 * i + 1;
+  while (cur * 2 + 2 < Size()) {
+    unsigned long lChild = 2 * cur + 1;
+    unsigned long rChild = 2 * cur + 2;
 
-      } else if (data_[2 * i + 1] >= data_[2 * i + 2]) {
-        std::swap(data_[i], data_[2 * i + 2]);
-        i = 2 * i + 2;
+    if (2 * cur < Size()) {
+      if (data_[lChild] < data_[rChild]) {
+        std::swap(data_[cur], data_[lChild]);
+        cur = lChild;
+      } else if (data_[rChild] <= data_[lChild]) {
+        std::swap(data_[cur], data_[rChild]);
+        cur = rChild;
       }
-    }
-
-    else {
-      if (2 * i + 1 < Size()) {
-        std::swap(data_[i], data_[2 * i + 1]);
-        i = 2 * i + 1;
-      }
-
-      else {
+    } else {
+      if (lChild < Size()) {
+        std::swap(data_[cur], data_[lChild]);
+        cur = lChild;
+      } else
         return;
-      }
     }
   }
 }
 
-void MinHeap::Push(int n) {
-  data_.push_back(n);
-  siftUp(Size() - 1);
+void MinHeap::Push(int value) {
+  data_.push_back(value);
+  SiftUp(Size() - 1);
 }
 
 int MinHeap::Pop() {
@@ -69,7 +64,7 @@ int MinHeap::Pop() {
   auto result = data_[0];
   std::swap(data_[0], data_[Size() - 1]);
   data_.pop_back();
-  siftDown();
+  SiftDown();
   return result;
 }
 

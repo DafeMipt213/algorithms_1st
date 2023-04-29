@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include <vector>
 
-void merge(int begin, int half, int end, std::vector<int>& data,
+void Merge(int begin, int half, int end, std::vector<int>& data,
            std::vector<int>& buffer) {
   int r = begin;
   int l = half;
@@ -14,10 +14,10 @@ void merge(int begin, int half, int end, std::vector<int>& data,
   for (; r < half && l < end; ++i) {
     if (data[r] < data[l]) {
       buffer[i] = data[r];
-      r++;
+      ++r;
     } else {
       buffer[i] = data[l];
-      l++;
+      ++l;
     }
   }
 
@@ -35,26 +35,25 @@ void merge(int begin, int half, int end, std::vector<int>& data,
   }
 }
 
-void mergeSort(int begin, int end, std::vector<int>& data,
+void MergeSort(int begin, int end, std::vector<int>& data,
                std::vector<int>& buffer) {
   if (end - begin == 1) return;
 
   int half = begin + (end - begin) / 2;
 
-  mergeSort(begin, half, data, buffer);
-  mergeSort(half, end, data, buffer);
+  MergeSort(begin, half, data, buffer);
+  MergeSort(half, end, data, buffer);
 
-  merge(begin, half, end, data, buffer);
+  Merge(begin, half, end, data, buffer);
 }
 
 std::vector<int> Sort(const std::vector<int>& data) {
   if (data.size() == 0) {
     return {};
   }
-
   std::vector<int> result = data;
   std::vector<int> buffer = data;
 
-  mergeSort(0, result.size(), result, buffer);
+  MergeSort(0, result.size(), result, buffer);
   return result;
 }

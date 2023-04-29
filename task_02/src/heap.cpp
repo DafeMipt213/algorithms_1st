@@ -7,11 +7,14 @@
 
 MinHeap::MinHeap() : data_{} {}
 
-MinHeap::MinHeap(std::vector<int> vec) : data_{std::move(vec)} {
+MinHeap::MinHeap(std::vector<int>&& vec) : data_{std::move(vec)} {
   for (auto i = data_.size() - 1; i >= 0; --i) SiftUp(i);
 }
 
-// Other functions:
+MinHeap::MinHeap(const std::vector<int>& vec) : data_{vec} {
+  for (auto i = data_.size() - 1; i >= 0; --i) SiftUp(i);
+}
+
 void MinHeap::Push(int value) {
   data_.push_back(value);
   SiftUp(data_.size() - 1);
@@ -32,8 +35,7 @@ int MinHeap::Depth() { return ceil(log2(data_.size() + 1)); }
 
 void MinHeap::SiftUp(size_t index) {
   if (data_.empty()) return;
-  if (index < 0 || index >= data_.size())
-    throw std::out_of_range("SiftUp: Wrong index");
+  if (index >= data_.size()) throw std::out_of_range("SiftUp: Wrong index");
   while (index > 0) {
     if (data_[index] < data_[GetParentIndex(index)])
       std::swap(data_[index], data_[GetParentIndex(index)]);

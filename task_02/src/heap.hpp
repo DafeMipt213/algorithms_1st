@@ -8,7 +8,8 @@
 class MinHeap {
  public:
   MinHeap();
-  MinHeap(std::vector<int> vec);
+  MinHeap(std::vector<int>&& vec);
+  MinHeap(const std::vector<int>& vec);
 
   void Push(int value);
   int Pop();

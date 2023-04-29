@@ -1,3 +1,18 @@
 #include <iostream>
+#include <vector>
 
-int main() { return 0; }
+#include "utils.hpp"
+
+void print(std::vector<int>& v) {
+  for (int i = 0; i < v.size(); ++i) {
+    std::cout << v[i] << " ";
+  }
+  std::cout << '\n';
+}
+
+int main() {
+  std::vector<float> temp{10, 11, 8, 12};
+  std::vector<int> v = CalculateDaysBeforWarmup(temp);
+  print(v);
+  return 0;
+}

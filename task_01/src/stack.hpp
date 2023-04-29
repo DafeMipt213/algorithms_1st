@@ -7,7 +7,8 @@
 class Stack {
  public:
   Stack() = default;
-  Stack(std::vector<int> v);
+  Stack(std::vector<int>&& v);
+  Stack(const std::vector<int>& v);
 
   void Push(int value);
   int Pop();

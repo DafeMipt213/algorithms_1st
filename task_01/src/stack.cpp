@@ -2,7 +2,9 @@
 
 #include <algorithm>
 
-Stack::Stack(std::vector<int> v) : data_{std::move(v)} {}
+Stack::Stack(std::vector<int>&& v) : data_{std::move(v)} {}
+
+Stack::Stack(const std::vector<int>& v) : data_(v) {}
 
 void Stack::Push(int value) { data_.push_back(value); }
 

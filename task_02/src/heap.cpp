@@ -5,7 +5,6 @@
 #include <iostream>
 #include <stdexcept>
 
-// Constructors:
 MinHeap::MinHeap() : data_{} {}
 
 MinHeap::MinHeap(std::vector<int> vec) : data_{std::move(vec)} {
@@ -35,41 +34,38 @@ void MinHeap::SiftUp(size_t index) {
   if (data_.empty()) return;
   if (index < 0 || index >= data_.size())
     throw std::out_of_range("SiftUp: Wrong index");
-  int i = index;
-  while (i > 0) {
-    if (data_[i] < data_[GetParentIndex(i)])
-      std::swap(data_[i], data_[GetParentIndex(i)]);
-    i = GetParentIndex(i);
+  while (index > 0) {
+    if (data_[index] < data_[GetParentIndex(index)])
+      std::swap(data_[index], data_[GetParentIndex(index)]);
+    index = GetParentIndex(index);
   }
 }
 
 void MinHeap::SiftDown(size_t index) {
   if (data_.empty() || data_.size() == 1) return;
-  if (index < 0 || index >= data_.size())
-    throw std::out_of_range("SiftUp: Wrong index");
-  int i = index;
-  while (i <= GetParentIndex(data_.size() - 1)) {
-    int min_child_index = MinChildIndex(i);
-    if (data_[i] > data_[min_child_index])
-      std::swap(data_[i], data_[min_child_index]);
-    i = min_child_index;
+  if (index >= data_.size()) throw std::out_of_range("SiftUp: Wrong index");
+  while (index <= GetParentIndex(data_.size() - 1)) {
+    size_t min_child_index = MinChildIndex(index);
+    if (data_[index] > data_[min_child_index])
+      std::swap(data_[index], data_[min_child_index]);
+    index = min_child_index;
   }
 }
 
 size_t MinHeap::GetParentIndex(size_t index) {
-  if (index <= 0 || index >= data_.size())
+  if (index == 0 || index >= data_.size())
     throw std::out_of_range("GetParentIndex: Wrong index");
   return (index - 1) / 2;
 }
 
 size_t MinHeap::GetLeftChildIndex(size_t index) {
-  if (index < 0 || index > GetParentIndex(data_.size() - 1))
+  if (index > GetParentIndex(data_.size() - 1))
     throw std::out_of_range("GetLeftChildIndex: Wrong index");
   return 2 * index + 1;
 }
 
 size_t MinHeap::GetRightChildIndex(size_t index) {
-  if (index < 0 || index > GetParentIndex(data_.size() - 1))
+  if (index > GetParentIndex(data_.size() - 1))
     throw std::out_of_range("GetRightChildIndex: Wrong index");
   if (2 * index + 2 < data_.size())
     return 2 * index + 2;
@@ -85,10 +81,8 @@ void MinHeap::Print() {
 }
 
 size_t MinHeap::MinChildIndex(size_t i) {
-  int min_child_index = 0;
   if (data_[GetLeftChildIndex(i)] <= data_[GetRightChildIndex(i)])
-    min_child_index = GetLeftChildIndex(i);
+    return GetLeftChildIndex(i);
   else
-    min_child_index = GetRightChildIndex(i);
-  return min_child_index;
+    return GetRightChildIndex(i);
 }

@@ -3,9 +3,10 @@
 #include <algorithm>
 #include <vector>
 
-std::vector<int> TakeVectorSlice(const std::vector<int>& data, int first_index,
-                                 int last_index) {
-  if (data.size() == 0) throw std::out_of_range("TakePartVector: empty vector");
+namespace {
+std::vector<int> TakeVectorSlice(const std::vector<int>& data,
+                                 size_t first_index, size_t last_index) {
+  if (data.empty()) throw std::out_of_range("TakePartVector: empty vector");
   if (first_index >= data.size() || last_index >= data.size() ||
       first_index > last_index) {
     throw std::out_of_range("TakePartVector: wrong indexes");
@@ -17,7 +18,7 @@ std::vector<int> TakeVectorSlice(const std::vector<int>& data, int first_index,
 std::vector<int> Merge(const std::vector<int>& left,
                        const std::vector<int>& right) {
   std::vector<int> merged_vector{};
-  int left_i = 0, right_i = 0;
+  size_t left_i = 0, right_i = 0;
   while (left_i < left.size() && right_i < right.size()) {
     if (left[left_i] < right[right_i])
       merged_vector.push_back(left[left_i++]);
@@ -29,6 +30,7 @@ std::vector<int> Merge(const std::vector<int>& left,
 
   return merged_vector;
 }
+}  // namespace
 
 std::vector<int> MergeSort(const std::vector<int>& data) {
   if (data.size() <= 1) return data;

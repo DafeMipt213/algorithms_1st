@@ -46,5 +46,6 @@ TEST(MinStackTest, Simple1) {
   stack.Push(5);  // Stack [5]
   stack.Push(4);  // Stack [5,4]
   stack.Push(3);  // Stack [5,4,3]
-  ASSERT_EQ(stack.GetMin(), 3);
+  stack.Pop();
+  ASSERT_EQ(stack.GetMin(), 4);
 }

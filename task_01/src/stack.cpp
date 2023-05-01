@@ -42,6 +42,7 @@ int MinStack::Pop() {
   }
   int value = data[top];
   top--;
+  min = *std::min_element(std::begin(data), std::next(data.begin(), top + 1));
   return value;
 }
 int MinStack::GetMin() { return min; }

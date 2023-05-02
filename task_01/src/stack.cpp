@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <exception>
+#include <iostream>
 
 void Stack::Push(int value) { _data.push_back(value); }
 

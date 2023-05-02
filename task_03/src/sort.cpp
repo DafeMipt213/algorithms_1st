@@ -2,6 +2,7 @@
 
 #include <stack>
 #include <vector>
+#include <iostream>
 
 int partition(std::vector<int>& data, int l, int r) {
   // Выбираем рандомный pivot

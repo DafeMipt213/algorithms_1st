@@ -5,7 +5,7 @@
 class Stack {
  public:
   struct Node {
-    int val;
+    int value;
     Node* prev = nullptr;
   };
   void Push(int value);
@@ -21,8 +21,8 @@ class MinStack {
   int Pop();
   int GetMin();
   struct Node {
-    int val = 0;
-    int minn = 10e8;
+    int value = 0;
+    int min = 10e8;
     Node* prev = nullptr;
   };
 

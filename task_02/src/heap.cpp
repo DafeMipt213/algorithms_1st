@@ -5,56 +5,56 @@
 
 void MinHeap::Push(int n) {
   tree.push_back(n);
-  sift_up(Size() - 1);
+  SiftUp(Size() - 1);
 }
 
 int MinHeap::Pop() {
-  if (Size() == 0) throw std::out_of_range("Empty heap");
-  int result = tree[0];
+  if (tree.empty()) throw std::out_of_range("Empty heap");
+  int result = tree.front();
 
-  tree[0] = tree[Size() - 1];
+  tree[0] = tree.back();
   tree.erase(tree.end() - 1);
-  sift_down(0);
+  SiftDown(0);
   return result;
 }
 
 size_t MinHeap::Size() { return tree.size(); }
 
-void MinHeap::sift_down(int ind) {
-  if (2 * ind + 1 >= Size()) {
+void MinHeap::SiftDown(int index) {
+  int left = 2 * index + 1;
+  int right = 2 * index + 2;
+  if (left >= Size()) {
     return;
-  } else if (2 * ind + 2 >= Size() && tree[2 * ind + 1] < tree[ind]) {
-    int tmp = tree[ind];
-    tree[ind] = tree[2 * ind + 1];
-    tree[2 * ind + 1] = tmp;
+  } else if (right >= Size() && tree[left] < tree[index]) {
+    int tmp = tree[index];
+    tree[index] = tree[left];
+    tree[left] = tmp;
   } else {
-    if (tree[2 * ind + 1] < tree[2 * ind + 2] &&
-        tree[2 * ind + 1] < tree[ind]) {
-      int tmp = tree[ind];
-      tree[ind] = tree[2 * ind + 1];
-      tree[2 * ind + 1] = tmp;
+    if (tree[left] < tree[right] && tree[left] < tree[index]) {
+      int tmp = tree[index];
+      tree[index] = tree[left];
+      tree[left] = tmp;
     }
-    if (tree[2 * ind + 1] >= tree[2 * ind + 2] &&
-        tree[2 * ind + 2] < tree[ind]) {
-      int tmp = tree[ind];
-      tree[ind] = tree[2 * ind + 2];
-      tree[2 * ind + 2] = tmp;
+    if (tree[left] >= tree[right] && tree[right] < tree[index]) {
+      int tmp = tree[index];
+      tree[index] = tree[right];
+      tree[right] = tmp;
     }
   }
 }
 
-void MinHeap::sift_up(int ind) {
-  if ((ind - 1) / 2 == 0) {
-    if (tree[0] > tree[ind]) {
+void MinHeap::SiftUp(int index) {
+  if ((index - 1) / 2 == 0) {
+    if (tree[0] > tree[index]) {
       int tmp = tree[0];
-      tree[0] = tree[ind];
-      tree[ind] = tmp;
+      tree[0] = tree[index];
+      tree[index] = tmp;
     }
     return;
   }
-  if (tree[ind] < tree[(ind - 1) / 2]) {
-    int tmp = tree[ind];
-    tree[ind] = tree[(ind - 1) / 2];
-    tree[(ind - 1) / 2] = tmp;
+  if (tree[index] < tree[(index - 1) / 2]) {
+    int tmp = tree[index];
+    tree[index] = tree[(index - 1) / 2];
+    tree[(index - 1) / 2] = tmp;
   }
 }

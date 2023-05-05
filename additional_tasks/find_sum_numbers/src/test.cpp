@@ -1,8 +1,8 @@
 
 #include <gtest/gtest.h>
 
-#include <vector>
+#include <stack>
 
 #include "utils.hpp"
 
-TEST(Snadbox, Simple) {}
+TEST(GetNumbersOfSum, Simple) {}

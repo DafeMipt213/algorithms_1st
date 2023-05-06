@@ -6,7 +6,7 @@
 using namespace std;
 using iter = vector<int>::iterator;
 
-void merge (iter left, iter mid, iter right);
+void merge(iter left, iter mid, iter right);
 
 void Sort1(iter left, iter right);
 

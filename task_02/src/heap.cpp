@@ -1,8 +1,8 @@
 #include "heap.hpp"
 
 #include <cstddef>
-#include <vector>
 #include <stdexcept>
+#include <vector>
 
 void MinHeap::Push(int n) {
   heap.push_back(n);
@@ -10,7 +10,7 @@ void MinHeap::Push(int n) {
 }
 
 int MinHeap::Pop() {
-  if(heap.empty()){
+  if (heap.empty()) {
     throw std::out_of_range("heap is empty");
   }
   int min = heap[0];

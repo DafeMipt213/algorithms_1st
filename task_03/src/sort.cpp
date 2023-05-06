@@ -40,7 +40,7 @@ void Sort1(iter left, iter right) {
   }
 }
 
-//void Sort(iter left, iter right) {
+// void Sort(iter left, iter right) {
 vector<int> Sort(vector<int> vec) {
   if (vec.size() > 1) {
     iter left = vec.begin();

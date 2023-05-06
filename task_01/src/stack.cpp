@@ -10,12 +10,11 @@ int Stack::Pop() {
   return result;
 }
 
-void MinStack::Push(int value) { 
+void MinStack::Push(int value) {
   if (data_.size() == 0) {
     data_.push_back(value);
     minimal = value;
-  }
-  else if (value >= minimal) {
+  } else if (value >= minimal) {
     data_.push_back(value);
   } else {
     data_.push_back(2 * value - minimal);
@@ -25,7 +24,7 @@ void MinStack::Push(int value) {
 
 int MinStack::Pop() {
   if (data_.size() == 0) {
-    return NULL;
+    return 0;
   } else if (data_.back() >= minimal) {
     int tmp = data_.back();
     data_.pop_back();

@@ -1,9 +1,9 @@
-#include "iostream"
 #include "tree.hpp"
+
+#include "iostream"
 #include "queue"
 
-Tree::Tree() {
-}
+Tree::Tree() {}
 
 bool Tree::Insert(int key, int value) {
   if (node == nullptr) {
@@ -29,7 +29,7 @@ bool Tree::Insert(int key, int value) {
         curr = curr->right;
       }
     }
-  } 
+  }
 }
 
 void Tree::InsertOrUpdate(int key, int value) {
@@ -85,7 +85,7 @@ void Tree::PrintAll() const {
   while (!q.empty()) {
     Node* curr = q.front();
     q.pop();
-    printf("%d: %d\n",curr->key,curr->value);
+    printf("%d: %d\n", curr->key, curr->value);
     if (curr->left != nullptr) {
       q.push(curr->left);
     }
@@ -93,4 +93,4 @@ void Tree::PrintAll() const {
       q.push(curr->right);
     }
   }
-} 
+}

@@ -2,7 +2,6 @@
 
 #pragma once
 
-
 class Tree {
  public:
   Tree();
@@ -13,7 +12,6 @@ class Tree {
 
  private:
   struct Node {
-    
     int key;
     int value;
     Node* left = nullptr;

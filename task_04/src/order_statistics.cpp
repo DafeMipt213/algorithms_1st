@@ -16,7 +16,6 @@ std::vector<int> Sort(const std::vector<int>& data) {
   v2 = Sort(v2);
   std::vector<int> result;
   int i = 0, j = 0, k = 0;
-  // Merge two vectors
   while (i < v1.size() && j < v2.size()) {
     if (v1[i] <= v2[j]) {
       result.insert(result.end(), v1[i]);
@@ -37,8 +36,6 @@ std::vector<int> Sort(const std::vector<int>& data) {
 
 int GetOrderStatistics(const std::vector<int>& data, size_t n) {
   std::vector<int> tmp(data);
-
   tmp = Sort(tmp);
-
   return tmp[n];
 }

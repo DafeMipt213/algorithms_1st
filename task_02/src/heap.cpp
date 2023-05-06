@@ -1,15 +1,23 @@
 #include "heap.hpp"
 
 #include <cstddef>
+#include <vector>
 #include <stdexcept>
 
-void MinHeap::Push(int n) { heap.push_back(n); }
+void MinHeap::Push(int n) {
+  heap.push_back(n);
+  SiftUp(heap.size() - 1);
+}
 
 int MinHeap::Pop() {
+  if(heap.empty()){
+    throw std::out_of_range("heap is empty");
+  }
   int min = heap[0];
-  heap[0] = heap[heap.size() - 1];
-  // heap.size() = heap.size() - 1;
-  SiftUp(0);
+  heap[0] = heap.back();
+  heap.back() = min;
+  heap.pop_back();
+  SiftDown(0);
   return min;
 }
 

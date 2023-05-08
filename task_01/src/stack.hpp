@@ -4,12 +4,11 @@
 
 class Stack {
  public:
-
   void Push(int value);
   int Pop();
 
  private:
-   struct Node {
+  struct Node {
     int value;
     Node* prev = nullptr;
   };
@@ -21,10 +20,9 @@ class MinStack {
   void Push(int value);
   int Pop();
   int GetMin();
-  
 
  private:
- struct Node {
+  struct Node {
     int value = 0;
     int min = 10e8;
     Node* prev = nullptr;

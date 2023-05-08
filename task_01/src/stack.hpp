@@ -1,6 +1,6 @@
 #pragma once
-#include <iostream>
 #include <array>
+#include <iostream>
 #include <vector>
 const int MAX_SIZE = 100;
 
@@ -17,15 +17,14 @@ class Stack {
   int top = -1;
 };
 
-
 class MinStack {
-public:
-    void Push(int);
-    int Pop();
-    int Top();
-    int GetMin();
+ public:
+  void Push(int);
+  int Pop();
+  int Top();
+  int GetMin();
 
-private:
-    Stack stack_;
-    Stack min_stack_;
+ private:
+  Stack stack_;
+  Stack min_stack_;
 };

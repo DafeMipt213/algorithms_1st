@@ -44,8 +44,8 @@ TEST(MinStackTest, Simple) {
 TEST(MinStackTest, Simple1) {
   MinStack stack;
   stack.Push(6);  // Stack [6]
-  stack.Push(5);  // Stack [6,5]  
-  stack.Push(4);  // Stack [6,5,4]  
+  stack.Push(5);  // Stack [6,5]
+  stack.Push(4);  // Stack [6,5,4]
   stack.Push(3);  // Stack [6,5,4,3]
   stack.Push(2);  // Stack [6,5,4,3,2]
   stack.Push(1);  // Stack [6,5,4,3,2,1]
@@ -64,8 +64,8 @@ TEST(MinStackTest, Simple1) {
 TEST(MinStackTest, Simple2) {
   MinStack stack;
   stack.Push(1);  // Stack [1]
-  stack.Push(2);  // Stack [1,2]  
-  stack.Push(3);  // Stack [1,2,3]  
+  stack.Push(2);  // Stack [1,2]
+  stack.Push(3);  // Stack [1,2,3]
   stack.Push(4);  // Stack [1,2,3,4]
   stack.Push(5);  // Stack [1,2,3,4,5]
   stack.Push(6);  // Stack [1,2,3,4,5,6]

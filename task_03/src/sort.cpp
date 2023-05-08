@@ -21,7 +21,7 @@ int partition(std::vector<int>& data, int l, int r) {
   return i + 1;
 }
 
-// Quick Sort без рекурсии
+// Quick Sort без рекурсии со Стеком :)
 std::vector<int> Sort(const std::vector<int>& data) {
   std::vector<int> sorted_data = data;
   std::stack<std::pair<int, int>> s;

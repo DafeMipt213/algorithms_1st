@@ -4,32 +4,32 @@
 #include <exception>
 #include <iostream>
 
-void Stack::Push(int value) { _data.push_back(value); }
+void Stack::Push(int value) { data_.push_back(value); }
 
 int Stack::Pop() {
-  if (_data.empty()) throw std::out_of_range("Empty Stack");
-  int ret_value = _data[_data.size() - 1];
-  _data.erase(_data.end() - 1);
-  return ret_value;
+  if (data_.empty()) throw std::out_of_range("Empty Stack");
+  int result = data_.back();
+  data_.erase(data_.end() - 1);
+  return result;
 }
 
 void MinStack::Push(int value) {
-  if (_data.size() > 0) {
-    int min_num = std::min(value, _data[0].second);
-    _data.push_back(std::pair<int, int>(value, min_num));
+  if (!data_.empty()) {
+    int min_num = std::min(value, data_.back().second);
+    data_.push_back(std::pair<int, int>(value, min_num));
   } else {
-    _data.push_back(std::pair<int, int>(value, value));
+    data_.push_back(std::pair<int, int>(value, value));
   }
 }
 
 int MinStack::Pop() {
-  if (_data.empty()) throw std::out_of_range("Empty MinStack");
-  int ret_value = _data[_data.size() - 1].first;
-  _data.erase(_data.end() - 1);
-  return ret_value;
+  if (data_.empty()) throw std::out_of_range("Empty MinStack");
+  int result = data_.back().first;
+  data_.erase(data_.end() - 1);
+  return result;
 }
 
 int MinStack::GetMin() {
-  if (_data.empty()) throw std::out_of_range("Empty MinStack");
-  return _data[_data.size() - 1].second;
+  if (data_.empty()) throw std::out_of_range("Empty MinStack");
+  return data_.back().second;
 }

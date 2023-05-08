@@ -12,6 +12,10 @@ void Stack::Push(int value) {
   data[top] = value;
 }
 
+int Stack::Top(){
+  return data[top];
+}
+
 int Stack::Pop() {
   if (Stack::isEmpty()) {
     return -1;
@@ -21,28 +25,29 @@ int Stack::Pop() {
   return value;
 }
 
-bool MinStack::isEmpty() { return top == -1; }
+void MinStack::Push(int x) {
+        // добавляем элемент в стек
+        stack_.Push(x);
 
-bool MinStack::isFull() { return top == MAX_SIZE - 1; }
+        // обновляем минимальное значение
+        if (min_stack_.isEmpty() || x <= min_stack_.Top()) {
+            min_stack_.Push(x);
 
-void MinStack::Push(int value) {
-  if (MinStack::isEmpty() || min > value) {
-    min = value;
-  }
-  if (MinStack::isFull()) {
-    return;
-  }
-  top++;
-  data[(int)top] = value;
-}
+        }
+    }
 
-int MinStack::Pop() {
-  if (MinStack::isEmpty()) {
-    return -1;
-  }
-  int value = data[top];
-  top--;
-  min = *std::min_element(std::begin(data), std::next(data.begin(), top + 1));
-  return value;
-}
-int MinStack::GetMin() { return min; }
+    int MinStack::Pop() {
+        // удаляем элемент из стека
+        if (stack_.Top() == min_stack_.Top()) {
+            min_stack_.Pop();
+        }
+        return stack_.Pop();
+    }
+
+    int MinStack::Top() {
+        return stack_.Top();
+    }
+
+    int MinStack::GetMin() {
+        return min_stack_.Top();
+    }

@@ -13,7 +13,7 @@ int MinHeap::Pop() {
   int result = tree.front();
 
   tree[0] = tree.back();
-  tree.erase(tree.end() - 1);
+  tree.pop_back();
   SiftDown(0);
   return result;
 }
@@ -26,9 +26,7 @@ void MinHeap::SiftDown(int index) {
   if (left >= Size()) {
     return;
   } else if (right >= Size() && tree[left] < tree[index]) {
-    int tmp = tree[index];
-    tree[index] = tree[left];
-    tree[left] = tmp;
+    std::swap(tree[index], tree[left]);
   } else {
     if (tree[left] < tree[right] && tree[left] < tree[index]) {
       int tmp = tree[index];
@@ -44,7 +42,8 @@ void MinHeap::SiftDown(int index) {
 }
 
 void MinHeap::SiftUp(int index) {
-  if ((index - 1) / 2 == 0) {
+  int parent = (index - 1) / 2;
+  if (parent == 0) {
     if (tree[0] > tree[index]) {
       int tmp = tree[0];
       tree[0] = tree[index];
@@ -52,9 +51,9 @@ void MinHeap::SiftUp(int index) {
     }
     return;
   }
-  if (tree[index] < tree[(index - 1) / 2]) {
+  if (tree[index] < tree[parent]) {
     int tmp = tree[index];
-    tree[index] = tree[(index - 1) / 2];
-    tree[(index - 1) / 2] = tmp;
+    tree[index] = tree[parent];
+    tree[parent] = tmp;
   }
 }

@@ -6,14 +6,14 @@
 void Stack::Push(int value) {
   Node* node = new Node();
   node->value = value;
-  node->prev = last;
-  last = node;
+  node->prev = last_;
+  last_ = node;
 };
 
 int Stack::Pop() {
-  int result = last->value;
-  Node* tmp = last;
-  last = last->prev;
+  int result = last_->value;
+  Node* tmp = last_;
+  last_ = last_->prev;
   delete tmp;
   return result;
 };
@@ -21,33 +21,33 @@ int Stack::Pop() {
 void MinStack::Push(int value) {
   Node* node = new Node();
   node->value = value;
-  if (last == nullptr) {
+  if (last_ == nullptr) {
     node->min = value;
   } else {
-    if (value < last->min) {
+    if (value < last_->min) {
       node->min = value;
     } else {
-      node->min = last->min;
+      node->min = last_->min;
     }
   }
-  node->prev = last;
-  last = node;
+  node->prev = last_;
+  last_ = node;
 }
 
 int MinStack::Pop() {
-  if (last == nullptr) {
+  if (last_ == nullptr) {
     return 0;
     throw std::range_error("Error");
   }
-  int result = last->value;
-  last = last->prev;
+  int result = last_->value;
+  last_ = last_->prev;
 
   return result;
 };
 
 int MinStack::GetMin() {
-  if (last != nullptr) {
-    return last->min;
+  if (last_ != nullptr) {
+    return last_->min;
   }
 
   throw std::range_error("Error");

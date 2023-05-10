@@ -1,32 +1,37 @@
 #include <iostream>
+#include <stack.hpp>
 #include <vector>
 
-using namespace std;
-
-class StackWithMin {
- public:
-  void push(int val) {
-    stack.push_back(val);
-    if (min_stack.empty() || val <= min_stack.back()) {
-      min_stack.push_back(val);
-    }
+void Stack::Push(int value) { data.push_back(value); }
+int Stack::Pop() {
+  if (data.empty()) {
+    return -1;
+  }
+  int back = data.back();
+  data.pop_back();
+  return back;
+}
+void MinStack::Push(int val) {
+  data.push_back(val);
+  if (data.empty() || val <= min) {
+    min = val;
+  }
+}
+int MinStack::Pop() {
+  if (data.empty()) {
+    return -1;
   }
 
-  void pop() {
-    if (stack.empty()) {
-      return;
+  int back = data.back();
+  data.pop_back();
+
+  min = INT16_MAX;
+  for (int i : data) {
+    if (min > i) {
+      min = i;
     }
-    if (stack.back() == min_stack.back()) {
-      min_stack.pop_back();
-    }
-    stack.pop_back();
+    std::cout << i << std::endl;
   }
-
-  int top() { return stack.back(); }
-
-  int getMin() { return min_stack.back(); }
-
- private:
-  vector<int> stack;
-  vector<int> min_stack;
-};
+  return back;
+}
+int MinStack::GetMin() { return min; }

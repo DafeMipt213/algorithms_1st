@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void merge(vector<int>& arr, int left, int middle, int right) {
+void merge(vector<int> &arr, int left, int middle, int right) {
   int left_half_size = middle - left + 1;
   int right_half_size = right - middle;
 
@@ -34,7 +34,7 @@ void merge(vector<int>& arr, int left, int middle, int right) {
   }
 }
 
-void merge_sort(vector<int>& arr, int left, int right) {
+void merge_sort(vector<int> &arr, int left, int right) {
   if (left >= right) {
     return;
   }
@@ -44,15 +44,8 @@ void merge_sort(vector<int>& arr, int left, int right) {
   merge(arr, left, middle, right);
 }
 
-int main() {
-  vector<int> arr = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5};
-
-  merge_sort(arr, 0, arr.size() - 1);
-
-  for (int x : arr) {
-    cout << x << " ";
-  }
-  cout << endl;
-
-  return 0;
+vector<int> Sort(const vector<int> &data) {
+  vector<int> result = data;
+  merge_sort(result, 0, result.size() - 1);
+  return result;
 }

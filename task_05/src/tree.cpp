@@ -43,9 +43,8 @@ Node* Tree::PopMin(Node* a) {
   a = Balance(a);
   return a;
 }
-Node* Tree::FindMin(Node* a){
-  if (a->left_child != nullptr)
-    return FindMin(a->left_child);
+Node* Tree::FindMin(Node* a) {
+  if (a->left_child != nullptr) return FindMin(a->left_child);
   return a;
 }
 
@@ -92,11 +91,10 @@ Node* Tree::InsertNode(Node* a, int key, int value) {
 Node* Tree::EraseNode(Node* a, int key) {
   if (key > a->Key) {
     a->right_child = EraseNode(a->right_child, key);
-  } 
-  if (key < a->Key){
-    a->left_child = EraseNode(a->left_child, key);
   }
-  else{
+  if (key < a->Key) {
+    a->left_child = EraseNode(a->left_child, key);
+  } else {
     Node* l = a->left_child;
     Node* r = a->right_child;
     delete a;
@@ -116,7 +114,4 @@ void Tree::insert(int key, int value) {
   this->root = InsertNode(this->root, key, value);
 }
 
-void Tree::remove(int key) {
-  this->root = EraseNode(this->root, key);
-}
-
+void Tree::remove(int key) { this->root = EraseNode(this->root, key); }

@@ -21,22 +21,18 @@ int MinHeap::Pop() {
 size_t MinHeap::Size() { return tree.size(); }
 
 void MinHeap::SiftDown(int index) {
-  int left = 2 * index + 1;
-  int right = 2 * index + 2;
+  size_t left = 2 * index + 1;
+  size_t right = 2 * index + 2;
   if (left >= Size()) {
     return;
   } else if (right >= Size() && tree[left] < tree[index]) {
     std::swap(tree[index], tree[left]);
   } else {
     if (tree[left] < tree[right] && tree[left] < tree[index]) {
-      int tmp = tree[index];
-      tree[index] = tree[left];
-      tree[left] = tmp;
+      std::swap(tree[index], tree[left]);
     }
     if (tree[left] >= tree[right] && tree[right] < tree[index]) {
-      int tmp = tree[index];
-      tree[index] = tree[right];
-      tree[right] = tmp;
+      std::swap(tree[index], tree[right]);
     }
   }
 }

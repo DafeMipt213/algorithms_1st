@@ -4,6 +4,7 @@
 
 class Stack {
  public:
+  ~Stack() { deleteNode(last_); }
   void Push(int value);
   int Pop();
 
@@ -12,6 +13,12 @@ class Stack {
     int value;
     Node* prev = nullptr;
   };
+  void deleteNode(Node* p) {
+    if (p->prev != nullptr) {
+      deleteNode(p->prev);
+    }
+    delete p;
+  }
   Node* last_ = nullptr;
 };
 

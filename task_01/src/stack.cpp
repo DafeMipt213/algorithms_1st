@@ -24,11 +24,7 @@ void MinStack::Push(int value) {
   if (last_ == nullptr) {
     node->min = value;
   } else {
-    if (value < last_->min) {
-      node->min = value;
-    } else {
-      node->min = last_->min;
-    }
+    node->min = std::min(value, last_->min);
   }
   node->prev = last_;
   last_ = node;
@@ -36,8 +32,8 @@ void MinStack::Push(int value) {
 
 int MinStack::Pop() {
   if (last_ == nullptr) {
-    return 0;
     throw std::range_error("Error");
+    return 0;
   }
   int result = last_->value;
   last_ = last_->prev;

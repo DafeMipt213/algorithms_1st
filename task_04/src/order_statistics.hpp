@@ -2,4 +2,10 @@
 
 #include <vector>
 
-int GetOrderStatistics(const std::vector<int>& data, size_t n);
+int GetOrderStatistics(std::vector<int>& data, size_t n);
+
+int findOrderStatistic(std::vector<int>& vec, int low, int high, int k);
+
+int findMedian(std::vector<int> vec, int low, int med, int high);
+
+int breakPartition(std::vector<int>& vec, int low, int high);

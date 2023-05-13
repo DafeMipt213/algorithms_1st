@@ -14,6 +14,9 @@ class Stack {
     Node* prev = nullptr;
   };
   void deleteNode(Node* p) {
+    if (p == nullptr) {
+      return;
+    }
     if (p->prev != nullptr) {
       deleteNode(p->prev);
     }

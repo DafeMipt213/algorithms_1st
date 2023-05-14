@@ -7,7 +7,7 @@
 size_t Partition(std::vector<int>& data, size_t left, size_t right) {
   // Выбираем рандомный pivot
   size_t pivot_index = left + rand() % (right - left + 1);
-  size_t pivot = data[pivot_index];
+  int pivot = data[pivot_index];
   std::swap(data[pivot_index], data[right]);
 
   size_t i = left - 1;
@@ -28,16 +28,16 @@ std::vector<int> Sort(const std::vector<int>& data) {
   stack.push({0, data.size() - 1});
 
   while (!stack.empty()) {
-    size_t l = stack.top().first;
-    size_t r = stack.top().second;
+    int left = stack.top().first;
+    int right = stack.top().second;
     stack.pop();
 
-    if (l >= r) continue;
+    if (left >= right) continue;
 
-    size_t pivot_index = Partition(sorted_data, l, r);
+    size_t pivot_index = Partition(sorted_data, left, right);
 
-    stack.push({pivot_index + 1, r});
-    stack.push({l, pivot_index - 1});
+    stack.push({pivot_index + 1, right});
+    stack.push({left, pivot_index - 1});
   }
   return sorted_data;
 }

@@ -23,23 +23,22 @@ int MinHeap::Pop() {
 
 size_t MinHeap::Size() { return array.size(); }
 
-void MinHeap::SiftUp(int index) {
+void MinHeap::SiftUp(size_t index) {
   if (index > 0) {
-    int parent = array[(index - 1) / 2];
-    if (parent > array[index]) {
-      array[(index - 1) / 2] = array[index];
-      array[index] = parent;
+    size_t parent_index = (index - 1) / 2;
+    if (array[parent_index] > array[index]) {
+      std::swap(array[parent_index], array[index]);
     }
-    SiftUp((index - 1) / 2);
+    SiftUp(parent_index);
   }
   return;
 }
-void MinHeap::SiftDown(int index) {
+void MinHeap::SiftDown(size_t index) {
   if (array.size() == 0) return;
   if ((2 * index + 1) < (array.size())) {
-    int left_child_index = 2 * index + 1;
-    int right_child_index = 2 * index + 2;
-    int next_child_index = left_child_index;
+    size_t left_child_index = 2 * index + 1;
+    size_t right_child_index = 2 * index + 2;
+    size_t next_child_index = left_child_index;
     if (right_child_index < (array.size())) {
       if (array[left_child_index] > array[right_child_index])
         next_child_index = right_child_index;

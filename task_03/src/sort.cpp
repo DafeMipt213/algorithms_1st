@@ -4,40 +4,40 @@
 #include <stack>
 #include <vector>
 
-int partition(std::vector<int>& data, int l, int r) {
+size_t Partition(std::vector<int>& data, size_t left, size_t right) {
   // Выбираем рандомный pivot
-  int pivot_index = l + rand() % (r - l + 1);
-  int pivot = data[pivot_index];
-  std::swap(data[pivot_index], data[r]);
+  size_t pivot_index = left + rand() % (right - left + 1);
+  size_t pivot = data[pivot_index];
+  std::swap(data[pivot_index], data[right]);
 
-  int i = l - 1;
-  for (int j = l; j < r; j++) {
+  size_t i = left - 1;
+  for (size_t j = left; j < right; j++) {
     if (data[j] <= pivot) {
       i++;
       std::swap(data[i], data[j]);
     }
   }
-  std::swap(data[i + 1], data[r]);
+  std::swap(data[i + 1], data[right]);
   return i + 1;
 }
 
 // Quick Sort без рекурсии со Стеком :)
 std::vector<int> Sort(const std::vector<int>& data) {
   std::vector<int> sorted_data = data;
-  std::stack<std::pair<int, int>> s;
-  s.push({0, data.size() - 1});
+  std::stack<std::pair<int, int>> stack;
+  stack.push({0, data.size() - 1});
 
-  while (!s.empty()) {
-    int l = s.top().first;
-    int r = s.top().second;
-    s.pop();
+  while (!stack.empty()) {
+    size_t l = stack.top().first;
+    size_t r = stack.top().second;
+    stack.pop();
 
     if (l >= r) continue;
 
-    int pivot_index = partition(sorted_data, l, r);
+    size_t pivot_index = Partition(sorted_data, l, r);
 
-    s.push({pivot_index + 1, r});
-    s.push({l, pivot_index - 1});
+    stack.push({pivot_index + 1, r});
+    stack.push({l, pivot_index - 1});
   }
   return sorted_data;
 }

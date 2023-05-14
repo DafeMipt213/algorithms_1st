@@ -14,18 +14,18 @@ int Stack::Pop() {
 }
 
 void MinStack::Push(int value) {
-  if (!data_.empty()) {
+  if (data_.empty()) {
+    data_.push_back(std::pair<int, int>(value, value));
+  } else {
     int min_num = std::min(value, data_.back().second);
     data_.push_back(std::pair<int, int>(value, min_num));
-  } else {
-    data_.push_back(std::pair<int, int>(value, value));
   }
 }
 
 int MinStack::Pop() {
   if (data_.empty()) throw std::out_of_range("Empty MinStack");
   int result = data_.back().first;
-  data_.erase(data_.end() - 1);
+  data_.pop_back();
   return result;
 }
 

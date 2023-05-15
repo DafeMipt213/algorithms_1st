@@ -4,20 +4,20 @@
 #include <vector>
 
 void MinHeap::Push(int value) {
-  heap.push_back(value); // добавляем элемент в конец вектора
-  Sift_up(heap.size() - 1); // восстанавливаем свойство кучи
+  heap.push_back(value);  // добавляем элемент в конец вектора
+  Sift_up(heap.size() - 1);  // восстанавливаем свойство кучи
 }
 
 int MinHeap::Pop() {
-  int min_value = heap[0]; // сохраняем минимальный элемент
-  heap[0] = heap.back(); // заменяем корень на последний элемент вектора
-  heap.pop_back(); // удаляем последний элемент вектора
-  Sift_down(0);     // восстанавливаем свойство кучи
-  return min_value; // возвращаем минимальный элемент
+  int min_value = heap[0];  // сохраняем минимальный элемент
+  heap[0] = heap.back();  // заменяем корень на последний элемент вектора
+  heap.pop_back();  // удаляем последний элемент вектора
+  Sift_down(0);      // восстанавливаем свойство кучи
+  return min_value;  // возвращаем минимальный элемент
 }
 
 bool MinHeap::Empty() const {
-  return heap.empty(); // проверяем, пуста ли куча
+  return heap.empty();  // проверяем, пуста ли куча
 }
 
 void MinHeap::Sift_up(int index) {

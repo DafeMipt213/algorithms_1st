@@ -1,9 +1,9 @@
 #include <cstddef>
-#include <string>
 #include <stdexcept>  // Добавленный заголовочный файл
+#include <string>
 
 class TreeNode {
-public:
+ public:
   std::string key;
   int value;
   TreeNode* left;
@@ -14,7 +14,7 @@ public:
 };
 
 class HashTable {
-public:
+ public:
   HashTable();
   ~HashTable();
 
@@ -24,7 +24,7 @@ public:
   int Find(const std::string& key) const;
   size_t Size() const;
 
-private:
+ private:
   TreeNode* root_;
 
   void DestroyTree(TreeNode* node);
@@ -34,9 +34,7 @@ private:
 
 HashTable::HashTable() : root_(nullptr) {}
 
-HashTable::~HashTable() {
-  DestroyTree(root_);
-}
+HashTable::~HashTable() { DestroyTree(root_); }
 
 void HashTable::DestroyTree(TreeNode* node) {
   if (node != nullptr) {
@@ -48,7 +46,7 @@ void HashTable::DestroyTree(TreeNode* node) {
 
 bool HashTable::Insert(const std::string& key, int value) {
   if (Find(root_, key) != nullptr) {
-    return false; // Key already exists
+    return false;  // Key already exists
   }
 
   root_ = Insert(root_, key, value);
@@ -109,9 +107,4 @@ size_t CountNodes(TreeNode* node) {
   return 1 + CountNodes(node->left) + CountNodes(node->right);
 }
 
-size_t HashTable::Size() const {
-  return CountNodes(root_);
-}
-
-
-
+size_t HashTable::Size() const { return CountNodes(root_); }

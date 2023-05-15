@@ -19,6 +19,6 @@ class MinStack {
   void Push(int value);
 
  private:
- int min;
+  int min;
   std::vector<int> data;
 };

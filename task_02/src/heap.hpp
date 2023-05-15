@@ -15,6 +15,6 @@ class MinHeap {
  public:
   void Push(int val);
   int Pop();
-  bool empty() const { return heap.empty(); }
-  int size() const { return heap.size(); }
+  bool Empty() const;
+  size_t Size() const;
 };

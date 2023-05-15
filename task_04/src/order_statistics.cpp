@@ -1,41 +1,47 @@
 #include "order_statistics.hpp"
 
 #include <algorithm>
+#include <iostream>
+#include <stdexcept>
+#include <vector>
 
-std::vector<int> Sort(const std::vector<int>& data) {
-  if (data.size() <= 1) {
-    return data;
-  }
-
-  size_t mid = data.size() / 2;
-  auto mid_it = data.begin();
-  std::advance(mid_it, mid);
-  std::vector<int> v1(data.begin(), mid_it);
-  std::vector<int> v2(mid_it, data.end());
-  v1 = Sort(v1);
-  v2 = Sort(v2);
-  std::vector<int> result;
-  int i = 0, j = 0, k = 0;
-  while (i < v1.size() && j < v2.size()) {
-    if (v1[i] <= v2[j]) {
-      result.insert(result.end(), v1[i]);
-      i++;
-    } else {
-      result.insert(result.end(), v2[j]);
-      j++;
+size_t Partition(std::vector<int>& data, size_t left, size_t right,
+                 size_t pivotIndex) {
+  int pivot_value = data[pivotIndex];
+  std::swap(data[pivotIndex], data[right]);
+  size_t store_index = left;
+  for (size_t i = left; i < right; ++i) {
+    if (data[i] < pivot_value) {
+      std::swap(data[i], data[store_index]);
+      ++store_index;
     }
   }
-  if (i < v1.size()) {
-    result.insert(result.end(), std::next(v1.begin(), i), v1.end());
-  }
-  if (j < v2.size()) {
-    result.insert(result.end(), std::next(v2.begin(), j), v2.end());
-  }
-  return result;
+
+  std::swap(data[store_index], data[right]);
+  return store_index;
 }
 
 int GetOrderStatistics(const std::vector<int>& data, size_t n) {
-  std::vector<int> tmp(data);
-  tmp = Sort(tmp);
-  return tmp[n];
+  if (n >= data.size()) {
+    throw std::out_of_range("Invalid value of n");
+  }
+
+  std::vector<int> copy_data = data;
+  size_t left = 0;
+  size_t right = copy_data.size() - 1;
+
+  while (left < right) {
+    size_t pivotIndex = right; 
+    size_t pivot_position = Partition(copy_data, left, right, pivotIndex);
+
+    if (pivot_position == n) {
+      return copy_data[pivot_position];  // Найдена порядковая статистика
+    } else if (pivot_position < n) {
+      left = pivot_position + 1;  // Искать в правой части
+    } else {
+      right = pivot_position - 1;  // Искать в левой части
+    }
+  }
+
+  return copy_data[left];  // Возвращаем найденную порядковую статистику
 }

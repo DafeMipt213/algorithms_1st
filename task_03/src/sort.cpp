@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <cstddef>
 #include <iostream>
 #include <vector>
 
@@ -23,7 +24,7 @@ std::vector<int> Sort(const std::vector<int>& data) {
   v1 = Sort(v1);
   v2 = Sort(v2);
   std::vector<int> result;
-  int i = 0, j = 0, k = 0;
+  size_t i = 0, j = 0, k = 0;
   // Merge two vectors
   while (i < v1.size() && j < v2.size()) {
     if (v1[i] <= v2[j]) {

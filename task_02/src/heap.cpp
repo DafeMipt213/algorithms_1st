@@ -3,9 +3,9 @@
 #include <cstddef>
 #include <stdexcept>
 
-int parent(int index) { return (index - 1) / 2; }
-int leftChild(int index) { return 2 * index + 1; }
-int rightChild(int index) { return 2 * index + 2; }
+size_t parent(size_t index) { return (index - 1) / 2; }
+size_t leftChild(size_t index) { return 2 * index + 1; }
+size_t rightChild(size_t index) { return 2 * index + 2; }
 
 void MinHeap::Push(int val) {
   heap.push_back(val);
@@ -16,11 +16,11 @@ int MinHeap::Pop() {
   if (heap.empty()) {
     throw std::out_of_range("Empty heap");
   }
-  int maxVal = heap[0];
+  int max_value = heap[0];
   heap[0] = heap.back();
   heap.pop_back();
   SiftDown(0);
-  return maxVal;
+  return max_value;
 }
 
 void MinHeap::SiftUp(int index) {
@@ -47,3 +47,5 @@ void MinHeap::SiftDown(int index) {
     SiftDown(minIndex);
   }
 }
+bool MinHeap::Empty() const { return heap.empty(); }
+size_t MinHeap::Size() const { return heap.size(); }

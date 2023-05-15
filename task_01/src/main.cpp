@@ -13,5 +13,7 @@ int main() {
   std::cout << stack.Pop() << " Pop" << std::endl;
   std::cout << stack.GetMin() << " GetMin" << std::endl;
   std::cout << stack.Pop() << " Pop" << std::endl;
+  std::cout << stack.Pop() << " Pop" << std::endl;
+  std::cout << stack.Pop() << " Pop" << std::endl;
   return 0;
 }

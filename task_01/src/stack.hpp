@@ -8,8 +8,8 @@ class Stack {
  public:
   void Push(int value);
   int Pop();
-  bool isEmpty();
-  bool isFull();
+  bool IsEmpty();
+  bool IsFull();
   int Top();
 
  private:

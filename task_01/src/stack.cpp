@@ -35,9 +35,8 @@ int MinStack::Pop() {
 
   auto result = data_.back();
   data_.pop_back();
-  if (minimum_.Get() == result)
-    minimum_.Pop();
-    
+  if (minimum_.Get() == result) minimum_.Pop();
+
   return result;
 }
 

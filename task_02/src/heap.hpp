@@ -30,8 +30,7 @@ T MinHeap<T>::Pop() {
   auto result = data_[0];
   std::swap(data_[0], data_.back());
   data_.pop_back();
-  if (!data_.empty())
-    this->SiftDown(0);
+  if (!data_.empty()) this->SiftDown(0);
   return result;
 }
 
@@ -56,7 +55,8 @@ void MinHeap<T>::SiftDown(size_t index) {
   size_t data_last_index = this->Size() - 1;
   T element = data_[index];
 
-  if (left_child_index > data_last_index)  // left and right children don't exist
+  if (left_child_index >
+      data_last_index)  // left and right children don't exist
     return;
 
   T left_child = data_[left_child_index];
@@ -65,8 +65,7 @@ void MinHeap<T>::SiftDown(size_t index) {
     size_t min_index = -1;
     if (left_child < right_child) {
       min_index = left_child_index;
-    }
-    else {
+    } else {
       min_index = right_child_index;
     }
     std::swap(data_[index], data_[min_index]);
@@ -79,7 +78,6 @@ void MinHeap<T>::SiftDown(size_t index) {
 
 template <typename T>
 size_t MinHeap<T>::Size() {
-  if (data_.empty())
-    return 0;
+  if (data_.empty()) return 0;
   return data_.size();
 }

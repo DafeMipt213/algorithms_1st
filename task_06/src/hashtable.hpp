@@ -1,8 +1,8 @@
 #pragma once
 
-#include <cstddef>
+#include <list>
 #include <string>
-#include <unordered_map>
+#include <vector>
 
 class HashTable {
  public:
@@ -11,8 +11,16 @@ class HashTable {
   void InsertOrUpdate(const std::string& key, int value);
   void Remove(const std::string& key);
   int Find(const std::string& key) const;
-  size_t Size() const;
+  size_t Size() const;  // размер вектора или количество ключей/значений
 
  private:
-  std::unordered_map<std::string, int> data_;
+  struct Data {
+    Data(std::string k, int val);
+    std::string key;
+    int value;
+  };
+  int HashFunction(const std::string& key) const;
+  std::list<Data>::iterator Index(const std::string& key) const;
+
+  std::vector<std::list<Data>> data_;
 };

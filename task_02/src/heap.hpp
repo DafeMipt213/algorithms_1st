@@ -28,9 +28,10 @@ template <typename T>
 T MinHeap<T>::Pop() {
   if (data_.empty()) throw std::out_of_range("Empty heap");
   auto result = data_[0];
-  std::swap(data_[0], data_[this->Size() - 1]);
+  std::swap(data_[0], data_.back());
   data_.pop_back();
-  this->SiftDown(0);
+  if (!data_.empty())
+    this->SiftDown(0);
   return result;
 }
 
@@ -78,5 +79,7 @@ void MinHeap<T>::SiftDown(size_t index) {
 
 template <typename T>
 size_t MinHeap<T>::Size() {
+  if (data_.empty())
+    return 0;
   return data_.size();
 }

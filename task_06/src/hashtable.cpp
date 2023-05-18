@@ -55,7 +55,7 @@
 //   int index = HashFunction(key);
 
 //   auto value = this->Find(key);
-//   data_[index].remove(Data{key, value});
+// //   data_[index].remove(Data{key, value});
 // }
 
 // int HashTable::Find(const std::string& key) const {

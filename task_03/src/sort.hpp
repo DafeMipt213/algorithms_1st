@@ -4,6 +4,6 @@
 #include <iterator>
 #include <vector>
 
-void quickSort(std::vector<int>::iterator array, int low, int hight);
-void printArr(std::vector<int>::iterator array, int n);
+void QuickSort(std::vector<int>::iterator array, size_t low, size_t hight);
+void PrintVector(std::vector<int>::iterator array, int n);
 std::vector<int> Sort(std::vector<int> vec);

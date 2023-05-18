@@ -1,6 +1,6 @@
 #pragma once
 
-//#include <stack>
+#include <initializer_list>
 #include <iostream>
 #include <stdexcept>
 #include <vector>
@@ -21,141 +21,82 @@ class Stack {
   std::vector<T> data_;
 };
 
-// can work with numeric types
-template <typename T>
-class MinStack;
-
 // specialization for int
-template <>
-class MinStack<int> {
+template <typename T>
+class MinStack {
  public:
   MinStack() = default;
-  MinStack(std::initializer_list<int> lst) {
-    for (size_t i = 0; i < lst.size(); ++i) data_.push_back(*(lst.begin() + i));
-    if (!data_.empty()) minValues_.Push(data_[0]);
-    for (size_t i = 1; i < data_.size(); ++i) {
-      if (data_[i] < minValues_.Get())
-        minValues_.Push(data_[i]);
-      else
-        minValues_.Push(minValues_.Get());
-    }
-  }
-  MinStack(std::vector<int> vec) {
-    if (!vec.empty()) {
-      data_.push_back(vec[0]);
-      minValues_.Push(vec[0]);
-    }
-    for (size_t i = 1; i < vec.size(); ++i) {
-      data_.push_back(vec[i]);
-      if (data_[i] < minValues_.Get())
-        minValues_.Push(data_[i]);
-      else
-        minValues_.Push(minValues_.Get());
-    }
-  }
+  MinStack(std::initializer_list<T> lst);
+  MinStack(std::vector<T> vec);
 
-  void Push(int value) {
-    data_.push_back(value);
-    try {
-      if (minValues_.Get() >= value)
-        minValues_.Push(value);
-      else
-        minValues_.Push(minValues_.Get());
-    } catch (...) {
-      minValues_.Push(value);
-    }
-  }
-
-  int Pop() {
-    if (data_.empty()) throw std::out_of_range("Stack is empty ");
-    auto result = data_[data_.size() - 1];
-    data_.pop_back();
-    minValues_.Pop();
-    return result;
-  }
-
-  int GetMin() {
-    auto result = minValues_.Get();
-    return result;
-  }
-
-  int Get() {
-    if (data_.empty())
-      throw std::out_of_range("Stack is empty ");
-    else
-      return data_[data_.size() - 1];
-  }
+  void Push(int value);
+  T Pop();
+  T GetMin();
+  T Get();
 
  private:
-  std::vector<int> data_;
-  Stack<int> minValues_;
+  std::vector<T> data_;
+  Stack<T> minValues_;
 };
 
-// specialization for double
-template <>
-class MinStack<double> {
- public:
-  MinStack() = default;
-  MinStack(std::initializer_list<double> lst) {
-    for (size_t i = 0; i < lst.size(); ++i) data_.push_back(*(lst.begin() + i));
-    if (!data_.empty()) minValues_.Push(data_[0]);
-    for (size_t i = 1; i < data_.size(); ++i) {
-      if (data_[i] < minValues_.Get())
-        minValues_.Push(data_[i]);
-      else
-        minValues_.Push(minValues_.Get());
-    }
+template <typename T>
+MinStack<T>::MinStack(std::vector<T> vec) {
+  if (!vec.empty()) {
+    data_.push_back(vec[0]);
+    minValues_.Push(vec[0]);
   }
-  MinStack(std::vector<double> vec) {
-    if (!vec.empty()) {
-      data_.push_back(vec[0]);
-      minValues_.Push(vec[0]);
-    }
-    for (size_t i = 1; i < vec.size(); ++i) {
-      data_.push_back(vec[i]);
-      if (data_[i] < minValues_.Get())
-        minValues_.Push(data_[i]);
-      else
-        minValues_.Push(minValues_.Get());
-    }
-  }
-
-  void Push(double value) {
-    data_.push_back(value);
-    try {
-      if (minValues_.Get() >= value)
-        minValues_.Push(value);
-      else
-        minValues_.Push(minValues_.Get());
-    } catch (...) {
-      minValues_.Push(value);
-    }
-  }
-
-  double Pop() {
-    if (data_.empty()) throw std::out_of_range("Stack is empty ");
-    auto result = data_[data_.size() - 1];
-    data_.pop_back();
-    minValues_.Pop();
-    return result;
-  }
-
-  double GetMin() {
-    double result = minValues_.Get();
-    return result;
-  }
-
-  double Get() {
-    if (data_.empty())
-      throw std::out_of_range("Stack is empty ");
+  for (size_t i = 1; i < vec.size(); ++i) {
+    data_.push_back(vec[i]);
+    if (data_[i] < minValues_.Get())
+      minValues_.Push(data_[i]);
     else
-      return data_[data_.size() - 1];
+      minValues_.Push(minValues_.Get());
   }
+}
 
- private:
-  std::vector<double> data_;
-  Stack<double> minValues_;
-};
+template <typename T>
+MinStack<T>::MinStack(std::initializer_list<T> lst) {
+  for (size_t i = 0; i < lst.size(); ++i) data_.push_back(*(lst.begin() + i));
+  if (!data_.empty()) minValues_.Push(data_[0]);
+  for (size_t i = 1; i < data_.size(); ++i)
+    minValues_.Push(std::min(data_[i], minValues_.Get()));
+}
+
+template <typename T>
+void MinStack<T>::Push(int value) {
+  data_.push_back(value);
+  try {
+    if (minValues_.Get() >= value)
+      minValues_.Push(value);
+    else
+      minValues_.Push(minValues_.Get());
+  } catch (...) {
+    minValues_.Push(value);
+  }
+}
+
+template <typename T>
+T MinStack<T>::Pop() {
+  if (data_.empty()) throw std::out_of_range("Stack is empty ");
+  auto result = data_[data_.size() - 1];
+  data_.pop_back();
+  minValues_.Pop();
+  return result;
+}
+
+template <typename T>
+T MinStack<T>::GetMin() {
+  auto result = minValues_.Get();
+  return result;
+}
+
+template <typename T>
+T MinStack<T>::Get() {
+  if (data_.empty())
+    throw std::out_of_range("Stack is empty ");
+  else
+    return data_[data_.size() - 1];
+}
 
 template <typename T>
 Stack<T>::Stack(std::initializer_list<T> lst) {

@@ -1,9 +1,9 @@
 
-// #include <gtest/gtest.h>
+#include <gtest/gtest.h>
 
-// #include <vector>
+#include <vector>
 
-// #include "hashtable.hpp"
+#include "hashtable.hpp"
 
 // TEST(HashTable, Simple) {
 //   HashTable data;

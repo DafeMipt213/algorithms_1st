@@ -1,21 +1,34 @@
-// #pragma once
+#pragma once
 
-// enum class Color { RED, GREEN, BLUE };
+enum class Color { RED, GREEN, BLUE };
 
-// class Tree {
-//  private:
-//   struct Node {
-//     Node* parent = nullptr;
-//     Node* left_child = nullptr;
-//     Node* right_child = nullptr;
-//     int Key;
-//     Color data;
-//   };
-//   Node* root = nullptr;
+struct Object {
+  int key;
+  Color color;
+};
 
-//  public:
-//   Tree();
-//   bool Insert(int key, Color value);
-//   void InsertOrUpdate(int key, int value);
-//   int Find(int key) const;
-// };
+class Tree {
+ private:
+  const static int t = 2;
+  struct Node {
+    int keys[2 * t];
+    Node *children[2 * t + 1];
+    Node *parent;
+    int count;
+    int countSons;
+    bool leaf;
+  };
+  Node *root = nullptr;
+  void insert_to_node(int key, Node *node);
+  void sort(Node *node);
+  void restruct(Node *node);
+  void deletenode(Node *node);
+  bool searchKey(int key, Node *node);
+
+ public:
+  Tree();
+  ~Tree();
+  bool Insert(int key);
+  void InsertOrUpdate(int key);
+  bool Find(int key);
+};

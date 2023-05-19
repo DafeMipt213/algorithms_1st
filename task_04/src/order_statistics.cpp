@@ -1,34 +1,51 @@
 #include "order_statistics.hpp"
 
-int Partition(std::vector<int>& data, size_t left, size_t right) {
-  int pivot = data[(left + right + 1) / 2];
-  while (left <= right) {
-    while (data[left] < pivot) left++;
+void RandomVec(std::vector<int>& vec, size_t size) {
+  for (int i = 0; i < size; i++) {
+    int b = rand() % 1000 + 1;
+    vec.push_back(b);
+  }
+}
 
-    while (data[right] > pivot) right--;
+std::vector<int> Sorted(std::vector<int> vec) {
+  std::sort(vec.begin(), vec.end());
+  return vec;
+}
+
+size_t Partition(std::vector<int>& vec, size_t left, size_t right) {
+  int middle = vec[(left + right + 1) / 2];
+  while (true) {
+    while (vec[left] < middle) left++;
+
+    if (vec[left] > vec[right]) std::swap(vec[right], vec[left]);
+
+    while (vec[right] > middle) right--;
 
     if (left >= right) break;
-    std::swap(data[right], data[left]);
-    left++;
-    right--;
-  }
 
+    if (vec[left] > vec[right]) std::swap(vec[right], vec[left]);
+
+    left += 1;
+  }
   return left;
 }
 
 int GetOrderStatistics(const std::vector<int>& data, size_t n) {
-  size_t Left = 0;
-  size_t Right = data.size() - 1;
-  std::vector<int> tmp = data;
+  std::vector<int> tmp(data);
+
+  size_t left = 0;
+  size_t right = data.size() - 1;
 
   while (true) {
-    size_t mid = Partition(tmp, Left, Right);
+    size_t pivot = Partition(tmp, left, right);
 
-    if (n < mid)
-      Right = mid;
-    else if (n > mid)
-      Left = mid;
+    if (pivot == n)
+      return tmp[pivot];
+    else if (pivot > n)
+      right = pivot - 1;
     else
-      return tmp[mid];
+      left = pivot + 1;
+
+    if (left == right) return tmp[left];
   }
 }

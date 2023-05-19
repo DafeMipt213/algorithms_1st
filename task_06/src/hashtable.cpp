@@ -1,95 +1,90 @@
-// #include "hashtable.hpp"
+#include "hashtable.hpp"
 
-// #include <algorithm>
+#include <cstddef>
+#include <string>
 
-// HashTable::HashTable() {}
+HashTable::HashTable() {
+  data_.resize(100);
+  TableSize = 100;
+}
 
-// HashTable::Data::Data(std::string k, int val) : key{k}, value{val} {}
+int MyHashFunction(const std::string& s, int TableSize) {
+  int k = TableSize - 1;
+  int hashRes = 0;
+  for (size_t i = 0; i <= s.size(); ++i)
+    hashRes = (k * hashRes + s[i]) % TableSize;
+  hashRes = (hashRes * 2 + 1) % TableSize;
+  return hashRes;
+}
 
-// std::list<HashTable::Data>::iterator HashTable::Index(
-//     const std::string& key) const {
-//   int index = HashFunction(key);
-//   std::list<Data> elements = data_[index];
+int HashFunction1::operator()(const std::string& s, int tableSize) const {
+  return MyHashFunction(s, tableSize);
+}
 
-//   std::list<Data>::iterator iter =
-//       std::find_if(elements.begin(), elements.end(),
-//                    [key](const Data& elem) { return key == elem.key; });
-//   return iter;
-// }
+bool Elem::operator==(Elem el) {
+  if (this->key_ == el.key_ && this->value_ == el.value_) return true;
+  return false;
+}
 
-// // int HashTable::HashFunction(const std::string& key) const {
-// //   return std::hash<std::string>{}(key) % data_.size();
-// // }
+bool HashTable::Insert(const std::string& key, int value) {
+  int index{0};
+  index = HashFunction1()(key, data_.size());
+  Elem obj(key, value);
+  if (InTable(obj)) return false;
+  data_[index].push_back(obj);
+  return true;
+}
 
-// HashTable::HashTable() {
-//   data_.resize(100);
-//   TableSize = 100;
-// }
+bool HashTable::InTable(Elem el) {
+  int index{0};
+  index = HashFunction1()(el.key_, data_.size());
+  for (size_t i = 0; i < data_[index].size(); ++i)
+    if (data_[index][i].key_ == el.key_) return true;
+  return false;
+}
 
-// int HashTable::HashFunction(const std::string& s, int TableSize) {
-//   int k = TableSize - 1;
-//   int hashRes = 0;
-//   for (size_t i = 0; i <= s.size(); ++i)
-//     hashRes = (k * hashRes + s[i]) % TableSize;
-//   hashRes = (hashRes * 2 + 1) % TableSize;
-//   return hashRes;
-// }
+void HashTable::InsertOrUpdate(const std::string& key, int value) {
+  int index{0};
+  index = HashFunction1()(key, data_.size());
+  Elem obj(key, value);
+  if (!InTable(obj)) {
+    Insert(key, value);
+    return;
+  }
 
-// int HashFunction::operator()(const std::string& s, int tableSize) const {
-//   return MyHashFunction(s, tableSize);
-// }
+  for (size_t i = 0; i < data_[index].size(); ++i) {
+    if (data_[index][i].key_ == obj.key_) {
+      data_[index][i].value_ = obj.value_;
+      break;
+    }
+  }
+  return;
+}
 
-// void HashTable::InsertOrUpdate(const std::string& key, int value) {
-//   Data new_elem{key, value};
-//   int index = HashFunction(key);
-//   std::list<Data> elements = data_[index];
+void HashTable::Remove(const std::string& key) {
+  int index = HashFunction1()(key, TableSize);
+  for (size_t i = 0; i < data_[index].size(); ++i) {
+    if (data_[index][i].key_ == key) {
+      data_[index].erase(data_[index].begin() + i);
+    }
+  }
+  return;
+}
 
-//   std::list<Data>::iterator iter = Index(key);
+int HashTable::Find(const std::string& key) const {
+  int index = HashFunction1()(key, TableSize);
+  for (size_t i = 0; i < data_[index].size(); ++i) {
+    if (data_[index][i].key_ == key) {
+      return data_[index][i].value_;
+    }
+  }
+}
 
-//   if (iter != elements.end())
-//     data_[index].insert(iter, new_elem);
-//   else
-//     data_[index].push_back(new_elem);
+size_t HashTable::Size() const { return TableSize; }
 
-//   return;
-// }
-
-// bool HashTable::Insert(const std::string& key, int value) {
-//   Data new_elem{key, value};
-//   int index = HashFunction(key);
-//   std::list<Data> elements = data_[index];
-
-//   std::list<Data>::iterator iter = Index(key);
-
-//   if (iter != elements.end())
-//     return false;
-//   else {
-//     data_[index].push_back(new_elem);
-//     return true;
-//   }
-// }
-
-// void HashTable::Remove(const std::string& key) {
-//   int index = HashFunction(key);
-
-//   auto value = this->Find(key);
-// //   data_[index].remove(Data{key, value});
-// }
-
-// int HashTable::Find(const std::string& key) const {
-//   int index = HashFunction(key);
-//   std::list<Data> elements = data_[index];
-
-//   std::list<Data>::iterator iter = Index(key);
-
-//   if (iter != elements.end())
-//     throw std::runtime_error("Element doesn't exist");
-//   else
-//     return iter->value;
-// }
-
-// size_t HashTable::Size() const {
-//   size_t result = 0;
-//   for (int i = 0; i < data_.size(); ++i) result += data_[i].size();
-//   return result;
-// }
+void HashTable::PrintTable() {
+  for (size_t i = 0; i < data_.size(); i++) {
+    for (size_t j = 0; j < data_[i].size(); j++)
+      std::cout << data_[i][j].value_;
+  }
+}

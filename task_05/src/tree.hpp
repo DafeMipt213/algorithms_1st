@@ -1,30 +1,27 @@
 #pragma once
-#include <vector>
 
 class Tree {
  private:
-  static constexpr int t = 2;
-  struct Node{
-    Node();
-    std::vector<int> keys;
-    std::vector<int> values;
-    std::vector<Node*> children;
-    Node* parent;
-    
-    int keys_count{0}; // count of keys in Node
-    int children_count{0}; // count of children in Node
-    bool leaf{true};
+  const static int t = 2;
+  struct Node {
+    int keys[2 * t];
+    Node *children[2 * t + 1];
+    Node *parent;
+    int count;
+    int countSons;
+    bool leaf;
   };
+  Node *root = nullptr;
+  void insert_to_node(int key, Node *node);
+  void sort(Node *node);
+  void restruct(Node *node);
+  void deletenode(Node *node);
+  bool searchKey(int key, Node *node);
 
-  int Find(int key, Node* root) const;
-  void NodeDeletion(Node* node); // to delete the Node and all its children
-  void SimpleInsert(int key, int value, Node* node); // to insert without reconstruction
-
-  Node* root{nullptr};
  public:
   Tree();
   ~Tree();
-  bool Insert(int key, int value);
-  void InsertOrUpdate(int key, int value);
-  int Find(int key) const;
+  bool Insert(int key);
+  void InsertOrUpdate(int key);
+  bool Find(int key);
 };

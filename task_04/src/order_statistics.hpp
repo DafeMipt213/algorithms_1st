@@ -8,4 +8,4 @@ int findOrderStatistic(std::vector<int>& vec, int low, int high, int k);
 
 int findMedian(std::vector<int> vec, int low, int med, int high);
 
-int breakPartition(std::vector<int>& vec, int low, int high);
+int BreakPartition(std::vector<int>& vec, int low, int high);

@@ -10,7 +10,7 @@ int GetOrderStatistics(std::vector<int>& data, size_t n) {
 int findOrderStatistic(std::vector<int>& vec, int low, int high, int k) {
   int median = findMedian(vec, low, low + (high - low) / 2, high);
   std::swap(vec[low], vec[median]);
-  int h = breakPartition(vec, low, high);
+  int h = BreakPartition(vec, low, high);
   if (h == k - 1) return h;
   if (h < k - 1) {
     return findOrderStatistic(vec, h + 1, high, k);
@@ -31,7 +31,7 @@ int findMedian(std::vector<int> vec, int low, int med, int high) {
   return high;
 }
 
-int breakPartition(std::vector<int>& vec, int low, int high) {
+int BreakPartition(std::vector<int>& vec, int low, int high) {
   int i = low + 1, j = high;
   int SupportElement = vec[low];
   while (true) {

@@ -1,6 +1,6 @@
 #include "tree.hpp"
 
-Node* Node::merge(Node *l, Node *r) {
+Node* Node::merge(Node* l, Node* r) {
   if (!l) return r;
   if (!r) return l;
   if (l->prior > r->prior) {

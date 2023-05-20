@@ -24,7 +24,7 @@ void Merge(std::vector<T> &data, int start, int center, int finish) {
     j++;
   }
   for (int k = 0; k < array.size(); k++) {
-    data[start + k] = array[k];
+    std::swap(data[start + k], array[k]);
   }
 }
 

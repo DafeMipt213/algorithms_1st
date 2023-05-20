@@ -4,18 +4,18 @@
 #include <stdexcept>
 
 template <typename T>
-struct Dot {
+struct Node {
  private:
-  Dot<T> *back = nullptr;
-  Dot<T> *next = nullptr;
+  Node<T> *back = nullptr;
+  Node<T> *next = nullptr;
   T value = T();
 
  public:
-  Dot(Dot *finish1, T value1) : back(finish1), value(value1) {}
-  Dot(T value1) : value(value1) {}
-  Dot() {}
-  Dot *GetBack() { return this->back; }
-  Dot *GetNext() { return this->next; }
+  Node(Node<T> *back, T value1) : back(back), value(value1) {}
+  Node(T value1) : value(value1) {}
+  Node() {}
+  Node *GetBack() { return this->back; }
+  Node *GetNext() { return this->next; }
   T GetValue() { return this->value; }
 };
 
@@ -31,22 +31,22 @@ class Stack {
   }
 
  private:
-  Dot<T> *start_ = nullptr;
-  Dot<T> *finish_ = nullptr;
+  Node<T> *start_ = nullptr;
+  Node<T> *finish_ = nullptr;
   int size_ = 0;
 };
 
 template <typename T>
 void Stack<T>::Push(T value) {
   if (!start_) {
-    Dot<T> *new_Dot = new Dot<T>(value);
-    start_ = new_Dot;
-    finish_ = new_Dot;
+    Node<T> *new_Node = new Node<T>(value);
+    start_ = new_Node;
+    finish_ = new_Node;
   } else {
-    Dot<T> *new_Dot = new Dot<T>(finish_, value);
+    Node<T> *new_Node = new Node<T>(finish_, value);
     auto tmp = finish_->GetNext();
-    tmp = new_Dot;
-    finish_ = new_Dot;
+    tmp = new_Node;
+    finish_ = new_Node;
   }
   size_ += 1;
 }
@@ -55,18 +55,20 @@ template <typename T>
 T Stack<T>::Pop() {
   if (size_ > 1) {
     T value = finish_->GetValue();
-    auto temp = std::unique_ptr<Dot<T>>(finish_);
+    auto temp = new Node<T>(finish_, 0);
     auto tmp = finish_->GetBack()->GetNext();
     tmp = nullptr;
     finish_ = finish_->GetBack();
     size_ -= 1;
+    delete temp;
     return value;
   } else if (size_ == 1) {
     T value = finish_->GetValue();
-    auto temp = std::unique_ptr<Dot<T>>(finish_);
+    auto temp = new Node<T>(finish_, 0);
     start_ = nullptr;
     finish_ = nullptr;
     size_ -= 1;
+    delete temp;
     return value;
   } else
     throw std::out_of_range("Empty Stack");
@@ -78,15 +80,15 @@ int Stack<T>::Size() {
 }
 
 template <typename T>
-struct DotWithMin {
+struct NodeWithMin {
  public:
-  DotWithMin<T> *back;
-  DotWithMin<T> *next;
+  NodeWithMin<T> *back;
+  NodeWithMin<T> *next;
   T value;
   T min_value;
-  DotWithMin(DotWithMin *finish1, T value1, T value2)
-      : next(nullptr), back(finish1), value(value1), min_value(value2) {}
-  DotWithMin(T value1)
+  NodeWithMin(NodeWithMin *back, T value1, T value2)
+      : next(nullptr), back(back), value(value1), min_value(value2) {}
+  NodeWithMin(T value1)
       : back(nullptr), next(nullptr), value(value1), min_value(value1) {}
 };
 
@@ -102,22 +104,22 @@ class MinStack {
   }
 
  private:
-  DotWithMin<T> *start_ = nullptr;
-  DotWithMin<T> *finish_ = nullptr;
+  NodeWithMin<T> *start_ = nullptr;
+  NodeWithMin<T> *finish_ = nullptr;
   int size_ = 0;
 };
 
 template <typename T>
 void MinStack<T>::Push(T value) {
   if (!start_) {
-    DotWithMin<T> *new_Dot = new DotWithMin<T>(value);
-    start_ = new_Dot;
-    finish_ = new_Dot;
+    NodeWithMin<T> *new_Node = new NodeWithMin<T>(value);
+    start_ = new_Node;
+    finish_ = new_Node;
   } else {
     T min_value = (finish_->min_value < value) ? finish_->min_value : value;
-    DotWithMin<T> *new_Dot = new DotWithMin<T>(finish_, value, min_value);
-    finish_->next = new_Dot;
-    finish_ = new_Dot;
+    NodeWithMin<T> *new_Node = new NodeWithMin<T>(finish_, value, min_value);
+    finish_->next = new_Node;
+    finish_ = new_Node;
   }
   size_ += 1;
 }
@@ -126,14 +128,14 @@ template <typename T>
 T MinStack<T>::Pop() {
   if (size_ > 1) {
     T value = finish_->value;
-    auto temp = std::unique_ptr<DotWithMin<T>>(finish_);
+    auto temp = std::unique_ptr<NodeWithMin<T>>(finish_);
     finish_->back->next = nullptr;
     finish_ = finish_->back;
     size_ -= 1;
     return value;
   } else if (size_ == 1) {
     T value = finish_->value;
-    auto temp = std::unique_ptr<DotWithMin<T>>(finish_);
+    auto temp = std::unique_ptr<NodeWithMin<T>>(finish_);
     start_ = nullptr;
     finish_ = nullptr;
     size_ = 0;

@@ -11,8 +11,8 @@ class MinHeap {
   void Push(T value);
   T Pop();
   size_t Size();
-  void ShiftDown(int index);
-  void ShiftUp(int index);
+  void ShiftDown(size_t index);
+  void ShiftUp(size_t index);
 
  private:
   std::vector<T> data_;
@@ -25,8 +25,8 @@ void MinHeap<T>::Push(T value) {
 }
 
 template <typename T>
-void MinHeap<T>::ShiftUp(int index) {
-  if (index > 0 && data_[index] < data_[index / 2]) {
+void MinHeap<T>::ShiftUp(size_t index) {
+  if (data_[index] < data_[index / 2]) {
     std::swap(data_[index], data_[index / 2]);
     ShiftUp(index / 2);
   } else
@@ -34,7 +34,7 @@ void MinHeap<T>::ShiftUp(int index) {
 }
 
 template <typename T>
-void MinHeap<T>::ShiftDown(int index) {
+void MinHeap<T>::ShiftDown(size_t index) {
   if (2 * index + 1 > data_.size() - 1 || index > data_.size())
     return;
   else {

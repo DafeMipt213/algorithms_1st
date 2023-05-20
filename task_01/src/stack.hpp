@@ -63,7 +63,7 @@ class MinStack {
 
 template <typename T>
 void MinStack<T>::Push(T value) {
-  if (data_.size() == 0 || min_values_.back() >= value)
+  if (data_.empty() || min_values_.back() >= value)
     min_values_.push_back(value);
   data_.push_back(value);
 }

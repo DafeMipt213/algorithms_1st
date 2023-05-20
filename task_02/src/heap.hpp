@@ -60,7 +60,7 @@ void MinHeap<T>::SiftDown() {
 
 template <typename T>
 void MinHeap<T>::Push(T value) {
-  if (data_.size() == 0 || value >= max_values_.back())
+  if (data_.empty() || value >= max_values_.back())
     max_values_.push_back(value);
   data_.push_back(value);
   SiftUp(value);

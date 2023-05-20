@@ -17,7 +17,7 @@ Node::Node(int key, int value) {
 }
 
 class AVL_Tree {
-private:
+ private:
   Node *InsertNode(Node *root, int key, int value);
   Node *RemoveNode(Node *root, int key);
   Node *FindNode(Node *root, int key);
@@ -30,7 +30,8 @@ private:
   Node *RemoveMinRightSubtree(Node *root);
 
   Node *root = nullptr;
-public:
+
+ public:
   void Insert(int key, int value);
   void Remove(int key);
   int Find(int key);
@@ -88,8 +89,7 @@ void AVL_Tree::NewHeight(Node *root) {
 }
 
 Node *AVL_Tree::InsertNode(Node *root, int key, int value) {
-  if (root == nullptr)
-    return new Node(key, value);
+  if (root == nullptr) return new Node(key, value);
 
   if (key >= root->key_)
     root->right_child_ = InsertNode(root->right_child_, key, value);
@@ -102,13 +102,13 @@ Node *AVL_Tree::InsertNode(Node *root, int key, int value) {
 }
 
 Node *AVL_Tree::FindMinRightSubtree(Node *root) {
-  return (root->left_child_ == nullptr) ? root
-                                      : FindMinRightSubtree(root->left_child_);
+  return (root->left_child_ == nullptr)
+             ? root
+             : FindMinRightSubtree(root->left_child_);
 }
 
 Node *AVL_Tree::RemoveMinRightSubtree(Node *root) {
-  if (root->left_child_ == nullptr)
-    return root->right_child_;
+  if (root->left_child_ == nullptr) return root->right_child_;
   root->left_child_ = RemoveMinRightSubtree(root->left_child_);
   NewHeight(root);
   root = SetBalance(root);
@@ -124,8 +124,7 @@ Node *AVL_Tree::RemoveNode(Node *root, int key) {
     Node *right_subtree = root->right_child_;
     Node *left_subtree = root->left_child_;
     delete root;
-    if (right_subtree == nullptr)
-      return left_subtree;
+    if (right_subtree == nullptr) return left_subtree;
     Node *min_right_subtree = FindMinRightSubtree(right_subtree);
     right_subtree = RemoveMinRightSubtree(right_subtree);
     min_right_subtree->right_child_ = right_subtree;
@@ -154,6 +153,4 @@ void AVL_Tree::Insert(int key, int value) {
 
 void AVL_Tree::Remove(int key) { RemoveNode(this->root, key); }
 
-int AVL_Tree::Find(int key) {
-  return FindNode(this->root, key)->value_;
-}
+int AVL_Tree::Find(int key) { return FindNode(this->root, key)->value_; }

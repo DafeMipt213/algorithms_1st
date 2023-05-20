@@ -7,13 +7,14 @@ void Stack::Push(int value) {
 }
 
 int Stack::Pop() {
+  if (data_.empty()) throw std::out_of_range("Empty stack");
   int result = data_.back();
   data_.pop_back();
   return result;
 }
 
 void MinStack::Push(int value) { 
-  if ( data_.size() == 0)
+  if ( data_.empty())
     data_.push_back( value);
   else if ( data_.back() >= value)
     data_.push_back( value);

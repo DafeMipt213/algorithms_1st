@@ -10,11 +10,13 @@
 
 void MinHeap::SiftUp(size_t index) {
   while (index > 0 && index < Size()) {
-    if (data_[index] < data_[(index - 1) / 2]) {
-      std::swap(data_[index], data_[(index - 1) / 2]);
+    size_t cur_index = (index - 1) / 2;
+
+    if (data_[index] < data_[cur_index]) {
+      std::swap(data_[index], data_[cur_index]);
     }
 
-    index = (index - 1) / 2;
+    index = cur_index;
   }
 }
 
@@ -26,21 +28,21 @@ void MinHeap::SiftDown() {
   }
 
   while (cur * 2 + 2 < Size()) {
-    unsigned long lChild = 2 * cur + 1;
-    unsigned long rChild = 2 * cur + 2;
+    unsigned long left_child = 2 * cur + 1;
+    unsigned long right_child = 2 * cur + 2;
 
     if (2 * cur < Size()) {
-      if (data_[lChild] < data_[rChild]) {
-        std::swap(data_[cur], data_[lChild]);
-        cur = lChild;
-      } else if (data_[rChild] <= data_[lChild]) {
-        std::swap(data_[cur], data_[rChild]);
-        cur = rChild;
+      if (data_[left_child] < data_[right_child]) {
+        std::swap(data_[cur], data_[left_child]);
+        cur = left_child;
+      } else if (data_[right_child] <= data_[left_child]) {
+        std::swap(data_[cur], data_[right_child]);
+        cur = right_child;
       }
     } else {
-      if (lChild < Size()) {
-        std::swap(data_[cur], data_[lChild]);
-        cur = lChild;
+      if (left_child < Size()) {
+        std::swap(data_[cur], data_[left_child]);
+        cur = left_child;
       } else
         return;
     }

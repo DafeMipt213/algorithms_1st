@@ -5,11 +5,11 @@
 #include <stdexcept>
 #include <vector>
 
-void Merge(int begin, int half, int end, std::vector<int>& data,
+void Merge(size_t begin, size_t half, size_t end, std::vector<int>& data,
            std::vector<int>& buffer) {
-  int r = begin;
-  int l = half;
-  int i = 0;
+  size_t r = begin;
+  size_t l = half;
+  size_t i = 0;
 
   for (; r < half && l < end; ++i) {
     if (data[r] < data[l]) {
@@ -35,7 +35,7 @@ void Merge(int begin, int half, int end, std::vector<int>& data,
   }
 }
 
-void MergeSort(int begin, int end, std::vector<int>& data,
+void MergeSort(size_t begin, size_t end, std::vector<int>& data,
                std::vector<int>& buffer) {
   if (end - begin == 1) return;
 

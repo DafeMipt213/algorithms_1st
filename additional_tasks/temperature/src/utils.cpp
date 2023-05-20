@@ -9,24 +9,25 @@ std::vector<int> CalculateDaysBeforWarmup(
     return {};
   }
   std::stack<float> stack;
-  std::stack<int> stackInd;
+  std::stack<int> indexes_stack;
   std::vector<int> result{0};
 
-  stack.push(temperature[temperature.size() - 1]);
-  stackInd.push(temperature.size() - 1);
+  size_t last_elem_index = temperature.size() - 1;
+  stack.push(temperature[last_elem_index]);
+  indexes_stack.push(last_elem_index);
 
-  for (int i = temperature.size() - 2; i > -1; --i) {
+  for (int i = last_elem_index - 1; i > -1; --i) {
     if (stack.empty()) {
       result.push_back(0);
       stack.push(temperature[i]);
-      stackInd.push(i);
+      indexes_stack.push(i);
     } else if (temperature[i] < stack.top()) {
-      result.push_back(stackInd.top() - i);
+      result.push_back(indexes_stack.top() - i);
       stack.push(temperature[i]);
-      stackInd.push(i);
+      indexes_stack.push(i);
     } else if (temperature[i] >= stack.top()) {
       stack.pop();
-      stackInd.pop();
+      indexes_stack.pop();
       i++;
     }
   }

@@ -2,4 +2,5 @@
 
 #include <vector>
 
-int GetOrderStatistics(const std::vector<int>& data, size_t n);
+int GetOrderStatistics(std::vector<int>& data, size_t k);
+size_t partition(std::vector<int>& resultData, size_t left, size_t right);

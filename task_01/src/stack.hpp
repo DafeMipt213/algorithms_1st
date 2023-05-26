@@ -7,7 +7,7 @@ class Stack {
  public:
   void Push(int value);
   int Pop();
-  int Count();
+  size_t Count();
 
  private:
   std::vector<int> data_;
@@ -18,7 +18,7 @@ class MinStack {
   void Push(int value);
   int Pop();
   int GetMin();
-  int Count();
+  size_t Count();
 
  private:
   std::vector<int> data_;

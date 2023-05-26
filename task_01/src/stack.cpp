@@ -5,12 +5,12 @@
 void Stack::Push(int value) { data_.push_back(value); }
 
 int Stack::Pop() {
-  auto result = data_[data_.size() - 1];
+  auto result = data_.back();
   data_.pop_back();
   return result;
 }
 
-int Stack::Count() { return data_.size(); }
+size_t Stack::Count() { return data_.size(); }
 
 void MinStack::Push(int value) {
   data_.push_back(value);
@@ -28,6 +28,6 @@ int MinStack::Pop() {
   return result;
 }
 
-int MinStack::Count() { return data_.size(); }
+size_t MinStack::Count() { return data_.size(); }
 
 int MinStack::GetMin() { return minData_.back(); }

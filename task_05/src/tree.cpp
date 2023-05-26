@@ -5,73 +5,108 @@
 
 Tree::Tree() {}
 
-bool Tree::Insert(int key, int value) {
+Tree::~Tree() { Clear(node); }
+
+int Tree::GetHeight(Node* node) const {
   if (node == nullptr) {
-    node = new Node(key, value);
-    return true;
+    return 0;
   }
-  Node* curr = node;
-  while (true) {
-    if (key == curr->key) {
-      return false;
-    } else if (key < curr->key) {
-      if (curr->left == nullptr) {
-        curr->left = new Node(key, value);
-        return true;
-      } else {
-        curr = curr->left;
-      }
-    } else {
-      if (curr->right == nullptr) {
-        curr->right = new Node(key, value);
-        return true;
-      } else {
-        curr = curr->right;
-      }
+  return node->height;
+}
+
+int Tree::GetBalanceFactor(Node* node) const {
+  if (node == nullptr) {
+    return 0;
+  }
+  return GetHeight(node->left) - GetHeight(node->right);
+}
+
+void Tree::UpdateHeight(Node* node) {
+  if (node == nullptr) {
+    return;
+  }
+  node->height = std::max(GetHeight(node->left), GetHeight(node->right)) + 1;
+}
+
+Tree::Node* Tree::RotateLeft(Node* node) {
+  Node* newRoot = node->right;
+  node->right = newRoot->left;
+  newRoot->left = node;
+  UpdateHeight(node);
+  UpdateHeight(newRoot);
+  return newRoot;
+}
+
+Tree::Node* Tree::RotateRight(Node* node) {
+  Node* newRoot = node->left;
+  node->left = newRoot->right;
+  newRoot->right = node;
+  UpdateHeight(node);
+  UpdateHeight(newRoot);
+  return newRoot;
+}
+
+Tree::Node* Tree::Balance(Node* node) {
+  UpdateHeight(node);
+  int balanceFactor = GetBalanceFactor(node);
+  if (balanceFactor > 1) {
+    if (GetBalanceFactor(node->left) < 0) {
+      node->left = RotateLeft(node->left);
     }
+    return RotateRight(node);
   }
+  if (balanceFactor < -1) {
+    if (GetBalanceFactor(node->right) > 0) {
+      node->right = RotateRight(node->right);
+    }
+    return RotateLeft(node);
+  }
+  return node;
+}
+
+Tree::Node* Tree::InsertNode(Node* node, int key, int value) {
+  if (node == nullptr) {
+    return new Node(key, value);
+  }
+  if (key == node->key) {
+    node->value = value;
+    return node;
+  }
+  if (key < node->key) {
+    node->left = InsertNode(node->left, key, value);
+  } else {
+    node->right = InsertNode(node->right, key, value);
+  }
+  return Balance(node);
+}
+
+bool Tree::Insert(int key, int value) {
+  if (Find(key) != 0) {
+    return false;  // Ключ уже существует в дереве
+  }
+  node = InsertNode(node, key, value);
+  return true;
 }
 
 void Tree::InsertOrUpdate(int key, int value) {
-  if (node == nullptr) {
-    node = new Node(key, value);
-  } else {
-    Node* curr = node;
-    while (true) {
-      if (key == curr->key) {
-        curr->value = value;
-        return;
-      } else if (key < curr->key) {
-        if (curr->left == nullptr) {
-          curr->left = new Node(key, value);
-          return;
-        } else {
-          curr = curr->left;
-        }
-      } else {
-        if (curr->right == nullptr) {
-          curr->right = new Node(key, value);
-          return;
-        } else {
-          curr = curr->right;
-        }
-      }
-    }
-  }
+  node = InsertNode(node, key, value);
 }
 
 int Tree::Find(int key) const {
   Node* curr = node;
   while (curr != nullptr) {
     if (key == curr->key) {
+      printf("Ключ %d найден: %d\n", key, curr->key);
       return curr->value;
     } else if (key < curr->key) {
+      printf("Ищем ключ %d влево: %d\n", key, curr->key);
       curr = curr->left;
-    } else {  // key > curr->key
+    } else {
+      printf("Ищем ключ %d вправо: %d\n", key, curr->key);
       curr = curr->right;
     }
   }
-  return 0;  // key not found
+  return 0;
 }
 
 void Tree::PrintAll() const {
@@ -93,4 +128,13 @@ void Tree::PrintAll() const {
       q.push(curr->right);
     }
   }
+}
+
+void Tree::Clear(Node* node) {
+  if (node == nullptr) {
+    return;
+  }
+  Clear(node->left);
+  Clear(node->right);
+  delete node;
 }

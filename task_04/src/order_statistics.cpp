@@ -23,7 +23,7 @@ size_t Partition(std::vector<int>& data, size_t left, size_t right,
 
 int GetOrderStatistics(const std::vector<int>& data, size_t n) {
   if (n >= data.size()) {
-    throw std::out_of_range("Invalid value of n");
+    throw std::out_of_range("Invalid value");
   }
 
   std::vector<int> copy_data = data;
@@ -31,7 +31,7 @@ int GetOrderStatistics(const std::vector<int>& data, size_t n) {
   size_t right = copy_data.size() - 1;
 
   while (left < right) {
-    size_t pivotIndex = right; 
+    size_t pivotIndex = right;
     size_t pivot_position = Partition(copy_data, left, right, pivotIndex);
 
     if (pivot_position == n) {

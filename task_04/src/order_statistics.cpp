@@ -6,9 +6,9 @@
 #include <vector>
 
 size_t Partition(std::vector<int>& data, size_t left, size_t right,
-                 size_t pivotIndex) {
-  int pivot_value = data[pivotIndex];
-  std::swap(data[pivotIndex], data[right]);
+                 size_t pivot_index) {
+  int pivot_value = data[pivot_index];
+  std::swap(data[pivot_index], data[right]);
   size_t store_index = left;
   for (size_t i = left; i < right; ++i) {
     if (data[i] < pivot_value) {
@@ -31,8 +31,8 @@ int GetOrderStatistics(const std::vector<int>& data, size_t n) {
   size_t right = copy_data.size() - 1;
 
   while (left < right) {
-    size_t pivotIndex = right;
-    size_t pivot_position = Partition(copy_data, left, right, pivotIndex);
+    size_t pivot_index = right;
+    size_t pivot_position = Partition(copy_data, left, right, pivot_index);
 
     if (pivot_position == n) {
       return copy_data[pivot_position];  // Найдена порядковая статистика

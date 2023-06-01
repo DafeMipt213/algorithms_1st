@@ -6,7 +6,7 @@ bool Stack::IsFull() { return top == MAX_SIZE - 1; }
 
 void Stack::Push(int value) {
   if (Stack::IsFull()) {
-    return;
+    throw std::out_of_range("Stack full item not push");
   }
   top++;
   data[top] = value;

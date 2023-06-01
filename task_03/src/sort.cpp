@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 
-void print(int id, const std::vector<int>& container) {
+void Print(int id, const std::vector<int>& container) {
   std::cout << id << ". ";
   for (const int x : container) std::cout << x << ' ';
   std::cout << '\n';
@@ -17,8 +17,7 @@ std::vector<int> Sort(const std::vector<int>& data) {
   }
 
   size_t mid = data.size() / 2;
-  auto mid_it = data.begin();
-  std::advance(mid_it, mid);
+  auto mid_it = data.begin() + mid;
   std::vector<int> v1(data.begin(), mid_it);
   std::vector<int> v2(mid_it, data.end());
   v1 = Sort(v1);

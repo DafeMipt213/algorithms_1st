@@ -9,25 +9,35 @@ public:
     void Push(int value);
     int Pop();
     int Top();
- private:
-  int* data_;
-  int size;
-  int capacity;
+
+    ~Stack() {
+        delete[] data_;
+    }
+
+private:
+    int* data_;
+    std::size_t size;
+    std::size_t capacity;
 };
 
 class MinStack {
- public:
+public:
     MinStack();
     void Push(int value);
     int Pop();
     int GetMin();
     int Top();
 
- private:
+    ~MinStack() {
+        delete[] data_;
+        delete[] data_min;
+    }
+
+private:
     int* data_;
     int* data_min;
-    int min_size;
-    int size;
-    int min_capacity;
-    int capacity;
+    std::size_t min_size;
+    std::size_t size;
+    std::size_t min_capacity;
+    std::size_t capacity;
 };

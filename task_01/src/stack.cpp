@@ -1,24 +1,23 @@
 #include "stack.hpp"
-
+#include <stdexcept>
 #include <algorithm>
+#include <cstring>
 
 void Stack::Push(int value) {
     if (size == capacity) {
-        int* new_data = new int[capacity*2];
-        for (int i = 0; i < size; i++){
-            new_data[i] = data_[i];
-        }
+        int* new_data = new int[static_cast<unsigned long>(capacity) * 2];
+        memcpy(new_data, data_, size * sizeof(int));
         delete[] data_;
         data_ = new_data;
         capacity *= 2;
     }
-    data_[size++] = value;
+    data_[size] = value;
+    size++;
+
 }
 
 
-Stack::Stack() {
-    size = 0;
-    capacity = 2;
+Stack::Stack() : size(0), capacity(2) {
     data_ = new int[capacity];
 }
 
@@ -27,17 +26,14 @@ Stack::Stack() {
 int Stack::Pop() {
     if (size == 0)
         throw std::runtime_error("Empty stack error");
+    size--;
+    return data_[size];
 
-    return data_[--size];
 }
 
 
 
-MinStack::MinStack() {
-    min_size = 0;
-    min_capacity = 2;
-    size = 0;
-    capacity = 2;
+MinStack::MinStack() : min_size(0), min_capacity(2), size(0), capacity(2) {
     data_ = new int[capacity];
     data_min = new int[min_capacity];
 }
@@ -51,7 +47,7 @@ int MinStack::Top() {
 
 void MinStack::Push(int value) {
     if (size == capacity) {
-        int* new_data = new int[capacity*2];
+        int* new_data = new int[static_cast<int>(capacity) * 2];
         for (int i = 0; i < size; i++){
             new_data[i] = data_[i];
         }
@@ -59,12 +55,13 @@ void MinStack::Push(int value) {
         data_ = new_data;
         capacity *= 2;
     }
-    data_[++size] = value;
+    ++size;
+    data_[size] = value;
 
     if (min_size == 0) {
         data_min[min_size++] = value;
     }
-        else{
+    else{
         if (value <= data_min[min_size-1]) {
             if (min_size == min_capacity) {
                 int *new_min_data = new int[capacity * 2];

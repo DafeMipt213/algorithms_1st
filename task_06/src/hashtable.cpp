@@ -16,8 +16,7 @@ HashTable::~HashTable() {
 
 size_t HashTable::GetHash(const std::string &key) const {
   size_t hash = 0;
-  for (char ch : key)
-    hash = (hash * 31 + ch) % TABLE_SIZE;
+  for (char ch : key) hash = (hash * 31 + ch) % TABLE_SIZE;
   return hash;
 }
 
@@ -30,10 +29,8 @@ bool HashTable::Insert(const std::string &key, int value) {
   } else {
     Node *current = table[index];
     while (current) {
-      if (current->key == key)
-        return false; // Key already exists
-      if (!current->next)
-        break;
+      if (current->key == key) return false;  // Key already exists
+      if (!current->next) break;
       current = current->next;
     }
     current->next = new_node;
@@ -55,8 +52,7 @@ void HashTable::InsertOrUpdate(const std::string &key, int value) {
         current->value = value;
         return;
       }
-      if (!current->next)
-        break;
+      if (!current->next) break;
       current = current->next;
     }
     current->next = new Node(key, value);
@@ -65,12 +61,10 @@ void HashTable::InsertOrUpdate(const std::string &key, int value) {
 }
 
 void HashTable::Remove(const std::string &key) {
-  if (size == 0)
-    throw std::out_of_range("Remove error - size=0");
+  if (size == 0) throw std::out_of_range("Remove error - size=0");
   size_t index = GetHash(key);
 
-  if (!table[index])
-    return;
+  if (!table[index]) return;
 
   Node *current = table[index];
   Node *prev = nullptr;
@@ -95,8 +89,7 @@ int HashTable::Find(const std::string &key) const {
 
   Node *current = table[index];
   while (current) {
-    if (current->key == key)
-      return current->value;
+    if (current->key == key) return current->value;
     current = current->next;
   }
   throw std::out_of_range("Key not found for \"" + key + "\"");

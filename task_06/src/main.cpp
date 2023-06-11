@@ -1,5 +1,6 @@
-#include "hashtable.hpp"
 #include <iostream>
+
+#include "hashtable.hpp"
 
 int main() {
   HashTable hashTable;

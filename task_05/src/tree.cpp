@@ -82,7 +82,7 @@ Tree::Node *Tree::InsertNode(Node *node, int key, int value) {
 
 bool Tree::Insert(int key, int value) {
   if (Find(key) != 0) {
-    return false; // Ключ уже существует в дереве
+    return false;  // Ключ уже существует в дереве
   }
   node = InsertNode(node, key, value);
   return true;

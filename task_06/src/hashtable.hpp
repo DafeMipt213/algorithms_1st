@@ -6,7 +6,7 @@
 #include <vector>
 
 class HashTable {
-public:
+ public:
   HashTable();
   ~HashTable();
   bool Insert(const std::string &key, int value);
@@ -15,7 +15,7 @@ public:
   int Find(const std::string &key) const;
   size_t Size() const;
 
-private:
+ private:
   struct Node {
     std::string key;
     int value;

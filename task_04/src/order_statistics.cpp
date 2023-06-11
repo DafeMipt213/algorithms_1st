@@ -35,13 +35,13 @@ int GetOrderStatistics(const std::vector<int> &data, size_t n) {
     size_t pivot_position = Partition(copy_data, left, right, pivot_index);
 
     if (pivot_position == n) {
-      return copy_data[pivot_position]; // Найдена порядковая статистика
+      return copy_data[pivot_position];  // Найдена порядковая статистика
     } else if (pivot_position < n) {
-      left = pivot_position + 1; // Искать в правой части
+      left = pivot_position + 1;  // Искать в правой части
     } else {
-      right = pivot_position - 1; // Искать в левой части
+      right = pivot_position - 1;  // Искать в левой части
     }
   }
 
-  return copy_data[left]; // Возвращаем найденную порядковую статистику
+  return copy_data[left];  // Возвращаем найденную порядковую статистику
 }

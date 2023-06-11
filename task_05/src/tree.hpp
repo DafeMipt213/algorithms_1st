@@ -3,7 +3,7 @@
 #pragma once
 
 class Tree {
-public:
+ public:
   Tree();
   ~Tree();
   bool Insert(int key, int value);
@@ -11,7 +11,7 @@ public:
   int Find(int key) const;
   void PrintAll() const;
 
-private:
+ private:
   struct Node {
     int key;
     int value;

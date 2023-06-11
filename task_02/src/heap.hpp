@@ -7,12 +7,12 @@
 #include <vector>
 
 class MinHeap {
- private:
+private:
   std::vector<int> heap;
   void SiftUp(int index);
   void SiftDown(int index);
 
- public:
+public:
   void Push(int val);
   int Pop();
   bool Empty() const;

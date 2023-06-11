@@ -5,13 +5,14 @@
 #include <iostream>
 #include <vector>
 
-void Print(int id, const std::vector<int>& container) {
+void Print(int id, const std::vector<int> &container) {
   std::cout << id << ". ";
-  for (const int x : container) std::cout << x << ' ';
+  for (const int x : container)
+    std::cout << x << ' ';
   std::cout << '\n';
 }
 
-std::vector<int> Sort(const std::vector<int>& data) {
+std::vector<int> Sort(const std::vector<int> &data) {
   if (data.size() <= 1) {
     return data;
   }

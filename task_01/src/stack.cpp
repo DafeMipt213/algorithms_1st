@@ -4,7 +4,7 @@
 
 void Stack::Push(int value) { data.push_back(value); }
 int Stack::Pop() {
-  if (data.empty()) { 
+  if (data.empty()) {
     return -1;
   }
   int back = data.back();

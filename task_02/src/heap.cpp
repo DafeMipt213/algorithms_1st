@@ -2,6 +2,7 @@
 #include <heap.hpp>
 #include <iostream>
 #include <vector>
+#include <cstddef>
 
 void MinHeap::Push(int value) {
   heap.push_back(value);  // добавляем элемент в конец вектора
@@ -9,6 +10,7 @@ void MinHeap::Push(int value) {
 }
 
 int MinHeap::Pop() {
+  if(heap.empty()) throw std::out_of_range("heap empty");
   int min_value = heap[0];  // сохраняем минимальный элемент
   heap[0] = heap.back();  // заменяем корень на последний элемент вектора
   heap.pop_back();  // удаляем последний элемент вектора

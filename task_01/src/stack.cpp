@@ -6,6 +6,7 @@
 void Stack::Push(int value) {
     if (size == capacity) {
         int* new_data = new int[static_cast<unsigned long>(capacity) * 2];
+
         memcpy(new_data, data_, size * sizeof(int));
         delete[] data_;
         data_ = new_data;

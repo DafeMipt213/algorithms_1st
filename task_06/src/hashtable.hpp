@@ -13,7 +13,7 @@ class HashTable {
   size_t Size() const;
 
  private:
-  int Hash(const std::string& key) const;
+  size_t Hash(const std::string& key) const;
   size_t element_count = 0;
   void Rehash();
 

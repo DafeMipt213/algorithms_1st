@@ -58,7 +58,7 @@ HashTable::Data::KeyValue HashTable::Data::GetKeyValue(size_t index) {
 
 void HashTable::Data::Pop(size_t index) { data_.erase(data_.begin() + index); }
 
-int HashTable::Hash(const std::string& key) const {
+size_t HashTable::Hash(const std::string& key) const {
   return std::hash<std::string>{}(key) % data_.size();
 }
 

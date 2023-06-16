@@ -29,7 +29,7 @@ void Merge(size_t begin, size_t half, size_t end, std::vector<int>& data,
     buffer[i] = data[l];
   }
 
-  for (int j = 0; j < i; ++j) {
+  for (size_t j = 0; j < i; ++j) {
     data[begin] = buffer[j];
     ++begin;
   }
@@ -39,7 +39,7 @@ void MergeSort(size_t begin, size_t end, std::vector<int>& data,
                std::vector<int>& buffer) {
   if (end - begin == 1) return;
 
-  int half = begin + (end - begin) / 2;
+  size_t half = begin + (end - begin) / 2;
 
   MergeSort(begin, half, data, buffer);
   MergeSort(half, end, data, buffer);

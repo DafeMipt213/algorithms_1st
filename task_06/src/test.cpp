@@ -29,4 +29,21 @@ TEST(HashTable, Simple) {
 
   data.Remove("test");
   ASSERT_EQ(data.Size(), 1);
+
+  data.Insert("c1", 1);
+  data.Insert("c2", 2);
+  data.Insert("c3", 3);
+  data.Insert("c4", 4);
+
+  ASSERT_EQ(data.Size(), 5);
+  ASSERT_EQ(data.Find("aaaa"), 2);
+  ASSERT_EQ(data.Find("c1"), 1);
+
+  data.InsertOrUpdate("c1", 100);
+  data.InsertOrUpdate("c6", 6);
+  data.Remove("aaaa");
+
+  ASSERT_EQ(data.Find("c1"), 100);
+  ASSERT_EQ(data.Find("c3"), 3);
+  ASSERT_EQ(data.Find("c4"), 4);
 }

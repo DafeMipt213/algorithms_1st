@@ -9,14 +9,14 @@ std::vector<int> CalculateDaysBeforWarmup(
     return {};
   }
   std::stack<float> stack;
-  std::stack<int> indexes_stack;
+  std::stack<size_t> indexes_stack;
   std::vector<int> result{0};
 
   size_t last_elem_index = temperature.size() - 1;
   stack.push(temperature[last_elem_index]);
   indexes_stack.push(last_elem_index);
 
-  for (int i = last_elem_index - 1; i > -1; --i) {
+  for (int i = static_cast<int>(last_elem_index) - 1; i > -1; --i) {
     if (stack.empty()) {
       result.push_back(0);
       stack.push(temperature[i]);

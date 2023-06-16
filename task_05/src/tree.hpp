@@ -3,13 +3,13 @@
 #include <utility>
 
 struct Node {
-  Node(int k, int v) : key{k}, val{v} {}
+  Node(int key, int value) : key{key}, value{value} {}
   Node(){};
-  Node* parent = nullptr;
-  std::shared_ptr<Node> leftChild = nullptr;
-  std::shared_ptr<Node> rightChild = nullptr;
+  std::shared_ptr<Node> parent = nullptr;
+  std::shared_ptr<Node> left_child = nullptr;
+  std::shared_ptr<Node> right_child = nullptr;
   int key = 0;
-  int val = 0;
+  int value = 0;
 };
 
 class BinTree {
@@ -31,7 +31,7 @@ class Treap {
   int Remove(int key);
   int Find(int key);
 
- public:
+ private:
   std::shared_ptr<Node> Merge(std::shared_ptr<Node> left,
                               std::shared_ptr<Node> right);
   std::pair<std::shared_ptr<Node>, std::shared_ptr<Node>> Split(

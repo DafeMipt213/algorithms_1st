@@ -1,26 +1,28 @@
 #include "order_statistics.hpp"
 
 #include <algorithm>
-#include <type_traits>
 #include <vector>
 
-size_t partition(std::vector<int>& arr, size_t l, size_t r) {
-  int i = l - 1, pivot = arr[r];
-  for (int j = l; j < r; j++) {
-    if (arr[j] <= pivot) {
-      ++i;
-      std::swap(arr[i], arr[j]);
+size_t Partition(std::vector<int>& data, size_t left, size_t right) {
+  int pivot = data[right];
+  size_t j = left;
+  for (size_t i = left; i < right; ++i) {
+    if (data[i] < pivot) {
+      std::swap(data[i], data[j]);
+      j++;
     }
   }
-  std::swap(arr[i + 1], arr[r]);
-  return i + 1;
+  std::swap(data[j], data[right]);
+  return j;
 }
 
 int GetOrderStatistics(const std::vector<int>& data, size_t n) {
-  size_t left = 0, right = data.size() - 1;
+  size_t left = 0;
+  size_t right = data.size() - 1;
   std::vector<int> tmp = data;
+
   while (true) {
-    size_t mid = partition(tmp, left, right);
+    size_t mid = Partition(tmp, left, right);
 
     if (mid == n)
       return tmp[mid];

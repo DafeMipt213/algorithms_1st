@@ -5,7 +5,9 @@
 #include <memory>
 #include <stdexcept>
 
-BinTree::BinTree(int key, int val) { root = std::make_shared<Node>(key, val); }
+BinTree::BinTree(int key, int value) {
+  root = std::make_shared<Node>(key, value);
+}
 
 BinTree::BinTree(){};
 
@@ -14,22 +16,22 @@ bool BinTree::Insert(int key, int value) {
     root = std::make_shared<Node>(key, value);
     return true;
   }
-  Node* cur = root.get();
+  std::shared_ptr<Node> cur = root;
   while (cur) {
     if (key >= cur->key) {
-      if (cur->leftChild) {
-        cur = cur->leftChild.get();
+      if (cur->left_child) {
+        cur = cur->left_child;
       } else {
-        cur->leftChild = std::make_shared<Node>(key, value);
-        cur->leftChild->parent = cur;
+        cur->left_child = std::make_shared<Node>(key, value);
+        cur->left_child->parent = cur;
         return true;
       }
     } else if (key < cur->key) {
-      if (cur->rightChild) {
-        cur = cur->rightChild.get();
+      if (cur->right_child) {
+        cur = cur->right_child;
       } else {
-        cur->rightChild = std::make_shared<Node>(key, value);
-        cur->rightChild->parent = cur;
+        cur->right_child = std::make_shared<Node>(key, value);
+        cur->right_child->parent = cur;
         return true;
       }
     }
@@ -43,14 +45,14 @@ int BinTree::Find(int key) const {
   if (!root) {
     throw std::out_of_range("out of range");
   }
-  Node* cur = root.get();
+  std::shared_ptr<Node> cur = root;
   while (cur) {
     if (key > cur->key) {
-      cur = cur->leftChild.get();
+      cur = cur->left_child;
     } else if (key < cur->key) {
-      cur = cur->rightChild.get();
+      cur = cur->right_child;
     } else if (key == cur->key) {
-      return cur->val;
+      return cur->value;
     }
   }
   throw std::out_of_range("out of range");
@@ -80,11 +82,11 @@ int Treap::Find(int key) {
   std::shared_ptr<Node> cur = root;
   while (cur) {
     if (key > cur->key) {
-      cur = cur->rightChild;
+      cur = cur->right_child;
     } else if (key < cur->key) {
-      cur = cur->leftChild;
+      cur = cur->left_child;
     } else if (key == cur->key) {
-      return cur->val;
+      return cur->value;
     }
   }
   throw std::out_of_range("out of range");
@@ -95,11 +97,11 @@ std::shared_ptr<Node> Treap::Merge(std::shared_ptr<Node> left,
   if (!right) return left;
   if (!left) return right;
 
-  if (left->val > right->val) {
-    left->rightChild = Merge(left->rightChild, right);
+  if (left->value > right->value) {
+    left->right_child = Merge(left->right_child, right);
     return left;
   } else {
-    right->leftChild = Merge(left, right->leftChild);
+    right->left_child = Merge(left, right->left_child);
     return right;
   }
 }
@@ -108,12 +110,12 @@ std::pair<std::shared_ptr<Node>, std::shared_ptr<Node>> Treap::Split(
     int x, std::shared_ptr<Node> root) {
   if (!root) return {nullptr, nullptr};
   if (x > root->key) {
-    auto [left, right] = Split(x, root->rightChild);
-    root->rightChild = left;
+    auto [left, right] = Split(x, root->right_child);
+    root->right_child = left;
     return {root, right};
   } else {
-    auto [left, right] = Split(x, root->leftChild);
-    root->leftChild = right;
+    auto [left, right] = Split(x, root->left_child);
+    root->left_child = right;
     return {left, root};
   }
   return {nullptr, nullptr};

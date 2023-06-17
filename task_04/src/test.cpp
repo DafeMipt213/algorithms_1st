@@ -22,6 +22,15 @@ TEST(OrderStatistics, Simple_float) {
   ASSERT_EQ(GetOrderStatistics<double>(data, 10), 99.003);
 }
 
+TEST(OrderStatistics, Simple_char) {
+  std::vector<double> data{'b', 'c', 'd', 'a', 'f'};
+  ASSERT_EQ(GetOrderStatistics<double>(data, 0), 'a');
+  ASSERT_EQ(GetOrderStatistics<double>(data, 1), 'b');
+  ASSERT_EQ(GetOrderStatistics<double>(data, 2), 'c');
+  ASSERT_EQ(GetOrderStatistics<double>(data, 3), 'd');
+  ASSERT_EQ(GetOrderStatistics<double>(data, 4), 'f');
+}
+
 TEST(OrderStatistics, Empty) {
   ASSERT_ANY_THROW(GetOrderStatistics<int>({}, 1));
 }

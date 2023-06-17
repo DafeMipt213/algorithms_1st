@@ -2,13 +2,25 @@
 
 #include <cstddef>
 #include <string>
+#include <vector>
+
+struct HashElement {
+  HashElement(std::string &&key, int value) : key_(key), value_(value) {}
+  int value_;
+  std::string key_;
+  HashElement *next_ = nullptr;
+};
 
 class HashTable {
- public:
+public:
   HashTable();
-  bool Insert(std::string&& key, int value);
-  void InsertOrUpdate(std::string&& key, int value);
-  void Remove(const std::string& key);
-  int Find(const std::string& key) const;
+  void Insert(std::string &&key, int value);
+  void Remove(const std::string &key);
+  int Find(const std::string &key) const;
   size_t Size() const;
+
+private:
+  bool FirstInsert(std::string &&key, int value);
+  std::vector<HashElement *> data_{};
+  size_t size_ = 0;
 };

@@ -23,7 +23,7 @@ int Stack::Pop() {
 void MinStack::Push(int value) {
     minNodeStack<int>* p;
     p = new minNodeStack<int>;
-    if (Top != nullptr && Top->nowmin > value) {
+    if (Top == nullptr || Top->nowmin > value) {
         p->nowmin = value;
     }
     else {

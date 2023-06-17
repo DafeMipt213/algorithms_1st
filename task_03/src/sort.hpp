@@ -2,4 +2,4 @@
 
 #include <vector>
 
-std::vector<int> Sort(const std::vector<int>& data);
+std::vector<int> MergeSort(const std::vector<int>& data);

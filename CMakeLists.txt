@@ -1,10 +1,18 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(homeworks)
+project(additional_tasks)
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/task_01)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/task_02)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/task_03)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/task_04)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/task_05)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/task_06)
+file(GLOB_RECURSE tasks_dirs LIST_DIRECTORIES true ".")
+
+MESSAGE("dirs: ${task_dirs}")
+
+foreach(dir ${tasks_dirs})
+    IF(IS_DIRECTORY ${dir})
+        IF(NOT ${dir} MATCHES ".*src.*")
+            MESSAGE("additional task: ${dir}")
+            add_subdirectory(${dir})
+        ENDIF()
+    ELSE()
+        CONTINUE()
+    ENDIF()
+endforeach()

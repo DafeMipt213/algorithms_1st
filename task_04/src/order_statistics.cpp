@@ -24,7 +24,7 @@ int MedianMethod(std::vector<int> &data, size_t start, size_t end) {
     medians.push_back(data[(i + end) / 2]);
   }
 
-  if (medians.size() > 0 && medians.size() <= 5) {
+  if (medians.size() <= 5) {
     SortLittleMassive(medians, 0, medians.size());
     return medians[medians.size() / 2];
   } else

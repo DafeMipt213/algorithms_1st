@@ -560,3 +560,4 @@ void Tree::RemoveSplay(int key) {
   this->Find(key);
   this->Remove(this->root->key);
 }
+Tree::~Tree() {}

@@ -8,6 +8,7 @@ class Tree {
     Node* parent = nullptr;
     Node* left_child = nullptr;
     Node* right_child = nullptr;
+    ~Node();
     int data;
     int key;
     bool visited = false;
@@ -30,6 +31,7 @@ class Tree {
   void Splay(Node*);
   Node* root = nullptr;
   Tree();
+  ~Tree();
   bool Insert(int key, int value);
   void InsertOrUpdate(int key, int value);
   int Find(int key);

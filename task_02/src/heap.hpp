@@ -10,10 +10,10 @@ class MinHeap {
   void Push(int value);
   int Pop();
   size_t Size();
-  std::vector<int> data_;
   MinHeap Merge(MinHeap const &heap1);
 
  private:
+  std::vector<int> data_;
   void SiftUp();
   void SiftDown();
 };

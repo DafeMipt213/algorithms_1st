@@ -88,7 +88,7 @@ TEST(HashTable, Complicated) {
   a.Insert("beware", 2);
   a.Insert("nobody", 3);
   a.Insert("inside", 4);
-  a.Insert("treehouse",5);
+  a.Insert("treehouse", 5);
   a.Remove(4);
   ASSERT_ANY_THROW(a.Find(4));
 }

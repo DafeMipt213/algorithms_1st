@@ -12,14 +12,14 @@ struct HashElement {
 };
 
 class HashTable {
-public:
+ public:
   HashTable();
   void Insert(std::string &&key, int value);
   void Remove(const std::string &key);
   int Find(const std::string &key) const;
   size_t Size() const;
 
-private:
+ private:
   bool FirstInsert(std::string &&key, int value);
   std::vector<HashElement *> data_{};
   size_t size_ = 0;

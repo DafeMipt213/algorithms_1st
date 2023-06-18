@@ -21,8 +21,7 @@ int RandomizedPartition(std::vector<T> &tmp, size_t left, size_t right) {
 
 template <typename T>
 T GetOrderStatistics(const std::vector<T> &data, size_t n) {
-  if (data.empty())
-    throw std::out_of_range("Empty vector");
+  if (data.empty()) throw std::out_of_range("Empty vector");
   std::vector<T> tmp = data;
   size_t left = 0, right = tmp.size() - 1;
   int pivot = RandomizedPartition(tmp, left, right);

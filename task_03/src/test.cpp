@@ -43,9 +43,7 @@ TEST(SortTest, EvenChar) {
 TEST(SortTest, BigData) {
   std::vector<int> data{};
   std::vector<int> answer{};
-  for (int i = 1000000; i >= 0; --i)
-    data.push_back(i);
-  for (int i = 0; i < 1000001; ++i)
-    answer.push_back(i);
+  for (int i = 1000000; i >= 0; --i) data.push_back(i);
+  for (int i = 0; i < 1000001; ++i) answer.push_back(i);
   ASSERT_EQ(QuickSort<int>(data), answer);
 }

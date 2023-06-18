@@ -1,6 +1,6 @@
-#include <stdexcept>
-
 #include "tree.hpp"
+
+#include <stdexcept>
 
 Node *AVL_Tree::TurnLeft(Node *root) {
   Node *right_subtree = root->right_child_;
@@ -80,7 +80,6 @@ Node *AVL_Tree::InsertNode(Node *root, int key, int value) {
   if (key >= root->key_)
     root->right_child_ = InsertNode(root->right_child_, key, value);
   else {
-
     root->left_child_ = InsertNode(root->left_child_, key, value);
   }
   NewHeight(root);
@@ -95,8 +94,7 @@ Node *AVL_Tree::FindMinRightSubtree(Node *root) {
 }
 
 Node *AVL_Tree::RemoveMinRightSubtree(Node *root) {
-  if (root->left_child_ == nullptr)
-    return root->right_child_;
+  if (root->left_child_ == nullptr) return root->right_child_;
   root->left_child_ = RemoveMinRightSubtree(root->left_child_);
   NewHeight(root);
   root = SetBalance(root);
@@ -104,8 +102,7 @@ Node *AVL_Tree::RemoveMinRightSubtree(Node *root) {
 }
 
 Node *AVL_Tree::RemoveNode(Node *root, int key) {
-  if (root == nullptr)
-    throw std::out_of_range("Wrong key");
+  if (root == nullptr) throw std::out_of_range("Wrong key");
 
   if (key > root->key_)
     root->right_child_ = RemoveNode(root->right_child_, key);
@@ -115,8 +112,7 @@ Node *AVL_Tree::RemoveNode(Node *root, int key) {
     Node *right_subtree = root->right_child_;
     Node *left_subtree = root->left_child_;
     delete root;
-    if (right_subtree == nullptr)
-      return left_subtree;
+    if (right_subtree == nullptr) return left_subtree;
     Node *min_right_subtree = FindMinRightSubtree(right_subtree);
     right_subtree = RemoveMinRightSubtree(right_subtree);
     min_right_subtree->right_child_ = right_subtree;
@@ -129,8 +125,7 @@ Node *AVL_Tree::RemoveNode(Node *root, int key) {
 }
 
 Node *AVL_Tree::FindNode(Node *root, int key) {
-  if (root == nullptr)
-    throw std::out_of_range("Wrong key");
+  if (root == nullptr) throw std::out_of_range("Wrong key");
   if (key > root->key_)
     return FindNode(root->right_child_, key);
   else if (key < root->key_)
@@ -145,8 +140,7 @@ void AVL_Tree::Insert(int key, int value) {
 }
 
 void AVL_Tree::Remove(int key) {
-  if (size_ == 0)
-    throw std::out_of_range("Empty tree");
+  if (size_ == 0) throw std::out_of_range("Empty tree");
   root = RemoveNode(root, key);
   --size_;
 }

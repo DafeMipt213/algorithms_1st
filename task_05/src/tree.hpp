@@ -12,13 +12,13 @@ struct Node {
 };
 
 class AVL_Tree {
-public:
+ public:
   void Insert(int key, int value);
   void Remove(int key);
   int Find(int key);
   int Size();
 
-private:
+ private:
   Node *InsertNode(Node *root, int key, int value);
   Node *RemoveNode(Node *root, int key);
   Node *FindNode(Node *root, int key);

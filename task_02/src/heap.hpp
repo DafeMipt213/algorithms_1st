@@ -5,8 +5,9 @@
 #include <stdexcept>
 #include <vector>
 
-template <typename T> class MinHeap {
-public:
+template <typename T>
+class MinHeap {
+ public:
   void Push(T value);
   T Pop();
   size_t Size();
@@ -14,18 +15,18 @@ public:
   T GetMin();
   T GetMax();
 
-private:
+ private:
   void SiftUp(T value);
   void SiftDown();
   std::vector<T> data_;
 };
 
-template <typename T> void MinHeap<T>::SiftUp(T value) {
+template <typename T>
+void MinHeap<T>::SiftUp(T value) {
   int index = data_.size() - 1;
   int swap_index = (index - 1) / 2;
   while (value < data_[swap_index]) {
-    if (index == 0)
-      break;
+    if (index == 0) break;
     data_[index] = data_[swap_index];
     data_[swap_index] = value;
     index = swap_index;
@@ -35,7 +36,8 @@ template <typename T> void MinHeap<T>::SiftUp(T value) {
     std::swap(data_[data_.size() - 2], data_[data_.size() - 1]);
 }
 
-template <typename T> void MinHeap<T>::SiftDown() {
+template <typename T>
+void MinHeap<T>::SiftDown() {
   int index = 0, left_child_index = 2 * index + 1,
       right_child_index = 2 * index + 2;
   while ((data_[index] >= data_[left_child_index] &&
@@ -60,14 +62,15 @@ template <typename T> void MinHeap<T>::SiftDown() {
     std::swap(data_[data_.size() - 2], data_[data_.size() - 1]);
 }
 
-template <typename T> void MinHeap<T>::Push(T value) {
+template <typename T>
+void MinHeap<T>::Push(T value) {
   data_.push_back(value);
   SiftUp(value);
 }
 
-template <typename T> T MinHeap<T>::Pop() {
-  if (data_.empty())
-    throw std::out_of_range("Empty heap");
+template <typename T>
+T MinHeap<T>::Pop() {
+  if (data_.empty()) throw std::out_of_range("Empty heap");
   T result = data_.front();
   data_.front() = data_.back();
   data_.pop_back();
@@ -75,18 +78,24 @@ template <typename T> T MinHeap<T>::Pop() {
   return result;
 }
 
-template <typename T> size_t MinHeap<T>::Size() { return data_.size(); }
+template <typename T>
+size_t MinHeap<T>::Size() {
+  return data_.size();
+}
 
-template <typename T> void MinHeap<T>::Clear() { return data_.clear(); }
+template <typename T>
+void MinHeap<T>::Clear() {
+  return data_.clear();
+}
 
-template <typename T> T MinHeap<T>::GetMin() {
-  if (data_.empty())
-    throw std::out_of_range("Empty heap");
+template <typename T>
+T MinHeap<T>::GetMin() {
+  if (data_.empty()) throw std::out_of_range("Empty heap");
   return data_.front();
 }
 
-template <typename T> T MinHeap<T>::GetMax() {
-  if (data_.empty())
-    throw std::out_of_range("Empty heap");
+template <typename T>
+T MinHeap<T>::GetMax() {
+  if (data_.empty()) throw std::out_of_range("Empty heap");
   return data_.back();
 }

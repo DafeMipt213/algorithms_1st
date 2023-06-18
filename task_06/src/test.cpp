@@ -82,3 +82,13 @@ TEST(HashTable, Simple) {
   ASSERT_EQ(a.Size(), 20);
   ASSERT_EQ(a.Insert("YES_WAY!", 101), true);
 }
+TEST(HashTable, Complicated) {
+  HashTable a;
+  a.Insert("pepe", 1);
+  a.Insert("beware", 2);
+  a.Insert("nobody", 3);
+  a.Insert("inside", 4);
+  a.Insert("treehouse",5);
+  a.Remove(4);
+  ASSERT_ANY_THROW(a.Find(4));
+}

@@ -9,7 +9,7 @@ std::vector<int> Merge(const std::vector<int>& data1,
   size_t j = 0;
   std::vector<int> data_merged;
   data_merged.reserve(data1.size() + data2.size());
-  while (i != data1.size() && j != data2.size()) {
+  while (i < data1.size() && j < data2.size()) {
     if (data1[i] > data2[j]) {
       data_merged.push_back(data2[j]);
       j++;

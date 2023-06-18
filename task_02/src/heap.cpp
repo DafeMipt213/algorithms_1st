@@ -53,9 +53,7 @@ void MinHeap::SiftUp() {
       if (data_[parent] < data_[index]) {
         return;
       } else {
-        tmp = data_[index];
-        data_[index] = data_[parent];
-        data_[parent] = tmp;
+        std::swap(data_[index], data_[parent]);
         index = parent;
       }
     }

@@ -5,14 +5,14 @@
 
 #include "order_statistics.hpp"
 
-int partition(std::vector<int>& a, int start, int end) {
+int Partition(std::vector<int>& a, int start, int end) {
   int randint = start + std::rand() % (end - start + 1);
   int pivot = a[randint];
   std::swap(a[randint], a[end]);
   int i = start - 1;
   for (int j = start; j < end; j++) {
     if (a[j] <= pivot) {
-      i++;
+      ++i;
       std::swap(a[i], a[j]);
     }
   }
@@ -22,9 +22,10 @@ int partition(std::vector<int>& a, int start, int end) {
 
 int GetOrderStatistics(const std::vector<int>& data, size_t n) {
   std::vector<int> tmp(data);
-  int left = 0, right = data.size() - 1;
+  int left = 0;
+  int right = data.size() - 1;
   while (true) {
-    int mid = partition(tmp, left, right);
+    int mid = Partition(tmp, left, right);
 
     if (mid == n) {
       return tmp[mid];

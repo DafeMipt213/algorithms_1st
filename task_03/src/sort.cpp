@@ -6,25 +6,25 @@
 
 std::vector<int> Merge(const std::vector<int>& left,
                        const std::vector<int>& right) {
-  int iter_left = 0;
-  int iter_right = 0;
+  int index_left = 0;
+  int index_right = 0;
   std::vector<int> res;
-  while (iter_left < left.size() && iter_right < right.size()) {
-    if (left[iter_left] > right[iter_right]) {
-      res.push_back(right[iter_right]);
-      iter_right++;
+  while (index_left < left.size() && index_right < right.size()) {
+    if (left[index_left] > right[index_right]) {
+      res.push_back(right[index_right]);
+      index_right++;
     } else {
-      res.push_back(left[iter_left]);
-      iter_left++;
+      res.push_back(left[index_left]);
+      index_left++;
     }
   }
-  while (iter_left < left.size()) {
-    res.push_back(left[iter_left]);
-    iter_left++;
+  while (index_left < left.size()) {
+    res.push_back(left[index_left]);
+    index_left++;
   }
-  while (iter_right < right.size()) {
-    res.push_back(right[iter_right]);
-    iter_right++;
+  while (index_right < right.size()) {
+    res.push_back(right[index_right]);
+    index_right++;
   }
   return res;
 }

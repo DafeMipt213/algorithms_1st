@@ -8,34 +8,29 @@ class Stack {
   void Push(int value);
   int Pop();
 
- private:
+ protected:
   struct Node {
     int value;
     Node* prev = nullptr;
   };
-  void deleteNode(Node* p) {
-    if (p == nullptr) {
-      return;
-    }
-    if (p->prev != nullptr) {
-      deleteNode(p->prev);
-    }
-    delete p;
-  }
+  void deleteNode(Node* p);
   Node* last_ = nullptr;
 };
 
-class MinStack {
+class MinStack : public Stack {
  public:
+  ~MinStack() { deleteNode(last_); }
+
   void Push(int value);
   int Pop();
   int GetMin();
 
- private:
+ protected:
   struct Node {
     int value = 0;
     int min = 10e8;
     Node* prev = nullptr;
   };
+  void deleteNode(Node* p);
   Node* last_ = nullptr;
 };

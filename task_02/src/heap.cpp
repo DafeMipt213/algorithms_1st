@@ -41,9 +41,7 @@ void MinHeap::SiftUp(int index) {
   int parent = (index - 1) / 2;
   if (parent == 0) {
     if (tree[0] > tree[index]) {
-      int tmp = tree[0];
-      tree[0] = tree[index];
-      tree[index] = tmp;
+      std::swap(tree[0], tree[index]);
     }
     return;
   }

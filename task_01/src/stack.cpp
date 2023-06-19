@@ -1,3 +1,5 @@
+
+
 #include "stack.hpp"
 
 #include <exception>
@@ -9,7 +11,15 @@ void Stack::Push(int value) {
   node->prev = last_;
   last_ = node;
 };
-
+void Stack::deleteNode(Node* p) {
+  if (p == nullptr) {
+    return;
+  }
+  if (p->prev != nullptr) {
+    deleteNode(p->prev);
+  }
+  delete p;
+}
 int Stack::Pop() {
   int result = last_->value;
   Node* tmp = last_;
@@ -33,14 +43,22 @@ void MinStack::Push(int value) {
 int MinStack::Pop() {
   if (last_ == nullptr) {
     throw std::range_error("Error");
-    return 0;
   }
   int result = last_->value;
+  Node* tmp = last_;
   last_ = last_->prev;
-
+  delete tmp;
   return result;
 };
-
+void MinStack::deleteNode(Node* p) {
+  if (p == nullptr) {
+    return;
+  }
+  if (p->prev != nullptr) {
+    deleteNode(p->prev);
+  }
+  delete p;
+}
 int MinStack::GetMin() {
   if (last_ != nullptr) {
     return last_->min;

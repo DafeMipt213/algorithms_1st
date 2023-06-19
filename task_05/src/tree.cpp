@@ -113,4 +113,4 @@ void Tree::Insert(int key, int value) {
 }
 
 void Tree::Remove(int key) { this->root = EraseNode(this->root, key); }
-int Tree::SearchMin() {return FindMin(this->root)->value;}
+int Tree::SearchMin() { return FindMin(this->root)->value; }

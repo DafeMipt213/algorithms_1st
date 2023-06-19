@@ -6,7 +6,7 @@
 void Stack::Push(int value) { data_.push_back(value); }
 
 int Stack::Pop() {
-  if (data_.empty()) throw std::out_of_range("");
+  if (data_.empty()) throw std::out_of_range("The stack is empty");
 
   auto result = data_.back();
   data_.pop_back();
@@ -15,7 +15,7 @@ int Stack::Pop() {
 
 int Stack::Get() {
   if (data_.empty()) {
-    throw std::out_of_range("");
+    throw std::out_of_range("The stack is empty");
   } else {
     return data_.back();
   }
@@ -31,7 +31,7 @@ void MinStack::Push(int value) {
 }
 
 int MinStack::Pop() {
-  if (data_.empty()) throw std::out_of_range("");
+  if (data_.empty()) throw std::out_of_range("The stack is empty");
 
   auto result = data_.back();
   data_.pop_back();
@@ -47,7 +47,7 @@ int MinStack::GetMin() {
 
 int MinStack::Get() {
   if (data_.empty()) {
-    throw std::out_of_range("");
+    throw std::out_of_range("The stack is empty");
   } else {
     return data_.back();
   }

@@ -22,7 +22,7 @@ int HashFunction1::operator()(const std::string& s, int tableSize) const {
 }
 
 bool Elem::operator==(Elem el) {
-  if (this->key_ == el.key_ && this->value_ == el.value_) return true;
+  if (key_ == el.key_ && value_ == el.value_) return true;
   return false;
 }
 

@@ -21,7 +21,7 @@ class MinHeap {
 template <typename T>
 void MinHeap<T>::Push(T value) {
   data_.push_back(value);
-  this->SiftUp(this->Size() - 1);
+  SiftUp(Size() - 1);
 }
 
 template <typename T>
@@ -30,7 +30,7 @@ T MinHeap<T>::Pop() {
   auto result = data_[0];
   std::swap(data_[0], data_.back());
   data_.pop_back();
-  if (!data_.empty()) this->SiftDown(0);
+  if (!data_.empty()) SiftDown(0);
   return result;
 }
 
@@ -52,7 +52,7 @@ template <typename T>
 void MinHeap<T>::SiftDown(size_t index) {
   size_t left_child_index = 2 * index + 1;
   size_t right_child_index = 2 * index + 2;
-  size_t data_last_index = this->Size() - 1;
+  size_t data_last_index = Size() - 1;
   T element = data_[index];
 
   if (left_child_index >
@@ -69,7 +69,7 @@ void MinHeap<T>::SiftDown(size_t index) {
       min_index = right_child_index;
     }
     std::swap(data_[index], data_[min_index]);
-    this->SiftDown(min_index);
+    SiftDown(min_index);
   }
 
   else if (element > left_child)

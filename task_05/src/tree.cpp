@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-Tree::Tree() { this->root = nullptr; }
+Tree::Tree() { root = nullptr; }
 
 Tree::~Tree() {
   if (root != nullptr) deletenode(root);
@@ -165,7 +165,7 @@ void Tree::restruct(Node *node) {
   }
 }
 
-bool Tree::Find(int key) { return searchKey(key, this->root); }
+bool Tree::Find(int key) { return searchKey(key, root); }
 
 bool Tree::searchKey(int key, Node *node) {
   if (node != nullptr) {

@@ -1,7 +1,7 @@
 #pragma once
-
 #include <cstddef>
 #include <functional>
+#include <iostream>
 #include <queue>
 #include <vector>
 
@@ -12,5 +12,7 @@ class MinHeap {
   size_t Size();
 
  private:
-  std::priority_queue<int, std::vector<int>, std::greater<int>> data_;
+  std::vector<int> tree;
+  void SiftDown(int index);
+  void SiftUp(int index);
 };

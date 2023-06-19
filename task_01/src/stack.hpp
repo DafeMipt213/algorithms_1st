@@ -1,23 +1,36 @@
 #pragma once
 
-#include <stack>
 #include <vector>
 
 class Stack {
  public:
+  ~Stack() { deleteNode(last_); }
   void Push(int value);
   int Pop();
 
- private:
-  std::stack<int> data_;
+ protected:
+  struct Node {
+    int value;
+    Node* prev = nullptr;
+  };
+  void deleteNode(Node* p);
+  Node* last_ = nullptr;
 };
 
-class MinStack {
+class MinStack : public Stack {
  public:
+  ~MinStack() { deleteNode(last_); }
+
   void Push(int value);
   int Pop();
   int GetMin();
 
- private:
-  std::vector<int> data_;
+ protected:
+  struct Node {
+    int value = 0;
+    int min = 10e8;
+    Node* prev = nullptr;
+  };
+  void deleteNode(Node* p);
+  Node* last_ = nullptr;
 };

@@ -1,8 +1,8 @@
 #pragma once
-
 #include <cstddef>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 class HashTable {
  public:
@@ -14,5 +14,13 @@ class HashTable {
   size_t Size() const;
 
  private:
-  std::unordered_map<std::string, int> data_;
+  struct LinkedList {
+    LinkedList(std::string key, int value) : value{value}, key{key} {};
+    std::string key;
+    int value = 0;
+    LinkedList* prev = nullptr;
+    LinkedList* next = nullptr;
+  };
+  std::vector<LinkedList*> hash_table_;
+  size_t size_ = 0;
 };

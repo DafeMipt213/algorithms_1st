@@ -9,7 +9,7 @@ size_t Partition(std::vector<int>& data, size_t left, size_t right) {
   size_t pivot = data[pivot_index];
   std::swap(data[pivot_index], data[right]);
 
-  size_t i = left - 1;
+  size_t i= left - 1;
   for (size_t j = left; j < right; j++) {
     if (data[j] <= pivot) {
       i++;

@@ -6,14 +6,13 @@
 #include <unordered_map>
 #include <vector>
 
-int MyHashFunction(const std::string& s, int tableSize);
+int MyHashFunction(const std::string& s, int table_size);
 
 struct HashFunction1 {
-  int operator()(const std::string& s, int tableSize) const;
+  int operator()(const std::string& s, int table_size) const;
 };
 
-class Elem {
- public:
+struct Elem {
   std::string key_;
   int value_;
   Elem() = default;
@@ -34,5 +33,5 @@ class HashTable {
 
  private:
   std::vector<std::vector<Elem>> data_;
-  size_t TableSize;
+  size_t table_size_;
 };

@@ -5,16 +5,16 @@
 
 HashTable::HashTable() {
   data_.resize(100);
-  TableSize = 100;
+  table_size_ = 100;
 }
 
-int MyHashFunction(const std::string& s, int TableSize) {
-  int k = TableSize - 1;
-  int hashRes = 0;
+int MyHashFunction(const std::string& s, int table_size) {
+  int k = table_size - 1;
+  int hash_result = 0;
   for (size_t i = 0; i <= s.size(); ++i)
-    hashRes = (k * hashRes + s[i]) % TableSize;
-  hashRes = (hashRes * 2 + 1) % TableSize;
-  return hashRes;
+    hash_result = (k * hash_result + s[i]) % table_size;
+  hash_result = (hash_result * 2 + 1) % table_size;
+  return hash_result;
 }
 
 int HashFunction1::operator()(const std::string& s, int tableSize) const {
@@ -27,8 +27,7 @@ bool Elem::operator==(Elem el) {
 }
 
 bool HashTable::Insert(const std::string& key, int value) {
-  int index{0};
-  index = HashFunction1()(key, data_.size());
+  int index = HashFunction1()(key, data_.size());
   Elem obj(key, value);
   if (InTable(obj)) return false;
   data_[index].push_back(obj);
@@ -36,16 +35,14 @@ bool HashTable::Insert(const std::string& key, int value) {
 }
 
 bool HashTable::InTable(Elem el) {
-  int index{0};
-  index = HashFunction1()(el.key_, data_.size());
-  for (size_t i = 0; i < data_[index].size(); ++i)
-    if (data_[index][i].key_ == el.key_) return true;
+  int index = HashFunction1()(el.key_, data_.size());
+  for (const auto& item : data_[index])
+    if (item.key_ == el.key_) return true;
   return false;
 }
 
 void HashTable::InsertOrUpdate(const std::string& key, int value) {
-  int index{0};
-  index = HashFunction1()(key, data_.size());
+  int index = HashFunction1()(key, data_.size());
   Elem obj(key, value);
   if (!InTable(obj)) {
     Insert(key, value);
@@ -62,7 +59,7 @@ void HashTable::InsertOrUpdate(const std::string& key, int value) {
 }
 
 void HashTable::Remove(const std::string& key) {
-  int index = HashFunction1()(key, TableSize);
+  int index = HashFunction1()(key, table_size_);
   for (size_t i = 0; i < data_[index].size(); ++i) {
     if (data_[index][i].key_ == key) {
       data_[index].erase(data_[index].begin() + i);
@@ -72,7 +69,7 @@ void HashTable::Remove(const std::string& key) {
 }
 
 int HashTable::Find(const std::string& key) const {
-  int index = HashFunction1()(key, TableSize);
+  int index = HashFunction1()(key, table_size_);
   for (size_t i = 0; i < data_[index].size(); ++i) {
     if (data_[index][i].key_ == key) {
       return data_[index][i].value_;
@@ -80,7 +77,7 @@ int HashTable::Find(const std::string& key) const {
   }
 }
 
-size_t HashTable::Size() const { return TableSize; }
+size_t HashTable::Size() const { return table_size_; }
 
 void HashTable::PrintTable() {
   for (size_t i = 0; i < data_.size(); i++) {

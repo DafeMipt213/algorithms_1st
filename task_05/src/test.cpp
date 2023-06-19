@@ -5,4 +5,4 @@
 
 #include "tree.hpp"
 
-TEST(Tree, Simple) { Tree tree; }
+TEST(B_Tree, Simple) { B_Tree tree; }

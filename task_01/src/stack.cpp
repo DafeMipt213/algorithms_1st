@@ -24,7 +24,6 @@ int Stack::Pop() {
 }
 
 void MinStack::Push(int x) {
-  // добавляем элемент в стек
   stack_.Push(x);
 
   // обновляем минимальное значение

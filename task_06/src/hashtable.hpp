@@ -14,13 +14,13 @@ class HashTable {
   size_t Size() const;
 
  private:
-  struct Linked_List {
-    Linked_List(std::string key, int value) : value{value}, key{key} {};
+  struct LinkedList {
+    LinkedList(std::string key, int value) : value{value}, key{key} {};
     std::string key;
     int value = 0;
-    Linked_List* prev = nullptr;
-    Linked_List* next = nullptr;
+    LinkedList* prev = nullptr;
+    LinkedList* next = nullptr;
   };
-  std::vector<Linked_List*> hash_table_;
+  std::vector<LinkedList*> hash_table_;
   size_t size_ = 0;
 };

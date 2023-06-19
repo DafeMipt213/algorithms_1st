@@ -1,18 +1,30 @@
 #pragma once
 
 #include <cstddef>
+#include <iostream>
 #include <string>
-#include <unordered_map>
+#include <vector>
 
 class HashTable {
  public:
   HashTable();
-  bool Insert(const std::string& key, int value);
-  void InsertOrUpdate(const std::string& key, int value);
-  void Remove(const std::string& key);
-  int Find(const std::string& key) const;
+  ~HashTable();
+  bool Insert(const std::string &key, int value);
+  void InsertOrUpdate(const std::string &key, int value);
+  void Remove(const std::string &key);
+  int Find(const std::string &key) const;
   size_t Size() const;
 
  private:
-  std::unordered_map<std::string, int> data_;
+  struct Node {
+    std::string key;
+    int value;
+    Node *next;
+
+    Node(const std::string &k, int v) : key(k), value(v), next(nullptr) {}
+  };
+  const int TABLE_SIZE = 11;
+  size_t GetHash(const std::string &key) const;
+  std::vector<Node *> table;
+  size_t size = 0;
 };

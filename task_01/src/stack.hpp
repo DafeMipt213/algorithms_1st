@@ -1,23 +1,30 @@
 #pragma once
-
-#include <stack>
+#include <array>
+#include <iostream>
 #include <vector>
+const int MAX_SIZE = 100;
 
 class Stack {
  public:
   void Push(int value);
   int Pop();
+  bool IsEmpty();
+  bool IsFull();
+  int Top();
 
  private:
-  std::stack<int> data_;
+  std::array<int, MAX_SIZE> data;
+  int top = -1;
 };
 
 class MinStack {
  public:
-  void Push(int value);
+  void Push(int);
   int Pop();
+  int Top();
   int GetMin();
 
  private:
-  std::vector<int> data_;
+  Stack stack_;
+  Stack min_stack_;
 };

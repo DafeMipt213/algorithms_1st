@@ -5,8 +5,6 @@
 #include <stdexcept>
 #include <vector>
 
-using namespace std;
-
 void MinHeap::Push(int n) {
   array.push_back(n);
   SiftUp(array.size() - 1);

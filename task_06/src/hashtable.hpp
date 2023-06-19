@@ -22,5 +22,5 @@ class HashTable {
     int value;
   };
   std::vector<std::list<KeyValue>> table;
-  int counter_elems;
+  size_t counter_elems = 0;
 };

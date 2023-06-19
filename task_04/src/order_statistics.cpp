@@ -22,9 +22,9 @@ size_t Partition(std::vector<int>& data, size_t left, size_t right) {
 
 int GetOrderStatistics(const std::vector<int>& data, size_t n) {
   std::vector<int> tmp_data = data;
-  int left = 0, right = data.size() - 1;
+  size_t left = 0, right = data.size() - 1;
   while (true) {
-    int middle = Partition(tmp_data, left, right);
+    size_t middle = Partition(tmp_data, left, right);
 
     if (middle == n)
       return tmp_data[middle];

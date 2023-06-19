@@ -1,14 +1,8 @@
 #pragma once
-
+#include <memory>
 // Splay Дерево
 class Tree {
  public:
-  struct Node {
-    Node* left = nullptr;
-    Node* right = nullptr;
-    int key;
-    int value;
-  };
   Tree(){};
 
   bool Insert(int key, int value);
@@ -16,11 +10,18 @@ class Tree {
   void Erase(int key);
   int Find(int key);
 
-  Node* Zig(Node* x);
-  Node* Zag(Node* x);
-  Node* Splay(Node* root, int x);
-  Node* CreateNode(int key, int value);
-
  private:
-  Node* current_root;
+  struct Node {
+    std::unique_ptr<Node> left = nullptr;
+    std::unique_ptr<Node> right = nullptr;
+    int key;
+    int value;
+  };
+  std::unique_ptr<Node> Zig(std::unique_ptr<Node> x);
+  std::unique_ptr<Node> Zag(std::unique_ptr<Node> x);
+  std::unique_ptr<Node> Splay(std::unique_ptr<Node> root, int x);
+
+  friend std::unique_ptr<Node> CreateNode(int key, int value);
+
+  std::unique_ptr<Node> current_root;
 };

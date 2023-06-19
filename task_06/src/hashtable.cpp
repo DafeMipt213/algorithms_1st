@@ -14,13 +14,12 @@ void HashTable::Rehash() {
                             int(table.size() * 0.7))) {
     std::vector<std::list<KeyValue>> new_table;
     new_table.resize((table.size() + 1) * 2);
-    int new_hashed_key;
-    for (size_t i = 0; i < table.size(); i++) {
-      for (auto list_kv = table[i].begin(); list_kv != table[i].end();
-           ++list_kv) {
-        new_hashed_key =
-            std::hash<std::string>{}(list_kv->key) % new_table.size();
-        new_table[new_hashed_key].push_back(std::move(*list_kv));
+    size_t new_hashed_key;
+    for (auto& bucket : table) {
+      for (auto& item : bucket) {
+        size_t new_hashed_key =
+            std::hash<std::string>{}(item.key) % new_table.size();
+        new_table[new_hashed_key].push_back(std::move(item));
       }
     }
     table = std::move(new_table);
@@ -29,10 +28,9 @@ void HashTable::Rehash() {
 
 bool HashTable::Insert(const std::string& key, int value) {
   this->Rehash();
-  int hashed_key = std::hash<std::string>{}(key) % table.size();
-  for (auto list_kv = table[hashed_key].begin();
-       list_kv != table[hashed_key].end(); ++list_kv) {
-    if (list_kv->key == key) return false;
+  size_t hashed_key = std::hash<std::string>{}(key) % table.size();
+  for (auto& item : table[hashed_key]) {
+    if (item.key == key) return false;
   }
   KeyValue kv;
   kv.key = key;
@@ -44,11 +42,10 @@ bool HashTable::Insert(const std::string& key, int value) {
 
 void HashTable::InsertOrUpdate(const std::string& key, int value) {
   this->Rehash();
-  int hashed_key = std::hash<std::string>{}(key) % table.size();
-  for (auto list_kv = table[hashed_key].begin();
-       list_kv != table[hashed_key].end(); ++list_kv) {
-    if (list_kv->key == key) {
-      list_kv->value = value;
+  size_t hashed_key = std::hash<std::string>{}(key) % table.size();
+  for (auto& item : table[hashed_key]) {
+    if (item.key == key) {
+      item.value = value;
       return;
     }
   }
@@ -61,7 +58,7 @@ void HashTable::InsertOrUpdate(const std::string& key, int value) {
 }
 
 void HashTable::Remove(const std::string& key) {
-  int hashed_key = std::hash<std::string>{}(key) % table.size();
+  size_t hashed_key = std::hash<std::string>{}(key) % table.size();
   if (table[hashed_key].empty()) throw std::out_of_range("Empty HashTable");
 
   for (auto list_kv = table[hashed_key].begin();
@@ -76,11 +73,10 @@ void HashTable::Remove(const std::string& key) {
 }
 
 int HashTable::Find(const std::string& key) const {
-  int hashed_key = std::hash<std::string>{}(key) % table.size();
-  for (auto list_kv = table[hashed_key].begin();
-       list_kv != table[hashed_key].end(); ++list_kv) {
-    if (list_kv->key == key) {
-      return list_kv->value;
+  size_t hashed_key = std::hash<std::string>{}(key) % table.size();
+  for (auto& item : table[hashed_key]) {
+    if (item.key == key) {
+      return item.value;
     }
   }
   throw std::out_of_range("No element in HashTable");

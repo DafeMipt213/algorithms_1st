@@ -9,7 +9,7 @@ class MinHeap {
   int Pop();
   [[nodiscard]] size_t Size() const;
   void swift_Down(size_t i);
-  void shift_Up(int i);
+  void shift_Up(size_t i);
 
  private:
   std::vector<int> h;

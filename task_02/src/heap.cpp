@@ -9,7 +9,7 @@ void MinHeap::Push(int n) {
   ++HeapSize;
 }
 
-void MinHeap::shift_Up(int i) {
+void MinHeap::shift_Up(size_t i) {
   while (i > 0 && h[(i - 1) / 2] > h[i]) {
     std::swap(h[(i - 1) / 2], h[i]);
     i = (i - 1) / 2;

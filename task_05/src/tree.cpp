@@ -24,7 +24,7 @@ bool Tree::Insert(int key, int value) {
           temp->key = key;
           temp->data = value;
           tmpnode->right_child = temp;
-          this->Splay(tmpnode->right_child);
+          Splay(tmpnode->right_child);
           return true;
         } else {
           tmpnode = tmpnode->right_child;

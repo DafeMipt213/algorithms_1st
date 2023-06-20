@@ -1,16 +1,17 @@
 #pragma once
 
 #include <cstddef>
-#include <functional>
-#include <queue>
 #include <vector>
 
 class MinHeap {
  public:
   void Push(int value);
   int Pop();
-  size_t Size();
+  [[nodiscard]] size_t Size() const;
+  void swift_Down(size_t i);
+  void shift_Up(int i);
 
  private:
-  std::priority_queue<int, std::vector<int>, std::greater<int>> data_;
+  std::vector<int> h;
+  size_t HeapSize = 0;
 };

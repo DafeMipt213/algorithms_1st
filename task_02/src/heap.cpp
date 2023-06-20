@@ -22,8 +22,7 @@ void MinHeap::SiftUp() {
 }
 
 int MinHeap::Pop() {
-  if (data_.empty())
-    throw std::out_of_range("Empty heap");
+  if (data_.empty()) throw std::out_of_range("Empty heap");
   int result = data_[0];
   data_[0] = data_.back();
   data_.pop_back();
@@ -32,8 +31,7 @@ int MinHeap::Pop() {
 }
 
 void MinHeap::SiftDown() {
-  if (data_.size() == 0)
-    return;
+  if (data_.size() == 0) return;
   int index = 0;
   int minimal_index = 0;
   while (2 * index + 1 <= data_.size() - 1) {

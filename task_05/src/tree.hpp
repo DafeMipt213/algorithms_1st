@@ -17,13 +17,13 @@ struct Node {
 };
 
 class Tree {
-public:
+ public:
   Node *root{nullptr};
   Tree(Node *node) { root = node; }
   void insert(int k) { root = root->insert(root, k); }
   void remove(int k) { root = root->remove(root, k); }
   void find(int k) { root = root->find(root, k); }
 
-private:
+ private:
   std::vector<int> values{};
 };

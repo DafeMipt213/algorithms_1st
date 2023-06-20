@@ -5,41 +5,40 @@
 
 void Heap::Push(int n) {
   h.push_back(n);
-  size_t counter = HeapSize;
-  size_t parent = (HeapSize - 1) / 2;
-  while (parent >= 0 && counter > 0) {
-    if (h[counter] < h[parent]) {
-      std::swap(h[counter], h[parent]);
-    }
-    counter = parent;
-    parent = (counter - 1) / 2;
-  }
+  shift_Up(HeapSize);
   ++HeapSize;
 }
 
-void Heap::Upd_Heap(size_t i) {
-  size_t left = 2 * i + 1;
-  if (left < HeapSize) {
-    if (h[i] > h[left]) {
-      std::swap(h[i], h[left]);
-      Upd_Heap(left);
-    }
+void Heap::shift_Up(int i) {
+  while (i > 0 && h[(i - 1) / 2] > h[i]) {
+    std::swap(h[(i - 1) / 2], h[i]);
+    i = (i - 1) / 2;
   }
-  int right = 2 * i + 2;
-  if (right < HeapSize) {
-    if (h[i] > h[left]) {
-      std::swap(h[i], h[right]);
-      Upd_Heap(right);
-    }
+}
+
+void Heap::swift_Down(size_t i) {
+  size_t max_ind = i;
+  size_t left = 2 * i + 1;
+  if (left <= HeapSize && h[left] < h[max_ind]) {
+    max_ind = left;
+  }
+  size_t right = 2 * i + 2;
+  if (right <= HeapSize && h[right] < h[max_ind]) {
+    max_ind = right;
+  }
+  if (i != max_ind) {
+    std::swap(h[i], h[max_ind]);
+    swift_Down(max_ind);
   }
 }
 
 int Heap::Pop() {
   if (HeapSize == 0) throw std::out_of_range("Empty heap");
   int result = h[0];
-  h[0] = h[HeapSize - 1];
+  auto iter_beg = h.cbegin();
+  h.erase(iter_beg);
   --HeapSize;
-  Upd_Heap(0);
+  swift_Down(0);
   return result;
 }
 

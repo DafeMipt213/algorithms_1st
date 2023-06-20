@@ -8,7 +8,8 @@ class Heap {
   void Push(int value);
   int Pop();
   [[nodiscard]] size_t Size() const;
-  void Upd_Heap(size_t i);
+  void swift_Down(size_t i);
+  void shift_Up(int i);
   void Create(const std::vector<int>& data);
 
  private:

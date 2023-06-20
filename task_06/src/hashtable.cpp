@@ -1,25 +1,107 @@
 #include "hashtable.hpp"
 
-#include <cstddef>
-#include <string>
+#include <functional>
+#include <stdexcept>
 
-HashTable::HashTable() {}
+int HashTable::Data::Update(HashTable::Data::KeyValue key_value) {
+  for (auto& elem : data_) {
+    if (elem.GetKey() == key_value.GetKey()) {
+      elem.SetValue(key_value.GetValue());
+      return 0;
+    }
+  }
+  Push(key_value);
+  return 1;
+}
+
+bool HashTable::Data::Push(HashTable::Data::KeyValue new_key_value) {
+  if (IsKeyContains(new_key_value)) {
+    return false;
+  } else {
+    data_.push_back(new_key_value);
+    return true;
+  }
+}
+
+bool HashTable::Data::IsKeyContains(
+    const HashTable::Data::KeyValue& key_value) const {
+  for (auto& elem : data_) {
+    if (elem.GetKey() == key_value.GetKey()) {
+      return true;
+    }
+  }
+  return false;
+}
+
+int HashTable::Data::GetValue(const std::string& key) const {
+  if (data_.empty()) {
+    throw std::out_of_range("no data in table");
+  }
+  for (auto& elem : data_) {
+    if (elem.GetKey() == key) {
+      return elem.GetValue();
+    }
+  }
+  throw std::out_of_range("no data in table");
+}
+
+int HashTable::Data::Remove(const std::string& key) {
+  if (data_.empty()) throw std::runtime_error("no data in table");
+  for (size_t i = 0; i < data_.size(); ++i) {
+    if (data_[i].GetKey() == key) {
+      int temp = data_[i].GetValue();
+      Pop(i);
+      return temp;
+    }
+  }
+  throw std::runtime_error("no data in table");
+}
+
+HashTable::Data::KeyValue HashTable::Data::GetKeyValue(size_t index) {
+  return data_[index];
+}
+
+void HashTable::Data::Pop(size_t index) { data_.erase(data_.begin() + index); }
+
+size_t HashTable::Hash(const std::string& key) const {
+  return std::hash<std::string>{}(key) % table_.size();
+}
+
+HashTable::HashTable() { table_.resize(500); }
 
 bool HashTable::Insert(const std::string& key, int value) {
-  if (data_.contains(key)) return false;
-  data_[key] = value;
-  return true;
+  bool is_success = table_[Hash(key)].Push(Data::KeyValue(key, value));
+  element_count += is_success;
+  Rehash();
+  return is_success;
 }
 
 void HashTable::InsertOrUpdate(const std::string& key, int value) {
-  data_[key] = value;
+  element_count += table_[Hash(key)].Update(Data::KeyValue(key, value));
+  Rehash();
 }
 
 void HashTable::Remove(const std::string& key) {
-  auto it = data_.find(key);
-  data_.erase(it);
+  table_[Hash(key)].Remove(key);
+  element_count--;
 }
 
-int HashTable::Find(const std::string& key) const { return data_.at(key); }
+int HashTable::Find(const std::string& key) const {
+  return table_[Hash(key)].GetValue(key);
+}
 
-size_t HashTable::Size() const { return data_.size(); }
+size_t HashTable::Size() const { return element_count; }
+
+void HashTable::Rehash() {
+  if ((float)element_count / (float)table_.size() > 0.7) {
+    table_.resize(table_.size() * 2);
+    for (auto& data : table_) {
+      size_t s = data.Size();
+      for (size_t i = 0; i < s; ++i) {
+        HashTable::Data::KeyValue temp = data.GetKeyValue(0);
+        data.Pop(0);
+        table_[Hash(temp.GetKey())].Push(temp);
+      }
+    }
+  }
+}

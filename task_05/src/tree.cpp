@@ -12,7 +12,7 @@ bool Tree::Insert(int key, int value) {
     root = tmpnode;
     return true;
   } else {
-    Node* tmpnode = new Node;
+    Node* tmpnode;
     tmpnode = root;
     while (true) {
       if (key > tmpnode->key) {
@@ -58,7 +58,7 @@ void Tree::InsertOrUpdate(int key, int value) {
     root = tmpnode;
     return;
   } else {
-    Node* tmpnode = new Node;
+    Node* tmpnode;
     tmpnode = root;
     while (true) {
       if (key > tmpnode->key) {
@@ -102,12 +102,7 @@ int Tree::Find(int key) {
   if (root == nullptr) {
     throw std::range_error("Tree is empty");
   } else {
-    Node* tmpnode = new Node;
-    tmpnode->parent = nullptr;
-    tmpnode->left_child = root->left_child;
-    tmpnode->right_child = root->right_child;
-    tmpnode->key = root->key;
-    tmpnode->data = root->data;
+    Node* tmpnode = root;
     while (true) {
       if (key > tmpnode->key) {
         if (root->right_child == nullptr) {
@@ -141,7 +136,7 @@ void Tree::Remove(int key) {
     } else if (root->left_child == nullptr && root->right_child != nullptr) {
       root = root->right_child;
     } else {
-      Node* best_child = new Node;
+      Node* best_child;
       best_child = root->right_child;
       while (best_child->left_child != nullptr) {
         best_child = best_child->left_child;
@@ -157,12 +152,7 @@ void Tree::Remove(int key) {
     }
     return;
   }
-  Node* tmpnode = new Node;
-  tmpnode->parent = nullptr;
-  tmpnode->left_child = root->left_child;
-  tmpnode->right_child = root->right_child;
-  tmpnode->key = root->key;
-  tmpnode->data = root->data;
+  Node* tmpnode = root;
   while (true) {
     if (key > tmpnode->key) {
       if (root->right_child == nullptr) {
@@ -194,7 +184,7 @@ void Tree::Remove(int key) {
           father->right_child = tmpnode->right_child;
         tmpnode = tmpnode->right_child;
       } else {
-        Node* best_child = new Node;
+        Node* best_child;
         best_child = tmpnode->right_child;
         while (best_child->left_child != nullptr) {
           best_child = best_child->left_child;
@@ -217,62 +207,6 @@ void Tree::Remove(int key) {
       }
     }
   }
-}
-void Show(Tree* node, bool high, std::vector<std::string> const& lpref,
-          std::vector<std::string> const& cpref,
-          std::vector<std::string> const& rpref, bool root, bool left,
-          std::shared_ptr<std::vector<std::vector<std::string>>> lines) {
-  if (!node) return;
-  typedef std::vector<std::string> VS;
-  auto VSCat = [](VS const& a, VS const& b) {
-    auto r = a;
-    r.insert(r.end(), b.begin(), b.end());
-    return r;
-  };
-  if (root) lines = std::make_shared<std::vector<VS>>();
-  if (node->root->left_child) {
-    Tree* tmptree = new Tree;
-    tmptree->root = node->root->left_child;
-    Show(tmptree, high, VSCat(lpref, high ? VS({" ", " "}) : VS({" "})),
-         VSCat(lpref, high ? VS({ch_ddia, ch_ver}) : VS({ch_ddia})),
-         VSCat(lpref, high ? VS({ch_hor, " "}) : VS({ch_hor})), false, true,
-         lines);
-  }
-  auto sval = std::to_string(node->root->key);
-  size_t sm =
-      left || sval.empty() ? sval.size() / 2 : ((sval.size() + 1) / 2 - 1);
-  for (size_t i = 0; i < sval.size(); ++i)
-    lines->push_back(VSCat(i < sm    ? lpref
-                           : i == sm ? cpref
-                                     : rpref,
-                           {std::string(1, sval[i])}));
-  if (node->root->right_child) {
-    Tree* tmptree = new Tree;
-    tmptree->root = node->root->right_child;
-    Show(tmptree, high, VSCat(rpref, high ? VS({ch_hor, " "}) : VS({ch_hor})),
-         VSCat(rpref, high ? VS({ch_rddia, ch_ver}) : VS({ch_rddia})),
-         VSCat(rpref, high ? VS({" ", " "}) : VS({" "})), false, false, lines);
-  }
-  if (root) {
-    VS out;
-    for (size_t l = 0;; ++l) {
-      bool last = true;
-      std::string line;
-      for (size_t i = 0; i < lines->size(); ++i)
-        if (l < (*lines).at(i).size()) {
-          line += lines->at(i)[l];
-          last = false;
-        } else
-          line += " ";
-      if (last) break;
-      out.push_back(line);
-    }
-    for (size_t i = 0; i < out.size(); ++i) std::cout << out[i] << std::endl;
-  }
-}
-void ShowTree(Tree* node) {
-  Show(node, true, std::vector<std::string>(), std::vector<std::string>(),
-       std::vector<std::string>(), true, true, nullptr);
 }
 
 void Tree::LeftZig(Node* curr) {
@@ -327,7 +261,7 @@ void Tree::RightZig(Node* curr) {
 
 void Tree::LeftZigZig(Node* curr) {
   if (curr->parent != nullptr and curr->parent->parent != nullptr) {
-    Tree* tmptree = new Tree;
+    Tree* tmptree;
     tmptree->root = curr->parent->parent;
     tmptree->LeftZig(curr->parent);
     tmptree->LeftZig(curr);
@@ -368,7 +302,7 @@ void Tree::LeftZigZig(Node* curr) {
 
 void Tree::RightZigZig(Node* curr) {
   if (curr->parent != nullptr && curr->parent->parent != nullptr) {
-    Tree* tmptree = new Tree;
+    Tree* tmptree;
     tmptree->root = curr->parent->parent;
     tmptree->RightZig(curr->parent);
     tmptree->RightZig(curr);
@@ -409,7 +343,7 @@ void Tree::RightZigZig(Node* curr) {
 
 void Tree::LeftZigZag(Node* curr) {
   if (curr->parent != nullptr && curr->parent->parent != nullptr) {
-    Tree* tmptree = new Tree;
+    Tree* tmptree;
     tmptree->root = curr->parent->parent;
     tmptree->RightZig(curr);
     tmptree->LeftZig(curr);
@@ -450,7 +384,7 @@ void Tree::LeftZigZag(Node* curr) {
 
 void Tree::RightZigZag(Node* curr) {
   if (curr->parent != nullptr && curr->parent->parent != nullptr) {
-    Tree* tmptree = new Tree;
+    Tree* tmptree;
     tmptree->root = curr->parent->parent;
     tmptree->LeftZig(curr);
     tmptree->RightZig(curr);

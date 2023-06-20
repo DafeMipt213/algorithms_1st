@@ -20,6 +20,6 @@ class MinStack {
   int Top();
 
  private:
-  Stack data_;  // stack data
+  Stack data_;
   Stack min_stack_;
 };

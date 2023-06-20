@@ -40,7 +40,7 @@ bool Tree::Insert(int key, int value) {
           temp->key = key;
           temp->data = value;
           tmpnode->left_child = temp;
-          this->Splay(tmpnode->left_child);
+          Splay(tmpnode->left_child);
           return true;
         } else {
           tmpnode = tmpnode->left_child;
@@ -70,14 +70,14 @@ void Tree::InsertOrUpdate(int key, int value) {
           temp->key = key;
           temp->data = value;
           tmpnode->right_child = temp;
-          this->Splay(tmpnode->right_child);
+          Splay(tmpnode->right_child);
           return;
         } else {
           tmpnode = tmpnode->right_child;
         }
       } else if (key == tmpnode->key) {
         tmpnode->data = value;
-        this->Splay(tmpnode);
+        Splay(tmpnode);
         return;
       } else {
         if (tmpnode->left_child == nullptr) {
@@ -116,7 +116,7 @@ int Tree::Find(int key) {
           tmpnode = tmpnode->right_child;
         }
       } else if (key == tmpnode->key) {
-        this->Splay(tmpnode);
+        Splay(tmpnode);
         return tmpnode->data;
       } else {
         if (root->left_child == nullptr) {
@@ -134,11 +134,11 @@ void Tree::Remove(int key) {
     throw std::range_error("Tree is empty");
   }
   if (key == root->key) {
-    if (root->left_child == nullptr and root->right_child == nullptr) {
+    if (root->left_child == nullptr && root->right_child == nullptr) {
       root = nullptr;
-    } else if (root->left_child != nullptr and root->right_child == nullptr) {
+    } else if (root->left_child != nullptr && root->right_child == nullptr) {
       root = root->left_child;
-    } else if (root->left_child == nullptr and root->right_child != nullptr) {
+    } else if (root->left_child == nullptr && root->right_child != nullptr) {
       root = root->right_child;
     } else {
       Node* best_child = new Node;
@@ -173,7 +173,7 @@ void Tree::Remove(int key) {
     } else if (key == tmpnode->key) {
       if (tmpnode->right_child == nullptr && tmpnode->left_child == nullptr) {
         Node* father = tmpnode->parent;
-        if (father->left_child != nullptr and father->left_child->key == key)
+        if (father->left_child != nullptr && father->left_child->key == key)
           father->left_child = nullptr;
         else
           father->right_child = nullptr;
@@ -188,7 +188,7 @@ void Tree::Remove(int key) {
       } else if (tmpnode->right_child != nullptr &&
                  tmpnode->left_child == nullptr) {
         Node* father = tmpnode->parent;
-        if (father->left_child != nullptr and father->left_child->key == key)
+        if (father->left_child != nullptr && father->left_child->key == key)
           father->left_child = tmpnode->right_child;
         else
           father->right_child = tmpnode->right_child;
@@ -337,19 +337,19 @@ void Tree::LeftZigZig(Node* curr) {
     if (curr->left_child != nullptr) {
       curr->left_child->parent = curr;
     }
-    if (curr->right_child != nullptr and
+    if (curr->right_child != nullptr &&
         curr->right_child->right_child != nullptr) {
       curr->right_child->right_child->parent = curr->right_child;
     }
-    if (curr->right_child != nullptr and
+    if (curr->right_child != nullptr &&
         curr->right_child->left_child != nullptr) {
       curr->right_child->left_child->parent = curr->right_child;
     }
-    if (curr->left_child != nullptr and
+    if (curr->left_child != nullptr &&
         curr->left_child->right_child != nullptr) {
       curr->left_child->right_child->parent = curr->left_child;
     }
-    if (curr->left_child != nullptr and
+    if (curr->left_child != nullptr &&
         curr->left_child->left_child != nullptr) {
       curr->left_child->left_child->parent = curr->left_child;
     }
@@ -367,7 +367,7 @@ void Tree::LeftZigZig(Node* curr) {
 }
 
 void Tree::RightZigZig(Node* curr) {
-  if (curr->parent != nullptr and curr->parent->parent != nullptr) {
+  if (curr->parent != nullptr && curr->parent->parent != nullptr) {
     Tree* tmptree = new Tree;
     tmptree->root = curr->parent->parent;
     tmptree->RightZig(curr->parent);
@@ -378,19 +378,19 @@ void Tree::RightZigZig(Node* curr) {
     if (curr->left_child != nullptr) {
       curr->left_child->parent = curr;
     }
-    if (curr->right_child != nullptr and
+    if (curr->right_child != nullptr &&
         curr->right_child->right_child != nullptr) {
       curr->right_child->right_child->parent = curr->right_child;
     }
-    if (curr->right_child != nullptr and
+    if (curr->right_child != nullptr &&
         curr->right_child->left_child != nullptr) {
       curr->right_child->left_child->parent = curr->right_child;
     }
-    if (curr->left_child != nullptr and
+    if (curr->left_child != nullptr &&
         curr->left_child->right_child != nullptr) {
       curr->left_child->right_child->parent = curr->left_child;
     }
-    if (curr->left_child != nullptr and
+    if (curr->left_child != nullptr &&
         curr->left_child->left_child != nullptr) {
       curr->left_child->left_child->parent = curr->left_child;
     }
@@ -408,7 +408,7 @@ void Tree::RightZigZig(Node* curr) {
 }
 
 void Tree::LeftZigZag(Node* curr) {
-  if (curr->parent != nullptr and curr->parent->parent != nullptr) {
+  if (curr->parent != nullptr && curr->parent->parent != nullptr) {
     Tree* tmptree = new Tree;
     tmptree->root = curr->parent->parent;
     tmptree->RightZig(curr);
@@ -419,19 +419,19 @@ void Tree::LeftZigZag(Node* curr) {
     if (curr->left_child != nullptr) {
       curr->left_child->parent = curr;
     }
-    if (curr->right_child != nullptr and
+    if (curr->right_child != nullptr &&
         curr->right_child->right_child != nullptr) {
       curr->right_child->right_child->parent = curr->right_child;
     }
-    if (curr->right_child != nullptr and
+    if (curr->right_child != nullptr &&
         curr->right_child->left_child != nullptr) {
       curr->right_child->left_child->parent = curr->right_child;
     }
-    if (curr->left_child != nullptr and
+    if (curr->left_child != nullptr &&
         curr->left_child->right_child != nullptr) {
       curr->left_child->right_child->parent = curr->left_child;
     }
-    if (curr->left_child != nullptr and
+    if (curr->left_child != nullptr &&
         curr->left_child->left_child != nullptr) {
       curr->left_child->left_child->parent = curr->left_child;
     }
@@ -449,7 +449,7 @@ void Tree::LeftZigZag(Node* curr) {
 }
 
 void Tree::RightZigZag(Node* curr) {
-  if (curr->parent != nullptr and curr->parent->parent != nullptr) {
+  if (curr->parent != nullptr && curr->parent->parent != nullptr) {
     Tree* tmptree = new Tree;
     tmptree->root = curr->parent->parent;
     tmptree->LeftZig(curr);
@@ -460,19 +460,19 @@ void Tree::RightZigZag(Node* curr) {
     if (curr->left_child != nullptr) {
       curr->left_child->parent = curr;
     }
-    if (curr->right_child != nullptr and
+    if (curr->right_child != nullptr &&
         curr->right_child->right_child != nullptr) {
       curr->right_child->right_child->parent = curr->right_child;
     }
-    if (curr->right_child != nullptr and
+    if (curr->right_child != nullptr &&
         curr->right_child->left_child != nullptr) {
       curr->right_child->left_child->parent = curr->right_child;
     }
-    if (curr->left_child != nullptr and
+    if (curr->left_child != nullptr &&
         curr->left_child->right_child != nullptr) {
       curr->left_child->right_child->parent = curr->left_child;
     }
-    if (curr->left_child != nullptr and
+    if (curr->left_child != nullptr &&
         curr->left_child->left_child != nullptr) {
       curr->left_child->left_child->parent = curr->left_child;
     }
@@ -492,29 +492,29 @@ void Tree::RightZigZag(Node* curr) {
 void Tree::Splay(Node* curr) {
   while (curr->parent != nullptr) {
     if (curr->parent->parent == nullptr) {
-      if (curr->parent->left_child != nullptr and
+      if (curr->parent->left_child != nullptr &&
           curr->parent->left_child->key == curr->key) {
-        this->LeftZig(curr);
+        LeftZig(curr);
       } else {
-        this->RightZig(curr);
+        RightZig(curr);
       }
     } else {
-      if (curr->parent->parent->left_child != nullptr and
-          curr->parent->parent->left_child->left_child != nullptr and
+      if (curr->parent->parent->left_child != nullptr &&
+          curr->parent->parent->left_child->left_child != nullptr &&
           curr->parent->parent->left_child->left_child->key == curr->key) {
-        this->LeftZigZig(curr);
-      } else if (curr->parent->parent->left_child != nullptr and
-                 curr->parent->parent->left_child->right_child != nullptr and
+        LeftZigZig(curr);
+      } else if (curr->parent->parent->left_child != nullptr &&
+                 curr->parent->parent->left_child->right_child != nullptr &&
                  curr->parent->parent->left_child->right_child->key ==
                      curr->key) {
-        this->LeftZigZag(curr);
-      } else if (curr->parent->parent->right_child != nullptr and
-                 curr->parent->parent->right_child->left_child != nullptr and
+        LeftZigZag(curr);
+      } else if (curr->parent->parent->right_child != nullptr &&
+                 curr->parent->parent->right_child->left_child != nullptr &&
                  curr->parent->parent->right_child->left_child->key ==
                      curr->key) {
-        this->RightZigZag(curr);
+        RightZigZag(curr);
       } else {
-        this->RightZigZig(curr);
+        RightZigZig(curr);
       }
     }
     if (curr->right_child != nullptr) {
@@ -523,41 +523,40 @@ void Tree::Splay(Node* curr) {
     if (curr->left_child != nullptr) {
       curr->left_child->parent = curr;
     }
-    if (curr->right_child != nullptr and
+    if (curr->right_child != nullptr &&
         curr->right_child->right_child != nullptr) {
       curr->right_child->right_child->parent = curr->right_child;
     }
-    if (curr->right_child != nullptr and
+    if (curr->right_child != nullptr &&
         curr->right_child->left_child != nullptr) {
       curr->right_child->left_child->parent = curr->right_child;
     }
-    if (curr->left_child != nullptr and
+    if (curr->left_child != nullptr &&
         curr->left_child->right_child != nullptr) {
       curr->left_child->right_child->parent = curr->left_child;
     }
-    if (curr->left_child != nullptr and
+    if (curr->left_child != nullptr &&
         curr->left_child->left_child != nullptr) {
       curr->left_child->left_child->parent = curr->left_child;
     }
   }
-  if (curr->right_child != nullptr and
+  if (curr->right_child != nullptr &&
       curr->right_child->right_child != nullptr) {
     curr->right_child->right_child->parent = curr->right_child;
   }
-  if (curr->right_child != nullptr and
+  if (curr->right_child != nullptr &&
       curr->right_child->left_child != nullptr) {
     curr->right_child->left_child->parent = curr->right_child;
   }
-  if (curr->left_child != nullptr and
-      curr->left_child->right_child != nullptr) {
+  if (curr->left_child != nullptr && curr->left_child->right_child != nullptr) {
     curr->left_child->right_child->parent = curr->left_child;
   }
-  if (curr->left_child != nullptr and curr->left_child->left_child != nullptr) {
+  if (curr->left_child != nullptr && curr->left_child->left_child != nullptr) {
     curr->left_child->left_child->parent = curr->left_child;
   }
 }
 void Tree::RemoveSplay(int key) {
-  this->Find(key);
-  this->Remove(this->root->key);
+  Find(key);
+  Remove(this->root->key);
 }
 Tree::~Tree() {}

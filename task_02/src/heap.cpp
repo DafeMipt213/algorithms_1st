@@ -14,9 +14,7 @@ void MinHeap::SiftDown() {
     } else {
       if (data_.size() == right_kid) {
         if (data_[index] > data_[left_kid]) {
-          tmp = data_[left_kid];
-          data_[left_kid] = data_[index];
-          data_[index] = tmp;
+          std::swap(data_[left_kid], data_[index]);
           index = left_kid;
         } else {
           return;
@@ -44,7 +42,6 @@ void MinHeap::SiftDown() {
 
 void MinHeap::SiftUp() {
   size_t index = data_.size() - 1;
-  int tmp = 0;
   while (true) {
     if (index == 0) {
       return;

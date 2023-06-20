@@ -11,11 +11,11 @@ void MinHeap::Push(int n) {
 
 void MinHeap::SiftUp() { //Fixed
   size_t index = data_.size() - 1;
-  int upperIndex = index;
-  while (upperIndex >= 0) {
-    upperIndex = (index - 1) / 2;
-    if (data_[upperIndex] > data_[index])
-      std::swap(data_[upperIndex], data_[index]);
+  int upper_index = index;
+  while (upper_index >= 0) {
+    upper_index = (index - 1) / 2;
+    if (data_[upper_index] > data_[index])
+      std::swap(data_[upper_index], data_[index]);
     else
       return;
   }
@@ -35,17 +35,17 @@ void MinHeap::SiftDown() {
   int index = 0;
   int minimal_index = 0;
   while (2 * index + 1 <= data_.size() - 1) {
-    int leftChildIndex = 2 * index + 1;
-    int rightChildIndex = 2 * index + 2;
-    if (leftChildIndex == data_.size() - 1) {
-      if (data_[index] > data_[leftChildIndex]) 
-        std::swap(data_[index], data_[leftChildIndex]);
+    int left_child_index = 2 * index + 1;
+    int right_child_index = 2 * index + 2;
+    if (left_child_index == data_.size() - 1) {
+      if (data_[index] > data_[left_child_index]) 
+        std::swap(data_[index], data_[left_child_index]);
       return;
     } else {
-      if (data_[leftChildIndex] < data_[rightChildIndex])
-        minimal_index = leftChildIndex;
+      if (data_[left_child_index] < data_[right_child_index])
+        minimal_index = left_child_index;
       else
-        minimal_index = rightChildIndex;
+        minimal_index = right_child_index;
       if (data_[index] > data_[minimal_index]) {
         std::swap(data_[index], data_[minimal_index]);
         index = minimal_index;

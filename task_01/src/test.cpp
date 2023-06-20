@@ -63,3 +63,16 @@ TEST(MinStackTestCustom, Simple)
   ASSERT_EQ(stack.Pop(), 14);
   ASSERT_EQ(stack.Pop(), 9);
 }
+
+TEST(MinStackGetMinCheck, Simple)
+{
+  MinStack stack;
+  stack.Push(1);
+  ASSERT_EQ(stack.GetMin(), 1);
+  stack.Push(2);
+  ASSERT_EQ(stack.GetMin(), 1);
+  stack.Push(1);
+  ASSERT_EQ(stack.GetMin(), 1);
+  ASSERT_EQ(stack.Pop(), 1);
+  ASSERT_EQ(stack.GetMin(), 1);
+}

@@ -96,7 +96,7 @@ void Tree::restruct(Node *node) {
   int j;
   for (j = 0; j <= t - 2; j++) child1->keys[j] = node->keys[j];
   for (j = t - 1; j <= (2 * t - 1); j++) child1->keys[j] = 0;
-  child1->count = t - 1;  //количество ключей в узле
+  child1->count = t - 1; 
   if (node->countSons != 0) {
     for (int i = 0; i <= (t - 1); i++) {
       child1->children[i] = node->children[i];
@@ -104,7 +104,7 @@ void Tree::restruct(Node *node) {
     }
     for (int i = t; i <= (2 * t); i++) child1->children[i] = nullptr;
     child1->leaf = false;
-    child1->countSons = t - 1;  //количество сыновей
+    child1->countSons = t - 1;  
   } else {
     child1->leaf = true;
     child1->countSons = 0;
@@ -115,7 +115,7 @@ void Tree::restruct(Node *node) {
   Node *child2 = new Node;
   for (int j = 0; j <= (t - 1); j++) child2->keys[j] = node->keys[j + t];
   for (j = t; j <= (2 * t - 1); j++) child2->keys[j] = 0;
-  child2->count = t;  //количество ключей в узле
+  child2->count = t; 
   if (node->countSons != 0) {
     for (int i = 0; i <= (t); i++) {
       child2->children[i] = node->children[i + t];
@@ -123,7 +123,7 @@ void Tree::restruct(Node *node) {
     }
     for (int i = t + 1; i <= (2 * t); i++) child2->children[i] = nullptr;
     child2->leaf = false;
-    child2->countSons = t;  //количество сыновей
+    child2->countSons = t;  
   } else {
     child2->leaf = true;
     child2->countSons = 0;
@@ -131,7 +131,7 @@ void Tree::restruct(Node *node) {
   }
 
   //родитель
-  if (node->parent == nullptr) {  //если родителя нет, то это корень
+  if (node->parent == nullptr) {  
     node->keys[0] = node->keys[t - 1];
     for (int j = 1; j <= (2 * t - 1); j++) node->keys[j] = 0;
     node->children[0] = child1;

@@ -5,4 +5,4 @@
 
 #include "tree.hpp"
 
-// TEST(Tree, Simple) {}
+TEST(Tree, Simple) {}

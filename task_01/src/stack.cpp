@@ -1,7 +1,7 @@
 #include "stack.hpp"
 
 void Stack::Push(int value) {
-  NodeStack<int>* p;
+  NodeStack<int>* p = nullptr;
   p = new NodeStack<int>;
   p->item = value;
   p->next = Top;
@@ -12,7 +12,7 @@ int Stack::Pop() {
   if (Top == nullptr) {
     return 0;
   }
-  NodeStack<int>* p;
+  NodeStack<int>* p = nullptr;
   int value = Top->item;
   p = Top;
   Top = Top->next;

@@ -7,6 +7,7 @@ struct Node {
   Node* right{nullptr};
   Node* insert(Node* p, int k);
   Node* remove(Node* p, int k);
+  Node* find(Node* p, int k);
   Node(int n) {
     key = n;
     left = nullptr;
@@ -20,7 +21,9 @@ class Tree {
   Node* root{nullptr};
   Tree(Node* node) { root = node; }
   void insert(int k) { root = root->insert(root, k); }
-  void remove(int k) { root = root->remove(root, k); };
+  void remove(int k) { root = root->remove(root, k); }
+  void find(int k) {root = root -> find(root, k);}
+  
 
  private:
   std::vector<int> values{};

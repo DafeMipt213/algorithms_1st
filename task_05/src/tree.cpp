@@ -57,6 +57,19 @@ Node* Node::insert(Node* p, int k) {
   return balance(p);
 }
 
+Node* Node::find(Node* p, int k) {
+  if (p != nullptr) {
+    if (key == p->key) {
+      return p;
+    }
+    if (key < p->key)
+      p->left = find(p->left, key);
+    else
+      p->right = find(p->right, key);
+    return nullptr;
+  }
+}
+
 Node* findMin(Node* p) {
   if (p->left == nullptr)
     return p;

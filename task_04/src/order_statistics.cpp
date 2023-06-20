@@ -13,19 +13,20 @@ std::vector<int> Sorted(std::vector<int> vec) {
 }
 
 size_t Partition(std::vector<int>& vec, size_t left, size_t right) {
-  int middle = vec[(left + right + 1) / 2];
+  int middle = vec[(left + right) / 2];
   while (true) {
     while (vec[left] < middle) left++;
 
-    if (vec[left] > vec[right]) std::swap(vec[right], vec[left]);
+    // if (vec[left] > vec[right]) std::swap(vec[right], vec[left]);
 
     while (vec[right] > middle) right--;
 
-    if (left >= right) break;
-
-    if (vec[left] > vec[right]) std::swap(vec[right], vec[left]);
+    if (vec[left] > vec[right] && left <= right)
+      std::swap(vec[right], vec[left]);
 
     left += 1;
+
+    if (left >= right) break;
   }
   return left;
 }

@@ -1,6 +1,5 @@
-// #pragma once
+#pragma once
 
-// #include <vector>
+#include <vector>
 
-// std::vector<int> CalculateDaysBeforWarmup(const std::vector<float>&
-// temerature);
+std::vector<int> CalculateDaysBeforWarmup(const std::vector<float>& temerature);

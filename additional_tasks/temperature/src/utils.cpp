@@ -1,8 +1,8 @@
-// #include "utils.hpp"
+#include "utils.hpp"
 
-// #include <algorithm>
+#include <algorithm>
 
-// std::vector<int> CalculateDaysBeforWarmup(
-//     const std::vector<float>& temerature) {
-//   return {};
-// }
+std::vector<int> CalculateDaysBeforWarmup(
+    const std::vector<float>& temerature) {
+  return {};
+}

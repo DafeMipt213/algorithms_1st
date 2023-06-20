@@ -1,24 +1,5 @@
 #include "sort.hpp"
 
-void CreateRandomVec(std::vector<int>& vec, size_t size) {
-  for (int i = 0; i < size; i++) {
-    int b = rand() % 1000 + 1;
-    vec.push_back(b);
-  }
-}
-
-void RandomFill(std::vector<int>& vec, size_t size) {
-  for (int i = 0; i < size; i++) {
-    int b = rand() % 1000 + 1;
-    vec[i] = b;
-  }
-}
-
-std::vector<int> Sorted(std::vector<int>& vec) {
-  std::sort(vec.begin(), vec.end());
-  return vec;
-}
-
 void QuickSort(std::vector<int>::iterator array, size_t low, size_t hight) {
   int i = low;
   int j = hight;

@@ -47,9 +47,14 @@ int HashTable::Data::GetValue(const std::string& key) const {
 
 int HashTable::Data::Remove(const std::string& key) {
   if (data_.empty()) throw std::runtime_error("no data in table");
-  int temp = data_.back().GetValue();
-  data_.pop_back();
-  return temp;
+  for (size_t i = 0; i < data_.size(); ++i) {
+    if (data_[i].GetKey() == key) {
+      int temp = data_[i].GetValue();
+      Pop(i);
+      return temp;
+    }
+  }
+  throw std::runtime_error("no data in table");
 }
 
 HashTable::Data::KeyValue HashTable::Data::GetKeyValue(size_t index) {
@@ -59,43 +64,43 @@ HashTable::Data::KeyValue HashTable::Data::GetKeyValue(size_t index) {
 void HashTable::Data::Pop(size_t index) { data_.erase(data_.begin() + index); }
 
 size_t HashTable::Hash(const std::string& key) const {
-  return std::hash<std::string>{}(key) % data_.size();
+  return std::hash<std::string>{}(key) % table_.size();
 }
 
-HashTable::HashTable() { data_.resize(500); }
+HashTable::HashTable() { table_.resize(500); }
 
 bool HashTable::Insert(const std::string& key, int value) {
-  bool is_success = data_[Hash(key)].Push(Data::KeyValue(key, value));
+  bool is_success = table_[Hash(key)].Push(Data::KeyValue(key, value));
   element_count += is_success;
   Rehash();
   return is_success;
 }
 
 void HashTable::InsertOrUpdate(const std::string& key, int value) {
-  element_count += data_[Hash(key)].Update(Data::KeyValue(key, value));
+  element_count += table_[Hash(key)].Update(Data::KeyValue(key, value));
   Rehash();
 }
 
 void HashTable::Remove(const std::string& key) {
-  data_[Hash(key)].Remove(key);
+  table_[Hash(key)].Remove(key);
   element_count--;
 }
 
 int HashTable::Find(const std::string& key) const {
-  return data_[Hash(key)].GetValue(key);
+  return table_[Hash(key)].GetValue(key);
 }
 
 size_t HashTable::Size() const { return element_count; }
 
 void HashTable::Rehash() {
-  if ((float)element_count / (float)data_.size() > 0.7) {
-    data_.resize(data_.size() * 2);
-    for (auto& data : data_) {
+  if ((float)element_count / (float)table_.size() > 0.7) {
+    table_.resize(table_.size() * 2);
+    for (auto& data : table_) {
       size_t s = data.Size();
       for (size_t i = 0; i < s; ++i) {
         HashTable::Data::KeyValue temp = data.GetKeyValue(0);
         data.Pop(0);
-        data_[Hash(temp.GetKey())].Push(temp);
+        table_[Hash(temp.GetKey())].Push(temp);
       }
     }
   }

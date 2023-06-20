@@ -5,12 +5,20 @@
 
 #include "tree.hpp"
 
-TEST(Tree, Simple) {
+TEST(Tree, BinTree) {
   BinTree tree;
   tree.Insert(4, 5);
   ASSERT_EQ(tree.Find(4), 5);
   tree.Insert(100, 0);
   ASSERT_EQ(tree.Find(100), 0);
+
+  tree.Insert(3, 6);
+  tree.Insert(10, 7);
+  tree.Insert(20, 0);
+  ASSERT_EQ(tree.Find(20), 0);
+  ASSERT_EQ(tree.Find(4), 5);
+  ASSERT_EQ(tree.Find(3), 6);
+  ASSERT_EQ(tree.Find(10), 7);
 }
 
 TEST(Tree, Treap) {

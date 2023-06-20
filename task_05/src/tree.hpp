@@ -3,13 +3,13 @@
 #include <utility>
 
 struct Node {
-  Node(int key, int value) : key{key}, value{value} {}
+  Node(int key, int priority) : key{key}, priority{priority} {}
   Node(){};
-  std::shared_ptr<Node> parent = nullptr;
+  std::weak_ptr<Node> parent;
   std::shared_ptr<Node> left_child = nullptr;
   std::shared_ptr<Node> right_child = nullptr;
   int key = 0;
-  int value = 0;
+  int priority = 0;
 };
 
 class BinTree {
@@ -26,8 +26,8 @@ class BinTree {
 
 class Treap {
  public:
-  Treap(int key, int val);
-  void Insert(int key, int val);
+  Treap(int key, int priority);
+  void Insert(int key, int priority);
   int Remove(int key);
   int Find(int key);
 

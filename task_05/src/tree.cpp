@@ -19,19 +19,19 @@ bool BinTree::Insert(int key, int value) {
   std::shared_ptr<Node> cur = root;
   while (cur) {
     if (key >= cur->key) {
-      if (cur->left_child) {
-        cur = cur->left_child;
-      } else {
-        cur->left_child = std::make_shared<Node>(key, value);
-        cur->left_child->parent = cur;
-        return true;
-      }
-    } else if (key < cur->key) {
       if (cur->right_child) {
         cur = cur->right_child;
       } else {
         cur->right_child = std::make_shared<Node>(key, value);
         cur->right_child->parent = cur;
+        return true;
+      }
+    } else if (key < cur->key) {
+      if (cur->left_child) {
+        cur = cur->left_child;
+      } else {
+        cur->left_child = std::make_shared<Node>(key, value);
+        cur->left_child->parent = cur;
         return true;
       }
     }
@@ -48,21 +48,25 @@ int BinTree::Find(int key) const {
   std::shared_ptr<Node> cur = root;
   while (cur) {
     if (key > cur->key) {
-      cur = cur->left_child;
-    } else if (key < cur->key) {
       cur = cur->right_child;
+    } else if (key < cur->key) {
+      cur = cur->left_child;
     } else if (key == cur->key) {
-      return cur->value;
+      return cur->priority;
     }
   }
   throw std::out_of_range("out of range");
 }
 
-Treap::Treap(int key, int val) { root = std::make_shared<Node>(key, val); }
+//-------------//-------------//
 
-void Treap::Insert(int key, int val) {
+Treap::Treap(int key, int priority) {
+  root = std::make_shared<Node>(key, priority);
+}
+
+void Treap::Insert(int key, int priority) {
   auto [left, right] = Split(key, root);
-  std::shared_ptr<Node> new_node = std::make_shared<Node>(key, val);
+  std::shared_ptr<Node> new_node = std::make_shared<Node>(key, priority);
   std::shared_ptr<Node> new_left = Merge(left, new_node);
   root = Merge(new_left, right);
 }
@@ -86,7 +90,7 @@ int Treap::Find(int key) {
     } else if (key < cur->key) {
       cur = cur->left_child;
     } else if (key == cur->key) {
-      return cur->value;
+      return cur->priority;
     }
   }
   throw std::out_of_range("out of range");
@@ -97,7 +101,7 @@ std::shared_ptr<Node> Treap::Merge(std::shared_ptr<Node> left,
   if (!right) return left;
   if (!left) return right;
 
-  if (left->value > right->value) {
+  if (left->priority > right->priority) {
     left->right_child = Merge(left->right_child, right);
     return left;
   } else {

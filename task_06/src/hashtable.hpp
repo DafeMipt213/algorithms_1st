@@ -44,5 +44,5 @@ class HashTable {
     std::vector<KeyValue> data_;
   };
 
-  std::vector<Data> data_;
+  std::vector<Data> table_;
 };

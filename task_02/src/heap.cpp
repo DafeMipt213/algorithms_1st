@@ -31,20 +31,12 @@ void MinHeap::SiftDown() {
     unsigned long left_child = 2 * cur + 1;
     unsigned long right_child = 2 * cur + 2;
 
-    if (2 * cur < Size()) {
-      if (data_[left_child] < data_[right_child]) {
-        std::swap(data_[cur], data_[left_child]);
-        cur = left_child;
-      } else if (data_[right_child] <= data_[left_child]) {
-        std::swap(data_[cur], data_[right_child]);
-        cur = right_child;
-      }
-    } else {
-      if (left_child < Size()) {
-        std::swap(data_[cur], data_[left_child]);
-        cur = left_child;
-      } else
-        return;
+    if (data_[left_child] < data_[right_child]) {
+      std::swap(data_[cur], data_[left_child]);
+      cur = left_child;
+    } else if (data_[right_child] <= data_[left_child]) {
+      std::swap(data_[cur], data_[right_child]);
+      cur = right_child;
     }
   }
 }

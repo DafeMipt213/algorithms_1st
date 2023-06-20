@@ -4,48 +4,47 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
-using iter = vector<int>::iterator;
+using iter = std::vector<int>::iterator;
 
-void merge(iter left, iter mid, iter right) {
-  vector<int> leftVec(left, mid);
-  vector<int> rightVec(mid, right);
+void Merge(iter left, iter mid, iter right) {
+  std::vector<int> left_vector(left, mid);
+  std::vector<int> right_vector(mid, right);
 
-  iter lidx = leftVec.begin();
-  iter ridx = rightVec.begin();
+  iter left_index = left_vector.begin();
+  iter right_index = right_vector.begin();
 
-  while (lidx != leftVec.end() and ridx != rightVec.end()) {
-    if (*lidx < *ridx) {
-      *left = *lidx;
-      ++lidx;
+  while (left_index != left_vector.end() && right_index != right_vector.end()) {
+    if (*left_index < *right_index) {
+      *left = *left_index;
+      ++left_index;
     } else {
-      *left = *ridx;
-      ridx++;
+      *left = *right_index;
+      right_index++;
     }
     left++;
   }
 
-  copy(lidx, leftVec.end(), left);
+  copy(left_index, left_vector.end(), left);
 }
 
-void Sort1(iter left, iter right) {
+void InnerSort(iter left, iter right) {
   int dist = distance(left, right);
   if (dist > 1) {
     iter mid = left + (dist) / 2;
 
-    Sort1(left, mid);
-    Sort1(mid, right);
+    InnerSort(left, mid);
+    InnerSort(mid, right);
 
-    merge(left, mid, right);
+    Merge(left, mid, right);
   }
 }
 
 // void Sort(iter left, iter right) {
-vector<int> Sort(vector<int> vec) {
+std::vector<int> Sort(std::vector<int> vec) {
   if (vec.size() > 1) {
     iter left = vec.begin();
     iter right = vec.end();
-    Sort1(left, right);
+    InnerSort(left, right);
   }
 
   return vec;

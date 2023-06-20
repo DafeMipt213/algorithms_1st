@@ -10,9 +10,9 @@ class MinHeap {
   void Push(int value);
   int Pop();
   size_t Size();
-  std::vector<int> heap;
 
  private:
+  std::vector<int> heap;
   void SiftUp(int i);
   void SiftDown(int i);
 };

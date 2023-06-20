@@ -28,7 +28,7 @@ void MinHeap::SiftDown(int i) {
     int left = 2 * i + 1;
     int right = 2 * i + 2;
     int j = left;
-    if (right < heap.size() and heap[right] < heap[left]) j = right;
+    if (right < heap.size() && heap[right] < heap[left]) j = right;
     if (heap[i] <= heap[j]) break;
     std::swap(heap[i], heap[j]);
     i = j;

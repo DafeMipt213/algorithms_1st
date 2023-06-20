@@ -21,59 +21,59 @@ void HashTable::Expand() {
   }
   data_ = tmp_data;
 }
-bool HashTable::Contains(int value) {
+bool HashTable::Contains(int key) {
   int i = 0;
-  const auto& curr = data_[(std::hash<int>{}(value)) % data_.size()];
+  const auto& curr = data_[(std::hash<int>{}(key)) % data_.size()];
   while (i < curr.size()) {
     i += 1;
-    if (curr[i].second == value) {
+    if (curr[i].second == key) {
       return true;
     }
   }
   return false;
 }
-bool HashTable::Insert(const std::string& key, int value) {
-  if (Contains(value)) return false;
-  if (data_[(std::hash<int>{}(value)) % data_.size()].size() > 5) {
+bool HashTable::Insert(const std::string& value, int key) {
+  if (Contains(key)) return false;
+  if (data_[(std::hash<int>{}(key)) % data_.size()].size() > 5) {
     Expand();
   }
-  data_[(std::hash<int>{}(value)) % data_.size()].push_back(
-      std::pair<std::string, int>(key, value));
+  data_[(std::hash<int>{}(key)) % data_.size()].push_back(
+      std::pair<std::string, int>(value, key));
   return true;
 }
 
-void HashTable::InsertOrUpdate(const std::string& key, int value) {
+void HashTable::InsertOrUpdate(const std::string& value, int key) {
   bool met = false;
-  for (int i = 0; i < data_[(std::hash<int>{}(value)) % data_.size()].size();
+  for (int i = 0; i < data_[(std::hash<int>{}(key)) % data_.size()].size();
        ++i) {
-    if (data_[(std::hash<int>{}(value)) % data_.size()][i].second == value) {
-      data_[(std::hash<int>{}(value)) % data_.size()][i].first = key;
+    if (data_[(std::hash<int>{}(key)) % data_.size()][i].second == key) {
+      data_[(std::hash<int>{}(key)) % data_.size()][i].first = value;
       return;
     }
   }
-  data_[(std::hash<int>{}(value)) % data_.size()].push_back(
-      std::pair<std::string, int>(key, value));
+  data_[(std::hash<int>{}(key)) % data_.size()].push_back(
+      std::pair<std::string, int>(value, key));
 }
 
-void HashTable::Remove(const int value) {
+void HashTable::Remove(const int key) {
   bool met = false;
-  for (int i = 0; i < data_[(std::hash<int>{}(value)) % data_.size()].size();
+  for (int i = 0; i < data_[(std::hash<int>{}(key)) % data_.size()].size();
        ++i) {
-    if (data_[(std::hash<int>{}(value)) % data_.size()][i].second == value) {
-      data_[(std::hash<int>{}(value)) % data_.size()].erase(
-          data_[(std::hash<int>{}(value)) % data_.size()].begin() + i);
+    if (data_[(std::hash<int>{}(key)) % data_.size()][i].second == key) {
+      data_[(std::hash<int>{}(key)) % data_.size()].erase(
+          data_[(std::hash<int>{}(key)) % data_.size()].begin() + i);
       return;
     }
   }
   throw std::out_of_range("No such element in hash table");
 }
-std::string HashTable::Find(const int value) const {
+std::string HashTable::Find(const int key) const {
   int i = 0;
   std::vector<std::pair<std::string, int>> curr =
-      data_[(std::hash<int>{}(value)) % data_.size()];
+      data_[(std::hash<int>{}(key)) % data_.size()];
   while (i < curr.size()) {
     i += 1;
-    if (curr[i].second == value) {
+    if (curr[i].second == key) {
       return curr[i].first;
     }
   }

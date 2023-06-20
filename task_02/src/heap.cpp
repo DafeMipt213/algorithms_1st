@@ -9,7 +9,7 @@ void MinHeap::Push(int n) {
   SiftUp();
 }
 
-void MinHeap::SiftUp() { //Fixed
+void MinHeap::SiftUp() {
   size_t index = data_.size() - 1;
   int upper_index = index;
   while (upper_index >= 0) {
@@ -22,7 +22,8 @@ void MinHeap::SiftUp() { //Fixed
 }
 
 int MinHeap::Pop() {
-  if (data_.empty()) throw std::out_of_range("Empty heap");
+  if (data_.empty())
+    throw std::out_of_range("Empty heap");
   int result = data_[0];
   data_[0] = data_.back();
   data_.pop_back();
@@ -31,14 +32,15 @@ int MinHeap::Pop() {
 }
 
 void MinHeap::SiftDown() {
-  if (data_.size() == 0) return;
+  if (data_.size() == 0)
+    return;
   int index = 0;
   int minimal_index = 0;
   while (2 * index + 1 <= data_.size() - 1) {
     int left_child_index = 2 * index + 1;
     int right_child_index = 2 * index + 2;
     if (left_child_index == data_.size() - 1) {
-      if (data_[index] > data_[left_child_index]) 
+      if (data_[index] > data_[left_child_index])
         std::swap(data_[index], data_[left_child_index]);
       return;
     } else {

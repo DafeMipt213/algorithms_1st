@@ -6,8 +6,8 @@
 #include "tree.hpp"
 
 TEST(Tree, Simple) {
-  Node* root = new Node(5);
-  Tree* tree = new Tree(root);
+  Node *root = new Node(5);
+  Tree *tree = new Tree(root);
   tree->insert(6);
   tree->remove(5);
   ASSERT_EQ((tree->root->key), 6);

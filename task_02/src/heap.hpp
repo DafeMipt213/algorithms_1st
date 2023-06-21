@@ -6,7 +6,7 @@
 #include <vector>
 
 class MinHeap {
-public:
+ public:
   MinHeap();
   int Size();
   void Push(int value);
@@ -14,7 +14,7 @@ public:
   int getLast();
   void Last();
 
-private:
+ private:
   std::vector<int> data_;
   int size;
   int left_child(int i);

@@ -4,7 +4,7 @@
 #include <vector>
 
 class Stack {
-public:
+ public:
   Stack();
   void Push(int value);
   int Pop();
@@ -12,14 +12,14 @@ public:
 
   ~Stack() { delete[] data_; }
 
-private:
+ private:
   int *data_;
   std::size_t size;
   std::size_t capacity;
 };
 
 class MinStack {
-public:
+ public:
   MinStack();
   void Push(int value);
   int Pop();
@@ -31,7 +31,7 @@ public:
     delete[] data_min;
   }
 
-private:
+ private:
   int *data_;
   int *data_min;
   std::size_t min_size;

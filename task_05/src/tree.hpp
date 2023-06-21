@@ -1,13 +1,13 @@
 #pragma once
 
 class TreeNode {
-private:
+ private:
   int key;
   int value;
   TreeNode *left;
   TreeNode *right;
 
-public:
+ public:
   TreeNode(int key, int value);
   int getKey() const;
   int getValue() const;
@@ -20,16 +20,16 @@ public:
 };
 
 class Tree {
-private:
+ private:
   TreeNode *root;
 
-public:
+ public:
   Tree();
   bool Insert(int key, int value);
   void InsertOrUpdate(int key, int value);
   int Find(int key) const;
 
-private:
+ private:
   TreeNode *Insert(TreeNode *node, int key, int value);
   TreeNode *FindNode(TreeNode *node, int key) const;
 };

@@ -22,9 +22,11 @@ int Partition(std::vector<int> &data, int start_index, int end_index) {
 }
 
 int GetOrderStatistics(const std::vector<int> &data, std::size_t n) {
+  if (data.empty() || n >= data.size()) {
+    return -1;
+  }
+
   std::vector<int> tmp(data);
-
   QuickSortRecursive(tmp, 0, static_cast<unsigned int>(tmp.size()) - 1);
-
   return tmp[n];
 }

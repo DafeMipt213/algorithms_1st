@@ -35,7 +35,7 @@ void MinHeap::SiftDown(int i) {
 
 void MinHeap::Push(int n) { 
   data_.push_back(n);
-  SiftUp(Size() - 1);
+  SiftUp(int(Size()) - 1);
 }
 
 int MinHeap::Pop() {

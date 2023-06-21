@@ -1,5 +1,5 @@
 #include "stack.hpp"
-
+#include <exception>
 #include <algorithm>
 
 void Stack::Push(int value) { 
@@ -15,7 +15,7 @@ int Stack::Pop() {
 
 void MinStack::Push(int value) { 
   if ( data_.empty())
-    data_.push_back( value);
+    data_.push_back(value);
   else if ( data_.back() >= value)
     data_.push_back( value);
   data.Push(value);

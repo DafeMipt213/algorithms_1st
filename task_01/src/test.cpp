@@ -7,7 +7,8 @@
 
 TEST(StackTest, Simple) {
   Stack stack;
-  stack.Push(1);              // Stack [1]
+  stack.Push(1);  // Stack [1]
+  ASSERT_EQ(stack.Get(), 1);
   ASSERT_EQ(stack.Pop(), 1);  // Stack []
   stack.Push(1);              // Stack [1]
   stack.Push(2);              // Stack [1, 2]
@@ -25,6 +26,7 @@ TEST(MinStackTest, Simple) {
   MinStack stack;
   stack.Push(1);  // Stack [1]
   ASSERT_EQ(stack.GetMin(), 1);
+  ASSERT_EQ(stack.Get(), 1);
   ASSERT_EQ(stack.Pop(), 1);  // Stack []
   stack.Push(1);              // Stack [1]
   stack.Push(2);              // Stack [1, 2]
@@ -39,4 +41,21 @@ TEST(MinStackTest, Simple) {
   ASSERT_EQ(stack.GetMin(), 1);
   ASSERT_EQ(stack.Pop(), 3);  // Stack [1]
   ASSERT_EQ(stack.Pop(), 1);  // Stack []
+  stack.Push(5);
+  stack.Push(4);
+  stack.Push(4);
+  stack.Pop();
+  ASSERT_EQ(stack.GetMin(), 4);
+}
+
+TEST(StackTest, Exceptions) {
+  Stack stack;
+  ASSERT_ANY_THROW(stack.Pop());
+  ASSERT_ANY_THROW(stack.Get());
+}
+
+TEST(MinStackTest, Exceptions) {
+  MinStack stack;
+  ASSERT_ANY_THROW(stack.Pop());
+  ASSERT_ANY_THROW(stack.GetMin());
 }

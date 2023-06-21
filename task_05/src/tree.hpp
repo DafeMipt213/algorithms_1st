@@ -12,7 +12,7 @@ class Tree {
     int data;
     int key;
     bool visited = false;
-    void operator=(Node other) {
+    void operator=(const Node& other) {
       parent = other.parent;
       left_child = other.left_child;
       right_child = other.right_child;

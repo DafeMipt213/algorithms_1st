@@ -17,6 +17,11 @@ class TreeNode {
   void setValue(int newValue);
   void setLeft(TreeNode *newLeft);
   void setRight(TreeNode *newRight);
+
+  ~TreeNode() {
+    delete left;
+    delete right;
+  }
 };
 
 class Tree {
@@ -28,6 +33,8 @@ class Tree {
   bool Insert(int key, int value);
   void InsertOrUpdate(int key, int value);
   int Find(int key) const;
+
+  ~Tree() { delete root; }
 
  private:
   TreeNode *Insert(TreeNode *node, int key, int value);

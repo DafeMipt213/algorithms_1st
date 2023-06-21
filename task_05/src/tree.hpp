@@ -14,7 +14,6 @@ struct Node {
 };
 
 class Tree {
-
  public:
   void LeftZig(Node*);
   void RightZig(Node*);

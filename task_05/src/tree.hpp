@@ -2,24 +2,18 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+
+struct Node {
+  Node* parent = nullptr;
+  Node* left_child = nullptr;
+  Node* right_child = nullptr;
+  ~Node();
+  int data;
+  int key;
+  void operator=(const Node& other);
+};
+
 class Tree {
- private:
-  struct Node {
-    Node* parent = nullptr;
-    Node* left_child = nullptr;
-    Node* right_child = nullptr;
-    ~Node();
-    int data;
-    int key;
-    bool visited = false;
-    void operator=(const Node& other) {
-      parent = other.parent;
-      left_child = other.left_child;
-      right_child = other.right_child;
-      data = other.data;
-      key = other.key;
-    }
-  };
 
  public:
   void LeftZig(Node*);

@@ -1,4 +1,6 @@
 #include <iostream>
 
 #include "tree.hpp"
-int main() {}
+
+int main() {
+}

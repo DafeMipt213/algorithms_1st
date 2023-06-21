@@ -4,126 +4,135 @@
 #include <iostream>
 
 
-Tree::Tree() :root(NULL){
-    root = nullptr;
-}
+Tree::Tree() :root{NULL} {}
 
 void Tree::leftRotate(node* x) {
-    node* y = x->right;
-    x->right = y->left;
-    if(y->left != NULL)
-        y->left->parent = x;
-    y->parent = x->parent;
-    if(x->parent == NULL)
-        root = y;
+    if(x->right == NULL)
+       return;
     else {
-        if(x == x->parent->left)
-            x->parent->left = y;
-        else
-            x->parent->right = y;
-    }
-    y->left = x;
-    x->parent = y;
+        node* y = x->right;
+        if(y->left != NULL) {
+            x->right = y->left;
+            y->left->parent = x;
+        } else
+            x->right = NULL;
+        if(x->parent != NULL)
+            y->parent = x->parent;
+        if(x->parent == NULL)
+            root = y;
+        else {
+            if(x == x->parent->left)
+               x->parent->left = y;
+            else
+               x->parent->right = y;
+        }
+        y->left = x;
+        x->parent = y;
+     }
 };
 
-void Tree::rightRotate(node *y) {
-    node* x = y->left;
-    y->left = x->right;
-    if(x->right != NULL)
-        x->right->parent = y;
-
-    x->parent = y->parent;
-    if(y->parent == NULL)
-        root = x;
+void Tree::rightRotate(node *x) {
+    if(x->left == NULL)
+        return;
     else {
-        if(y == y->parent->right)
-            y->parent->right = x;
-        else
-            y->parent->left = x;
+        node* y = x->left;
+        if(y->right != NULL) {
+            x->left = y->right;
+            y->right->parent = x;
+        } else
+            x->left = NULL;
+        if(x->parent != NULL)
+            y->parent = x->parent;
+        if(x->parent == NULL)
+           root=y;
+        else {
+            if(x == x->parent->left)
+               x->parent->left = y;
+            else
+               x->parent->right = y;
+        }
+        y->right = x;
+        x->parent = y;
     }
-    x->right = y;
-    y->parent = x;
-
 }
 
 bool Tree::Insert(int key, int value) { 
     if(Find(key) != -1)
         return false;
-    node t = node(0, key, value, NULL, NULL, NULL);
-    if( root == nullptr) {
-        root = &t;
-        t.parent = NULL;
+    node* t = new node(0, key, value, NULL, NULL, NULL);
+    node* p = root;
+    node* q = NULL;
+
+    if(root == NULL) {
+        root = t;
+        t->parent = NULL;
     } else {
-        node* p = root;
-        node* q = NULL;
         while(p != NULL) {
             q = p;
-            if( p->key < t.key)
+            if(p->key < t->key)
                 p = p->right;
             else
                 p = p->left;
         }
-        t.parent = q;
-        if(q->key < t.key)
-            q->right = &t;
+        t->parent = q;
+        if(q->key < t->key)
+            q->right = t;
         else
-            q->left = &t;
+            q->left = t;
     }
     fixInsert(t);
-
-
-    return true; 
+    return true;
 }
 
-void Tree::fixInsert(node t){
-    if(&t == root) {
-        t.col = 1;
+void Tree::fixInsert(node* t){
+    if(t == root) {
+        t->col = 1;
         return;
     }
-    node* parent = t.parent;
-    while(parent->col == 0) {
+    node* u;
+    node* parent = t->parent;
+    while(t->parent != NULL and t->parent->col == 0) {
         node* grparent = parent->parent;
-        if(grparent->left == parent) {
-            node* uncle = grparent->right;
-            if(uncle != NULL && uncle->col == 0) {
-                parent->col = 1;
-				uncle->col = 1;
-				grparent->col = 0;
-				t = *grparent;
-				parent = t.parent;
-            } else {
-                if(parent->right == &t) {
-                    leftRotate(parent);
-                    std::swap(t, *parent);
+        if(grparent->left == t->parent) {
+            if(grparent->right != NULL) {
+                u = grparent->right;
+                if(u->col == 0) {
+                    t->parent->col = 1;
+                    u->col = 1;
+                    grparent->col = 0;
+                    t = grparent;
                 }
+            } else {
+                if(t->parent->right == t) {
+                    t = t->parent;
+                    leftRotate(t);
+                }
+                t->parent->col = 1;
+                grparent->col = 0;
                 rightRotate(grparent);
-                grparent->col = 0;
-                parent->col = 1;
-                break;
-            }  
+            }
         } else {
-            node* uncle = grparent->left;
-            if(uncle != NULL && uncle->col == 0) {
-                grparent->col = 0;
-                parent->col = 1;
-                uncle->col = 1;
-                t = *grparent;
-                parent = t.parent; 
-            } else {
-                if(parent->left == &t) {
-                    rightRotate(parent);
-                    std::swap(*parent, t);
+            if(grparent->left != NULL) {
+                u = grparent->left;
+                if(u->col == 0) {
+                    t->parent->col = 1;
+                    u->col = 1;
+                    grparent->col = 0;
+                    t = grparent;
                 }
-                leftRotate(grparent);
-                parent->col = 1;
+            } else {
+                if(t->parent->left == t) {
+                    t = t->parent;
+                    rightRotate(t);
+                }
+                t->parent->col = 1;
                 grparent->col = 0;
-                break; 
+                leftRotate(grparent);
             }
         }
+        root->col = 1;
     }
-    root->col = 1;
 }
-
 void Tree::InsertOrUpdate(int key, int value) {
     if(!(Insert(key, value))) {
         search(root, key)->value = value;
@@ -131,19 +140,19 @@ void Tree::InsertOrUpdate(int key, int value) {
     }
 }
 
-int Tree::Find(int key) const {
-    node* t = search(root, key);
+int Tree::Find(int k) const {
+    node* t = search(root, k);
     if(t == NULL)
         return -1;
 	return t->value;
 }
 
-node* Tree::search(node* t, int key) const {
-    if(t == NULL or t->key == key)
+node* Tree::search(node* t, int k) const {
+    if(t == NULL or t->key == k)
         return t;
     else
-        if(key > t->key)
-            return search(t->right, key);
+        if(k < t->key)
+            return search(t->left, k);
         else
-            return search(t->left, key);
+            return search(t->right, k);
 }

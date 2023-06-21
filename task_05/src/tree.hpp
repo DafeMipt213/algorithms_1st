@@ -10,22 +10,22 @@ struct node {
     node* parent;
 
     node(bool c, int k, int v, node* l, node* r, node* p) :
-        col(c), key(k), left(l), right(r), parent(p) {};
+        col(c), key(k), value(v), left(l), right(r), parent(p) {};
 };
 
 
 class Tree {
- public:
-  node * root;
-  Tree();
-
+  public:
+    Tree();
   
-  bool Insert(int key, int value);
-  void InsertOrUpdate(int key, int value);
-  int Find(int key) const;
+    bool Insert(int key, int value);
+    void InsertOrUpdate(int key, int value);
+    int Find(int key) const;
 
-  void leftRotate(node* x);
-  void rightRotate(node* y);
-  void fixInsert(node t);
-  node* search(node* t, int key) const;
+    void leftRotate(node* x);
+    void rightRotate(node* y);
+    void fixInsert(node* t);
+    node* search(node* t, int key) const;
+  protected:
+    node * root;
 };

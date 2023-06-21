@@ -20,8 +20,7 @@ void Stack::Push(int value) {
 Stack::Stack() : size(0), capacity(2) { data_ = new int[capacity]; }
 
 int Stack::Pop() {
-  if (size == 0)
-    throw std::runtime_error("Empty stack error");
+  if (size == 0) throw std::runtime_error("Empty stack error");
   size--;
   return data_[size];
 }
@@ -32,8 +31,7 @@ MinStack::MinStack() : min_size(0), min_capacity(2), size(0), capacity(2) {
 }
 
 int MinStack::Top() {
-  if (size == 0)
-    throw std::runtime_error("Empty stack error");
+  if (size == 0) throw std::runtime_error("Empty stack error");
 
   return data_[size];
 }
@@ -67,8 +65,7 @@ void MinStack::Push(int value) {
 }
 
 int MinStack::Pop() {
-  if (size == 0)
-    throw std::runtime_error("Empty stack error");
+  if (size == 0) throw std::runtime_error("Empty stack error");
   if (data_[size - 1] == data_min[min_size]) {
     min_size--;
   }
@@ -77,7 +74,6 @@ int MinStack::Pop() {
 }
 
 int MinStack::GetMin() {
-  if (min_size == 0)
-    throw std::runtime_error("No minimum error");
+  if (min_size == 0) throw std::runtime_error("No minimum error");
   return data_min[min_size - 1];
 }

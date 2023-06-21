@@ -5,4 +5,6 @@
 
 #include "utils.hpp"
 
-TEST(Snadbox, Simple) {}
+TEST(Snadbox, Simple)
+{
+}

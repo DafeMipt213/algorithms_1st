@@ -40,5 +40,8 @@ int GetOrderStatistics(const std::vector<T>& data, size_t n) {
   else if (n < second.size() + first.size())
     return item;
   else
-    return GetOrderStatistics(third, third.size());
+    return GetOrderStatistics(
+        third,
+        n - first.size() - second.size());  // n - номер порядковой статистики,
+                                            // а не размер массива
 }

@@ -1,7 +1,6 @@
 #include <iostream>
 
-int
-main()
+int main()
 {
-  return 10;
+    return 10;
 }

@@ -4,104 +4,96 @@
 
 HashTable::HashTable()
 {
-  data_.resize(kTableSize);
+    data_.resize(kTableSize);
 }
 
 std::string
 KeyValue::getKey() const
 {
-  return key;
+    return key;
 }
 
-int
-KeyValue::getValue() const
+int KeyValue::getValue() const
 {
-  return value;
+    return value;
 }
 
-void
-KeyValue::setKey(std::string newKey)
+void KeyValue::setKey(std::string newKey)
 {
-  key = newKey;
+    key = newKey;
 }
 
-void
-KeyValue::setValue(int newValue)
+void KeyValue::setValue(int newValue)
 {
-  value = newValue;
+    value = newValue;
 }
 
-bool
-HashTable::Insert(const std::string& key, int value)
+bool HashTable::Insert(const std::string& key, int value)
 {
-  size_t index = HashFunction(key);
-  std::vector<KeyValue>& bucket = data_[index];
-  for (const auto& entry : bucket) {
-    if (entry.getKey() == key) {
-      return false;
+    size_t index = HashFunction(key);
+    std::vector<KeyValue>& bucket = data_[index];
+    for (const auto& entry : bucket) {
+        if (entry.getKey() == key) {
+            return false;
+        }
     }
-  }
-  bucket.emplace_back(key, value);
-  return true;
+    bucket.emplace_back(key, value);
+    return true;
 }
 
-void
-HashTable::InsertOrUpdate(const std::string& key, int value)
+void HashTable::InsertOrUpdate(const std::string& key, int value)
 {
-  size_t index = HashFunction(key);
-  std::vector<KeyValue>& bucket = data_[index];
-  for (auto& entry : bucket) {
-    if (entry.getKey() == key) {
-      entry.setValue(value);
-      return;
+    size_t index = HashFunction(key);
+    std::vector<KeyValue>& bucket = data_[index];
+    for (auto& entry : bucket) {
+        if (entry.getKey() == key) {
+            entry.setValue(value);
+            return;
+        }
     }
-  }
-  bucket.emplace_back(key, value);
+    bucket.emplace_back(key, value);
 }
 
-void
-HashTable::Remove(const std::string& key)
+void HashTable::Remove(const std::string& key)
 {
-  size_t index = HashFunction(key);
-  std::vector<KeyValue>& bucket = data_[index];
-  auto it =
-    std::find_if(bucket.begin(), bucket.end(), [&key](const KeyValue& entry) {
-      return entry.getKey() == key;
+    size_t index = HashFunction(key);
+    std::vector<KeyValue>& bucket = data_[index];
+    auto it = std::find_if(bucket.begin(), bucket.end(), [&key](const KeyValue& entry) {
+        return entry.getKey() == key;
     });
-  if (it != bucket.end()) {
-    bucket.erase(it);
-  }
+    if (it != bucket.end()) {
+        bucket.erase(it);
+    }
 }
 
-int
-HashTable::Find(const std::string& key) const
+int HashTable::Find(const std::string& key) const
 {
-  size_t index = HashFunction(key);
-  const std::vector<KeyValue>& bucket = data_[index];
-  for (const auto& entry : bucket) {
-    if (entry.getKey() == key) {
-      return entry.getValue();
+    size_t index = HashFunction(key);
+    const std::vector<KeyValue>& bucket = data_[index];
+    for (const auto& entry : bucket) {
+        if (entry.getKey() == key) {
+            return entry.getValue();
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
 size_t
 HashTable::Size() const
 {
-  size_t count = 0;
-  for (const auto& bucket : data_) {
-    count += bucket.size();
-  }
-  return count;
+    size_t count = 0;
+    for (const auto& bucket : data_) {
+        count += bucket.size();
+    }
+    return count;
 }
 
 size_t
 HashTable::HashFunction(const std::string& key) const
 {
-  size_t hash = 0;
-  for (char ch : key) {
-    hash = (hash * 31 + ch) % kTableSize;
-  }
-  return hash;
+    size_t hash = 0;
+    for (char ch : key) {
+        hash = (hash * 31 + ch) % kTableSize;
+    }
+    return hash;
 }

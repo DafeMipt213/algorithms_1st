@@ -5,5 +5,5 @@
 std::vector<int>
 CalculateDaysBeforWarmup(const std::vector<float>& temerature)
 {
-  return {};
+    return {};
 }

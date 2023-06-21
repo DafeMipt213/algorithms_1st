@@ -16,8 +16,7 @@ std::pair<int, int> GetNumbersOfSum(const std::vector<int>& numbers, int sum) {
       break;
     temp_sum = numbers[pointer1] + numbers[pointer2];
   }
-  if (numbers[pointer1] + numbers[pointer2] == sum)
-    return {pointer1, pointer2};
+  if (numbers[pointer1] + numbers[pointer2] == sum) return {pointer1, pointer2};
 
   return {0, 0};
 }

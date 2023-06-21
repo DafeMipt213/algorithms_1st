@@ -1,5 +1,8 @@
 #pragma once
 
+#include <iostream>
 #include <vector>
 
-std::vector<int> Sort(const std::vector<int>& data);
+using iter = std::vector<int>::iterator;
+
+std::vector<int> Sort(std::vector<int>);

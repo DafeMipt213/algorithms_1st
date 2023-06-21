@@ -12,5 +12,7 @@ class MinHeap {
   size_t Size();
 
  private:
-  std::priority_queue<int, std::vector<int>, std::greater<int>> data_;
+  std::vector<int> heap;
+  void SiftUp(int i);
+  void SiftDown(int i);
 };

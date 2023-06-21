@@ -30,7 +30,6 @@ std::vector<int> Join(std::vector<int>::iterator start_1,
 std::vector<int> Slice(const std::vector<int>& data, size_t start, size_t end) {
   std::vector<int> result;
   result.insert(result.end(), data.begin() + start, data.begin() + end);
-  // for (size_t i = start; i < end; ++i) result.push_back(data[i]);
   return result;
 }
 

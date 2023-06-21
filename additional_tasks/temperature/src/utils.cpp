@@ -3,7 +3,7 @@
 #include <algorithm>
 
 std::vector<int>
-CalculateDaysBeforWarmup (const std::vector<float> &temerature)
+CalculateDaysBeforWarmup(const std::vector<float>& temerature)
 {
   return {};
 }

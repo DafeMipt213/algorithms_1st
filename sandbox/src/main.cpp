@@ -2,7 +2,7 @@
 #include <vector>
 
 int
-main ()
+main()
 {
   return 0;
 }

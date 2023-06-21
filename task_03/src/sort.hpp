@@ -16,10 +16,10 @@ std::vector<T> QuickSort(const std::vector<T> &data) {
     int i = left;
     int j = right;
 
-    T midElem = result[(j + i) / 2];
+    T mid_elem = result[(j + i) / 2];
     do {
-      while (result[i] < midElem) ++i;
-      while (result[j] > midElem) --j;
+      while (result[i] < mid_elem) ++i;
+      while (result[j] > mid_elem) --j;
       if (i <= j) {
         std::swap(result[i], result[j]);
         ++i;

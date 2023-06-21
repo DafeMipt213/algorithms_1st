@@ -58,14 +58,17 @@ Node *AVL_Tree::SetBalance(Node *root) {
 }
 
 void AVL_Tree::NewHeight(Node *root) {
-  if (root->left_child_ == nullptr && root->right_child_ == nullptr)
+  if (root->left_child_ == nullptr && root->right_child_ == nullptr) {
     root->height_ = 1;
+  }
 
-  else if (root->left_child_ == nullptr)
+  else if (root->left_child_ == nullptr) {
     root->height_ = root->right_child_->height_ + 1;
+  }
 
-  else if (root->right_child_ == nullptr)
+  else if (root->right_child_ == nullptr) {
     root->height_ = root->left_child_->height_ + 1;
+  }
 
   else
     root->height_ =
@@ -77,9 +80,9 @@ Node *AVL_Tree::InsertNode(Node *root, int key, int value) {
     root = new Node(key, value);
     return root;
   }
-  if (key >= root->key_)
+  if (key >= root->key_) {
     root->right_child_ = InsertNode(root->right_child_, key, value);
-  else {
+  } else {
     root->left_child_ = InsertNode(root->left_child_, key, value);
   }
   NewHeight(root);
@@ -104,11 +107,11 @@ Node *AVL_Tree::RemoveMinRightSubtree(Node *root) {
 Node *AVL_Tree::RemoveNode(Node *root, int key) {
   if (root == nullptr) throw std::out_of_range("Wrong key");
 
-  if (key > root->key_)
+  if (key > root->key_) {
     root->right_child_ = RemoveNode(root->right_child_, key);
-  else if (key < root->key_)
+  } else if (key < root->key_) {
     root->left_child_ = RemoveNode(root->left_child_, key);
-  else {
+  } else {
     Node *right_subtree = root->right_child_;
     Node *left_subtree = root->left_child_;
     delete root;
@@ -126,11 +129,11 @@ Node *AVL_Tree::RemoveNode(Node *root, int key) {
 
 Node *AVL_Tree::FindNode(Node *root, int key) {
   if (root == nullptr) throw std::out_of_range("Wrong key");
-  if (key > root->key_)
+  if (key > root->key_) {
     return FindNode(root->right_child_, key);
-  else if (key < root->key_)
+  } else if (key < root->key_) {
     return FindNode(root->left_child_, key);
-  else
+  } else
     return root;
 }
 

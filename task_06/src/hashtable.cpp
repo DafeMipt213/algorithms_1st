@@ -1,4 +1,5 @@
 #include "hashtable.hpp"
+
 #include <algorithm>
 
 HashTable::HashTable() { data_.resize(kTableSize); }
@@ -38,10 +39,9 @@ void HashTable::InsertOrUpdate(const std::string &key, int value) {
 void HashTable::Remove(const std::string &key) {
   size_t index = HashFunction(key);
   std::vector<KeyValue> &bucket = data_[index];
-  auto it =
-      std::find_if(bucket.begin(), bucket.end(), [&key](const KeyValue &entry) {
-        return entry.getKey() == key;
-      });
+  auto it = std::find_if(
+      bucket.begin(), bucket.end(),
+      [&key](const KeyValue &entry) { return entry.getKey() == key; });
   if (it != bucket.end()) {
     bucket.erase(it);
   }

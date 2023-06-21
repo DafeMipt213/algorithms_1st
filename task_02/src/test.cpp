@@ -4,13 +4,13 @@
 #include "heap.hpp"
 
 TEST(HeapTest, Simple) {
-  MinHeap heap;
+  MinHeap<int> heap;
   heap.Push(1);
   ASSERT_EQ(heap.Pop(), 1);
 }
 
 TEST(HeapTest, Basic) {
-  MinHeap heap;
+  MinHeap<int> heap;
   heap.Push(1);
   heap.Push(2);
   heap.Push(3);              // [1, 2, 3]
@@ -19,8 +19,18 @@ TEST(HeapTest, Basic) {
   ASSERT_EQ(heap.Pop(), 3);  // [] -> 3
 }
 
+TEST(HeapTest, Double) {
+  MinHeap<int> heap;
+  heap.Push(3);
+  heap.Push(3);
+  heap.Push(1);              // [1, 3, 3]
+  ASSERT_EQ(heap.Pop(), 1);  // [3, 3] -> 1
+  ASSERT_EQ(heap.Pop(), 3);  // [3] -> 3
+  ASSERT_EQ(heap.Pop(), 3);  // [] -> 3
+}
+
 TEST(HeapTest, Empty) {
-  MinHeap heap;
+  MinHeap<int> heap;
   ASSERT_ANY_THROW(heap.Pop());
   heap.Push(1);
   ASSERT_EQ(heap.Pop(), 1);  // [(1), 2, 3]
@@ -28,7 +38,7 @@ TEST(HeapTest, Empty) {
 }
 
 TEST(HeapTest, Complex) {
-  MinHeap heap;
+  MinHeap<int> heap;
   heap.Push(6);              // [6]
   heap.Push(1);              // [1, 6]
   heap.Push(2);              // [1, 2, 6]
@@ -53,4 +63,19 @@ TEST(HeapTest, Complex) {
   ASSERT_EQ(heap.Pop(), 5);  // [6, 7] -> 5
   ASSERT_EQ(heap.Pop(), 6);  // [7] -> 6
   ASSERT_EQ(heap.Pop(), 7);  // [] -> 7
+}
+
+TEST(HeapTest, ComplexChar) {
+  MinHeap<char> heap;
+  heap.Push('f');              // [f]
+  heap.Push('a');              // [a, f]
+  heap.Push('b');              // [a, b, f]
+  heap.Push('c');              // [a, b, c, f]
+  heap.Push('d');              // [a, b, c, d, f]
+  heap.Push('a');              // [a, a, b, c, d, f]
+  ASSERT_EQ(heap.Pop(), 'a');  // [a, b, c, d, f] -> a
+  ASSERT_EQ(heap.Pop(), 'a');  // [b, c, d, f] -> a
+  ASSERT_EQ(heap.Pop(), 'b');  // [c, d, f] -> b
+  ASSERT_EQ(heap.Pop(), 'c');  // [d, f] -> c
+  ASSERT_EQ(heap.Pop(), 'd');  // [f] -> d
 }

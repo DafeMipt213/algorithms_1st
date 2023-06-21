@@ -5,4 +5,4 @@
 
 #include "tree.hpp"
 
-TEST(Tree, Simple) { Tree tree; }
+TEST(AVLTree, Simple) { AVLTree<int> tree; }

@@ -492,7 +492,7 @@ void Tree::RemoveSplay(int key) {
   Remove(this->root->key);
 }
 Tree::~Tree() {}
-Node::~Node(){}
+Node::~Node() {}
 void Node::operator=(const Node& other) {
   parent = other.parent;
   left_child = other.left_child;

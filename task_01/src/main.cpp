@@ -3,6 +3,8 @@
 #include "stack.hpp"
 using namespace std;
 
-int main() {
+int
+main ()
+{
   return 0;
 }

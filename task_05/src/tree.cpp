@@ -12,8 +12,7 @@ bool Tree::Insert(int key, int value) {
     root = tmpnode;
     return true;
   } else {
-    Node* tmpnode;
-    tmpnode = root;
+    Node* tmpnode = root;
     while (true) {
       if (key > tmpnode->key) {
         if (tmpnode->right_child == nullptr) {
@@ -58,8 +57,7 @@ void Tree::InsertOrUpdate(int key, int value) {
     root = tmpnode;
     return;
   } else {
-    Node* tmpnode;
-    tmpnode = root;
+    Node* tmpnode = root;
     while (true) {
       if (key > tmpnode->key) {
         if (tmpnode->right_child == nullptr) {
@@ -88,7 +86,7 @@ void Tree::InsertOrUpdate(int key, int value) {
           temp->key = key;
           temp->data = value;
           tmpnode->left_child = temp;
-          this->Splay(tmpnode->left_child);
+          Splay(tmpnode->left_child);
           return;
         } else {
           tmpnode = tmpnode->left_child;

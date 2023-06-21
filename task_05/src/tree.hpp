@@ -38,20 +38,3 @@ class Tree {
   void Remove(int key);
   void RemoveSplay(int key);
 };
-
-static std::string ch_hor = "\u2500" /*─*/, ch_ver = "\u2502" /*│*/,
-                   ch_ddia = "\u250C" /*┌*/, ch_rddia = "\u2510" /*┐*/,
-                   ch_udia = "\u2514" /*└*/, ch_ver_hor = "\u251C\u2500" /*├─*/,
-                   ch_udia_hor = "\u2514\u2500" /*└─*/,
-                   ch_ddia_hor = "\u250C\u2500" /*┌─*/,
-                   ch_ver_spa = "\u2502 " /*│ */;
-
-void Show(
-    Tree* node, bool high = true,
-    std::vector<std::string> const& lpref = std::vector<std::string>(),
-    std::vector<std::string> const& cpref = std::vector<std::string>(),
-    std::vector<std::string> const& rpref = std::vector<std::string>(),
-    bool root = true, bool left = true,
-    std::shared_ptr<std::vector<std::vector<std::string>>> lines = nullptr);
-
-void ShowTree(Tree* node);

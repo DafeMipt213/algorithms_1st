@@ -3,7 +3,7 @@
 #include <algorithm>
 
 int FindOrderStatistic(std::vector<int>& vec, int low, int high, int k) {
-  int median = findMedian(vec, low, low + (high - low) / 2, high);
+  int median = FindMedian(vec, low, low + (high - low) / 2, high);
   std::swap(vec[low], vec[median]);
   int h = BreakPartition(vec, low, high);
   if (h == k - 1) return h;

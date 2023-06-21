@@ -36,8 +36,10 @@ void MinHeap::SiftDown(int i) {
 }
 
 void MinHeap::SiftUp(int i) {
-  while (heap[i] < heap[(i - 1) / 2]) {
-    std::swap(heap[i], heap[(i - 1) / 2]);
-    i = (i - 1) / 2;
+  int k = (i - 1) / 2;
+  while (heap[i] < heap[k]) {
+    k = (i - 1) / 2;
+    std::swap(heap[i], heap[k]);
+    i = k;
   }
 }

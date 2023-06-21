@@ -40,3 +40,10 @@ TEST(MinStackTest, Simple) {
   ASSERT_EQ(stack.Pop(), 3);  // Stack [1]
   ASSERT_EQ(stack.Pop(), 1);  // Stack []
 }
+
+TEST(MinStackTest, Additional) {
+  MinStack stack;
+  stack.Push(10);
+  stack.Push(3);
+  ASSERT_EQ(stack.Pop(), 3);
+}

@@ -25,13 +25,13 @@ void MinStack::Push(int value) {
 int MinStack::Pop() {
   if (data_.size() == 0) {
     return 0;
-  } else if (data_.back() >= minimal) {
+  } else if (data_.back() > minimal) {
     int tmp = data_.back();
     data_.pop_back();
     return tmp;
   } else {
+    int tmp = minimal;
     minimal = 2 * minimal - data_.back();
-    int tmp = data_.back();
     data_.pop_back();
     return tmp;
   }

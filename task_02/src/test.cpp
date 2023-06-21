@@ -5,8 +5,9 @@
 
 TEST(HeapTest, Simple) {
   MinHeap heap;
-  heap.Push(1);
-  ASSERT_EQ(heap.Pop(), 1);
+  heap.Push(10);
+  heap.Push(3);
+  ASSERT_EQ(heap.Pop(), 3);
 }
 
 TEST(HeapTest, Basic) {

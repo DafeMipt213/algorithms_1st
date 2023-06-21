@@ -26,12 +26,13 @@ int GetOrderStatistics(const std::vector<int>& data, size_t n) {
   while (true) {
     size_t pivot = Partition(tmp, left, right);
 
-    if (pivot == n)
+    if (pivot == n) {
       return tmp[pivot];
-    else if (pivot > n)
+    } else if (pivot > n) {
       right = pivot - 1;
-    else
+    } else {
       left = pivot + 1;
+    }
 
     if (left == right) return tmp[left];
   }

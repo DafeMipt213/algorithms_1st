@@ -5,14 +5,14 @@
 Tree::Tree() { this->root = nullptr; }
 
 Tree::~Tree() {
-  if (root != nullptr) deletenode(root);
+  if (root != nullptr) DeleteNode(root);
 }
 
-void Tree::deletenode(Node *node) {
+void Tree::DeleteNode(Node *node) {
   if (node != nullptr) {
     for (int i = 0; i <= (2 * t - 1); i++) {
       if (node->children[i] != nullptr)
-        deletenode(node->children[i]);
+        DeleteNode(node->children[i]);
       else {
         delete (node);
         break;
@@ -21,13 +21,13 @@ void Tree::deletenode(Node *node) {
   }
 }
 
-void Tree::insert_to_node(int key, Node *node) {
+void Tree::InsertToNode(int key, Node *node) {
   node->keys[node->count] = key;
   node->count = node->count + 1;
-  sort(node);
+  Sort(node);
 }
 
-void Tree::sort(Node *node) {
+void Tree::Sort(Node *node) {
   int m;
   for (int i = 0; i < (2 * t - 1); i++) {
     for (int j = i + 1; j <= (2 * t - 1); j++) {
@@ -43,17 +43,17 @@ void Tree::sort(Node *node) {
   }
 }
 
-bool Tree::Insert(int key) {
+void Tree::Insert(int key) {
   if (root == nullptr) {
-    Node *newRoot = new Node;
-    newRoot->keys[0] = key;
-    for (int j = 1; j <= (2 * t - 1); j++) newRoot->keys[j] = 0;
-    for (int i = 0; i <= (2 * t); i++) newRoot->children[i] = nullptr;
-    newRoot->count = 1;
-    newRoot->countSons = 0;
-    newRoot->leaf = true;
-    newRoot->parent = nullptr;
-    root = newRoot;
+    Node *new_root = new Node;
+    new_root->keys[0] = key;
+    for (int j = 1; j <= (2 * t - 1); j++) new_root->keys[j] = 0;
+    for (int i = 0; i <= (2 * t); i++) new_root->children[i] = nullptr;
+    new_root->count = 1;
+    new_root->count_sons = 0;
+    new_root->leaf = true;
+    new_root->parent = nullptr;
+    root = new_root;
   } else {
     Node *ptr = root;
     while (
@@ -74,21 +74,21 @@ bool Tree::Insert(int key) {
           break;
       }
     }
-    insert_to_node(key, ptr);
+    InsertToNode(key, ptr);
 
     while (ptr->count == 2 * t) {
       if (ptr == root) {
-        restruct(ptr);
+        Restruct(ptr);
         break;
       } else {
-        restruct(ptr);
+        Restruct(ptr);
         ptr = ptr->parent;
       }
     }
   }
 }
 
-void Tree::restruct(Node *node) {
+void Tree::Restruct(Node *node) {
   if (node->count < (2 * t - 1)) return;
 
   //первый сын
@@ -96,18 +96,18 @@ void Tree::restruct(Node *node) {
   int j;
   for (j = 0; j <= t - 2; j++) child1->keys[j] = node->keys[j];
   for (j = t - 1; j <= (2 * t - 1); j++) child1->keys[j] = 0;
-  child1->count = t - 1; 
-  if (node->countSons != 0) {
+  child1->count = t - 1;
+  if (node->count_sons != 0) {
     for (int i = 0; i <= (t - 1); i++) {
       child1->children[i] = node->children[i];
       child1->children[i]->parent = child1;
     }
     for (int i = t; i <= (2 * t); i++) child1->children[i] = nullptr;
     child1->leaf = false;
-    child1->countSons = t - 1;  
+    child1->count_sons = t - 1;
   } else {
     child1->leaf = true;
-    child1->countSons = 0;
+    child1->count_sons = 0;
     for (int i = 0; i <= (2 * t); i++) child1->children[i] = nullptr;
   }
 
@@ -115,23 +115,23 @@ void Tree::restruct(Node *node) {
   Node *child2 = new Node;
   for (int j = 0; j <= (t - 1); j++) child2->keys[j] = node->keys[j + t];
   for (j = t; j <= (2 * t - 1); j++) child2->keys[j] = 0;
-  child2->count = t; 
-  if (node->countSons != 0) {
+  child2->count = t;
+  if (node->count_sons != 0) {
     for (int i = 0; i <= (t); i++) {
       child2->children[i] = node->children[i + t];
       child2->children[i]->parent = child2;
     }
     for (int i = t + 1; i <= (2 * t); i++) child2->children[i] = nullptr;
     child2->leaf = false;
-    child2->countSons = t;  
+    child2->count_sons = t;
   } else {
     child2->leaf = true;
-    child2->countSons = 0;
+    child2->count_sons = 0;
     for (int i = 0; i <= (2 * t); i++) child2->children[i] = nullptr;
   }
 
   //родитель
-  if (node->parent == nullptr) {  
+  if (node->parent == nullptr) {
     node->keys[0] = node->keys[t - 1];
     for (int j = 1; j <= (2 * t - 1); j++) node->keys[j] = 0;
     node->children[0] = child1;
@@ -140,11 +140,11 @@ void Tree::restruct(Node *node) {
     node->parent = nullptr;
     node->leaf = false;
     node->count = 1;
-    node->countSons = 2;
+    node->count_sons = 2;
     child1->parent = node;
     child2->parent = node;
   } else {
-    insert_to_node(node->keys[t - 1], node->parent);
+    InsertToNode(node->keys[t - 1], node->parent);
     for (int i = 0; i <= (2 * t); i++) {
       if (node->parent->children[i] == node)
         node->parent->children[i] = nullptr;
@@ -165,9 +165,9 @@ void Tree::restruct(Node *node) {
   }
 }
 
-bool Tree::Find(int key) { return searchKey(key, this->root); }
+bool Tree::Find(int key) { return SearchKey(key, this->root); }
 
-bool Tree::searchKey(int key, Node *node) {
+bool Tree::SearchKey(int key, Node *node) {
   if (node != nullptr) {
     if (node->leaf == false) {
       int i;
@@ -175,13 +175,13 @@ bool Tree::searchKey(int key, Node *node) {
         if (node->keys[i] != 0) {
           if (key == node->keys[i]) return true;
           if ((key < node->keys[i])) {
-            return searchKey(key, node->children[i]);
+            return SearchKey(key, node->children[i]);
             break;
           }
         } else
           break;
       }
-      return searchKey(key, node->children[i]);
+      return SearchKey(key, node->children[i]);
     } else {
       for (int j = 0; j <= (2 * t - 1); j++)
         if (key == node->keys[j]) return true;

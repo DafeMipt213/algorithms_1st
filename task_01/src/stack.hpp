@@ -21,7 +21,6 @@ class Stack {
   std::vector<T> data_;
 };
 
-// specialization for int
 template <typename T>
 class MinStack {
  public:

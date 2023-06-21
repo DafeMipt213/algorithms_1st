@@ -11,7 +11,7 @@ file(GLOB_RECURSE source_list "src/*.cpp" "src/*.hpp")
 file(GLOB_RECURSE main_source_list "src/main.cpp")
 file(GLOB_RECURSE test_source_list "src/*.cpp")
 file(GLOB_RECURSE test_list "src/*test.cpp")
-
+#
 list(REMOVE_ITEM test_source_list ${main_source_list})
 list(REMOVE_ITEM source_list ${test_list})
 

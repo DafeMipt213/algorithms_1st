@@ -1,6 +1,8 @@
 
 #include <gtest/gtest.h>
 
+#include <algorithm>
+
 #include "sort.hpp"
 
 TEST(SortTest, Simple) {

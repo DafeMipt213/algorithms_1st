@@ -35,20 +35,22 @@ void MinHeap<T>::ShiftUp(size_t index) {
 
 template <typename T>
 void MinHeap<T>::ShiftDown(size_t index) {
-  if (2 * index + 1 > data_.size() - 1 || index > data_.size())
+  size_t leftChild = 2 * index + 1;
+  size_t rightChild = 2 * index + 2;
+  if (leftChild > data_.size() - 1 || index > data_.size())
     return;
   else {
-    if (data_[index] == data_[2 * index + 1] &&
-        data_[2 * index + 1] == data_[2 * index + 2])
+    if (data_[index] == data_[leftChild] &&
+        data_[leftChild] == data_[rightChild])
       return;
-    else if (data_[index] > data_[2 * index + 1] &&
-             data_[2 * index + 1] <= data_[2 * index + 2]) {
-      std::swap(data_[2 * index + 1], data_[index]);
-      ShiftDown(2 * index + 1);
-    } else if (data_[index] > data_[2 * index + 2] &&
-               data_[2 * index + 1] > data_[2 * index + 2]) {
-      std::swap(data_[2 * index + 2], data_[index]);
-      ShiftDown(2 * index + 2);
+    else if (data_[index] > data_[leftChild] &&
+             data_[leftChild] <= data_[rightChild]) {
+      std::swap(data_[leftChild], data_[index]);
+      ShiftDown(leftChild);
+    } else if (data_[index] > data_[leftChild] &&
+               data_[leftChild] > data_[rightChild]) {
+      std::swap(data_[rightChild], data_[index]);
+      ShiftDown(rightChild);
     }
   }
 }
@@ -57,11 +59,9 @@ template <typename T>
 T MinHeap<T>::Pop() {
   if (!data_.size()) throw std::out_of_range("Empty heap");
   T result = data_[0];
-  if (data_.size() > 0) {
-    data_[0] = data_.back();
-    data_.pop_back();
-    ShiftDown(0);
-  }
+  data_[0] = data_.back();
+  data_.pop_back();
+  ShiftDown(0);
   return result;
 }
 

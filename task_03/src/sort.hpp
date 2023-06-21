@@ -3,7 +3,7 @@
 #include <vector>
 
 template <typename T>
-void Merge(std::vector<T> &data, int start, int center, int finish) {
+void Merge(std::vector<T> &data, size_t start, size_t center, size_t finish) {
   std::vector<T> array;
   int i = start, j = center;
   while (i < center && j < finish) {
@@ -29,7 +29,7 @@ void Merge(std::vector<T> &data, int start, int center, int finish) {
 }
 
 template <typename T>
-void MergeVector(std::vector<T> &data, int start, int finish) {
+void MergeVector(std::vector<T> &data, size_t start, size_t finish) {
   if (finish - start <= 1) {
     return;
   }

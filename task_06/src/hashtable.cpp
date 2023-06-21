@@ -1,19 +1,34 @@
 #include "hashtable.hpp"
+#include <algorithm>
 
 HashTable::HashTable() {
     data_.resize(kTableSize);
 }
 
+std::string KeyValue::getKey() const {
+    return key;
+}
+
+int KeyValue::getValue() const {
+    return value;
+}
+
+void KeyValue::setKey(std::string newKey){
+    key = newKey;
+}
+
+void KeyValue::setValue(int newValue){
+    value = newValue;
+}
+
 bool HashTable::Insert(const std::string& key, int value) {
     size_t index = HashFunction(key);
     std::vector<KeyValue>& bucket = data_[index];
-
     for (const auto& entry : bucket) {
-        if (entry.key == key) {
-            return false; 
+        if (entry.getKey() == key) {
+            return false;
         }
     }
-
     bucket.emplace_back(key, value);
     return true;
 }
@@ -21,27 +36,21 @@ bool HashTable::Insert(const std::string& key, int value) {
 void HashTable::InsertOrUpdate(const std::string& key, int value) {
     size_t index = HashFunction(key);
     std::vector<KeyValue>& bucket = data_[index];
-
     for (auto& entry : bucket) {
-        if (entry.key == key) {
-            entry.value = value;
+        if (entry.getKey() == key) {
+            entry.setValue(value);
             return;
         }
     }
-
- 
     bucket.emplace_back(key, value);
 }
 
 void HashTable::Remove(const std::string& key) {
     size_t index = HashFunction(key);
     std::vector<KeyValue>& bucket = data_[index];
-
-
     auto it = std::find_if(bucket.begin(), bucket.end(), [&key](const KeyValue& entry) {
-        return entry.key == key;
+        return entry.getKey() == key;
     });
-
     if (it != bucket.end()) {
         bucket.erase(it);
     }
@@ -50,13 +59,11 @@ void HashTable::Remove(const std::string& key) {
 int HashTable::Find(const std::string& key) const {
     size_t index = HashFunction(key);
     const std::vector<KeyValue>& bucket = data_[index];
-
     for (const auto& entry : bucket) {
-        if (entry.key == key) {
-            return entry.value;
+        if (entry.getKey() == key) {
+            return entry.getValue();
         }
     }
-
     return 0;
 }
 

@@ -1,13 +1,22 @@
 #pragma once
 
 class TreeNode {
-public:
+private:
     int key;
     int value;
     TreeNode* left;
     TreeNode* right;
 
+public:
     TreeNode(int key, int value);
+    int getKey() const;
+    int getValue() const;
+    TreeNode* getLeft() const;
+    TreeNode* getRight() const;
+    void setKey(int newKey);
+    void setValue(int newValue);
+    void setLeft(TreeNode* newLeft);
+    void setRight(TreeNode* newRight);
 };
 
 class Tree {

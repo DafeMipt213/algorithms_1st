@@ -4,6 +4,6 @@
 
 std::vector<int> Sort(std::vector<int> data);
 
-void QuickSortRecursive(std::vector<int>& data, int left, int right);
+void QuickSortRecursive(std::vector<int>& data, int start_index, int end_index);
 
-int Partition(std::vector<int>& data, int left, int right);
+int Partition(std::vector<int>& data, int start_index, int end_index);

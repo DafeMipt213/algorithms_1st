@@ -1,13 +1,9 @@
 #include "heap.hpp"
-
 #include <cstddef>
 #include <stdexcept>
 #include <iostream>
 
-
-MinHeap::MinHeap() {
-    size = 0;
-}
+MinHeap::MinHeap() :size(0){}
 
 int MinHeap::left_child(int i) {
     return 2*i+1;

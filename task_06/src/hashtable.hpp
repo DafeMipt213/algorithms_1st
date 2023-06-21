@@ -4,10 +4,16 @@
 #include <vector>
 
 struct KeyValue {
-    std::string key;
-    int value;
+    private:
+        std::string key;
+        int value;
 
-    KeyValue(const std::string& k, int v) : key(k), value(v) {}
+    public:
+        KeyValue(const std::string& k, int v) : key(k), value(v) {}
+        std::string getKey() const;
+        int getValue() const;
+        void setKey(std::string newKey);
+        void setValue(int newValue);    
 };
 
 class HashTable {

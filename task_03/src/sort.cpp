@@ -1,39 +1,37 @@
 #include "sort.hpp"
 
 #include <algorithm>
-#include <vector>
-/*
-def bose_nelson_merge(j, r, m):
-    if j + r < len(data):
-        if m == 1:
-            if data[j] > data[j + r]:
-                data[j], data[j + r] = data[j + r], data[j]
-        else:
-            m = m // 2
-            bose_nelson_merge(j, r, m)
-            if j + r + m < len(data):
-                bose_nelson_merge(j + m, r, m)
-            bose_nelson_merge(j + m, r - m, m)
-    return data
-*/
-/*
-void Merge(int j, int r, int m) {
-  if (j + r < data.size()) {
-    if (m == 1) {
-      if ( data[j] > data[j + r]) {
-        int buffer = data[j];
-        data[j] =  data[j + r];
-        data[j + r] = data[j];
+
+int* partition(int* begin, int* end) {
+  int pivot = *end;
+ 
+  int* p_ind = begin;
+ 
+  for (int* i = begin; i < end; i++) {
+      if (*i <= pivot) {
+        std::swap(*i, *p_ind);
+        p_ind++;
       }
-    }
   }
+  std::swap (*p_ind, *end);
+ 
+  return p_ind;
 }
-*/
-//what
+ 
+void qsort(int* begin, int* end) {
+  if (begin >= end) {
+      return;
+  }
+  int* pivot = partition(begin, end);
+ 
+  qsort(begin, pivot - 1); 
+  qsort(pivot + 1, end);
+}
+
 std::vector<int> Sort(const std::vector<int>& data) {
   std::vector<int> result = data;
 
-  std::sort(result.begin(), result.end());
-  
+  qsort(&result[0], &result[result.size() - 1]);
+
   return result;
 }

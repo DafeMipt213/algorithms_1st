@@ -1,7 +1,13 @@
 #include "tree.hpp"
 
+#include <algorithm>
+
 TreeNode::TreeNode(int nodeKey, int nodeValue)
-    : key(nodeKey), value(nodeValue), left(nullptr), right(nullptr) {}
+    : key(nodeKey),
+      value(nodeValue),
+      left(nullptr),
+      right(nullptr),
+      height(1) {}
 
 int TreeNode::getKey() const { return key; }
 
@@ -18,6 +24,14 @@ void TreeNode::setRight(TreeNode *newRight) { right = newRight; }
 void TreeNode::setKey(int newKey) { key = newKey; }
 
 void TreeNode::setValue(int newValue) { value = newValue; }
+
+int TreeNode::getHeight() const { return height; }
+
+void TreeNode::updateHeight() {
+  int leftHeight = (left != nullptr) ? left->getHeight() : 0;
+  int rightHeight = (right != nullptr) ? right->getHeight() : 0;
+  height = 1 + std::max(leftHeight, rightHeight);
+}
 
 Tree::Tree() : root(nullptr) {}
 
@@ -61,7 +75,8 @@ TreeNode *Tree::Insert(TreeNode *node, int key, int value) {
     return nullptr;
   }
 
-  return node;
+  node->updateHeight();
+  return Balance(node);
 }
 
 TreeNode *Tree::FindNode(TreeNode *node, int key) const {
@@ -74,4 +89,62 @@ TreeNode *Tree::FindNode(TreeNode *node, int key) const {
   } else {
     return FindNode(node->getRight(), key);
   }
+}
+
+int Tree::Height(TreeNode *node) const {
+  if (node == nullptr) {
+    return 0;
+  }
+  return node->getHeight();
+}
+
+int Tree::BalanceFactor(TreeNode *node) const {
+  if (node == nullptr) {
+    return 0;
+  }
+  return Height(node->getLeft()) - Height(node->getRight());
+}
+
+TreeNode *Tree::RotateLeft(TreeNode *node) {
+  TreeNode *pivot = node->getRight();
+  node->setRight(pivot->getLeft());
+  pivot->setLeft(node);
+
+  node->updateHeight();
+  pivot->updateHeight();
+
+  return pivot;
+}
+
+TreeNode *Tree::RotateRight(TreeNode *node) {
+  TreeNode *pivot = node->getLeft();
+  node->setLeft(pivot->getRight());
+  pivot->setRight(node);
+
+  node->updateHeight();
+  pivot->updateHeight();
+
+  return pivot;
+}
+
+TreeNode *Tree::Balance(TreeNode *node) {
+  node->updateHeight();
+
+  int balanceFactor = BalanceFactor(node);
+
+  if (balanceFactor > 1) {
+    if (BalanceFactor(node->getLeft()) < 0) {
+      node->setLeft(RotateLeft(node->getLeft()));
+    }
+    return RotateRight(node);
+  }
+
+  if (balanceFactor < -1) {
+    if (BalanceFactor(node->getRight()) > 0) {
+      node->setRight(RotateRight(node->getRight()));
+    }
+    return RotateLeft(node);
+  }
+
+  return node;
 }

@@ -4,6 +4,7 @@ class TreeNode {
  private:
   int key;
   int value;
+  int height;
   TreeNode *left;
   TreeNode *right;
 
@@ -17,6 +18,8 @@ class TreeNode {
   void setValue(int newValue);
   void setLeft(TreeNode *newLeft);
   void setRight(TreeNode *newRight);
+  int getHeight() const;
+  void updateHeight();
 
   ~TreeNode() {
     delete left;
@@ -27,6 +30,13 @@ class TreeNode {
 class Tree {
  private:
   TreeNode *root;
+  TreeNode *Insert(TreeNode *node, int key, int value);
+  TreeNode *FindNode(TreeNode *node, int key) const;
+  TreeNode *RotateLeft(TreeNode *node);
+  TreeNode *RotateRight(TreeNode *node);
+  TreeNode *Balance(TreeNode *node);
+  int Height(TreeNode *node) const;
+  int BalanceFactor(TreeNode *node) const;
 
  public:
   Tree();
@@ -35,8 +45,4 @@ class Tree {
   int Find(int key) const;
 
   ~Tree() { delete root; }
-
- private:
-  TreeNode *Insert(TreeNode *node, int key, int value);
-  TreeNode *FindNode(TreeNode *node, int key) const;
 };

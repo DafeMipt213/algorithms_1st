@@ -1,8 +1,11 @@
 #pragma once
 
-#include <cstddef>
+#include <algorithm>
+#include <list>
+#include <map>
+#include <stdexcept>
 #include <string>
-#include <unordered_map>
+#include <vector>
 
 class HashTable {
  public:
@@ -11,8 +14,10 @@ class HashTable {
   void InsertOrUpdate(const std::string& key, int value);
   void Remove(const std::string& key);
   int Find(const std::string& key) const;
-  size_t Size() const;
 
  private:
-  std::unordered_map<std::string, int> data_;
+  std::vector<std::list<std::pair<std::string, int>>> data_;
+  size_t Hash(const std::string& key) const;
+  void ReHash();
+  size_t size = 0;
 };

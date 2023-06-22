@@ -1,15 +1,25 @@
 #pragma once
-
 #include <stack>
 #include <vector>
 
+template <typename T>
+struct NodeStack {
+  T item;
+  NodeStack<T>* next;
+};
+
+template <typename T>
+struct minNodeStack : NodeStack<T> {
+  minNodeStack<T>* next;
+  T nowmin;
+};
 class Stack {
  public:
   void Push(int value);
   int Pop();
 
  private:
-  std::stack<int> data_;
+  NodeStack<int>* Top;
 };
 
 class MinStack {
@@ -19,5 +29,5 @@ class MinStack {
   int GetMin();
 
  private:
-  std::vector<int> data_;
+  minNodeStack<int>* Top;
 };

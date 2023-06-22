@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <vector>
 
-size_t Partition(std::vector<int>& data, size_t start, size_t end) {
+size_t Partition(std::vector<int>& data, int start, int end) {
   int pivot = data[start];
   size_t count = 0;
   for (size_t i = start + 1; i <= end; i++)

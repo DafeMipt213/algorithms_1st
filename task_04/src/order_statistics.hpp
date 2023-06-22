@@ -2,4 +2,4 @@
 
 #include <vector>
 
-int GetOrderStatistics(std::vector<int>& data, size_t k);
+size_t GetOrderStatistics(std::vector<int>& data, size_t k);

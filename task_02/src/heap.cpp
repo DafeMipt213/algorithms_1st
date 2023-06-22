@@ -11,7 +11,7 @@ void MinHeap::Push(int n) {
 
 void MinHeap::SiftUp() {
   size_t index = data_.size() - 1;
-  int upper_index = index;
+  size_t upper_index = index;
   while (upper_index >= 0) {
     upper_index = (index - 1) / 2;
     if (data_[upper_index] > data_[index])
@@ -32,11 +32,11 @@ int MinHeap::Pop() {
 
 void MinHeap::SiftDown() {
   if (data_.size() == 0) return;
-  int index = 0;
-  int minimal_index = 0;
+  size_t index = 0;
+  size_t minimal_index = 0;
   while (2 * index + 1 <= data_.size() - 1) {
-    int left_child_index = 2 * index + 1;
-    int right_child_index = 2 * index + 2;
+    size_t left_child_index = 2 * index + 1;
+    size_t right_child_index = 2 * index + 2;
     if (left_child_index == data_.size() - 1) {
       if (data_[index] > data_[left_child_index])
         std::swap(data_[index], data_[left_child_index]);

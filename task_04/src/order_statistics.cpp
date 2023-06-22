@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-size_t Partition(std::vector<int>& data, size_t start, size_t end) {
+size_t Partition(std::vector<int>& data, int start, int end) {
   int pivot = data[start];
   size_t count = 0;
   for (size_t i = start + 1; i <= end; i++)
@@ -19,7 +19,7 @@ size_t Partition(std::vector<int>& data, size_t start, size_t end) {
   return pivot_index;
 }
 
-int GetOrderStatistics(std::vector<int>& data, size_t k) {
+size_t GetOrderStatistics(std::vector<int>& data, size_t k) {
   int left = 0, right = data.size() - 1;
   while (true) {
     size_t pivot_index = Partition(data, left, right);

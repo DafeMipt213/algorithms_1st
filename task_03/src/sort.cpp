@@ -3,8 +3,60 @@
 #include <algorithm>
 #include <vector>
 
+void Heap::Push(int n) {
+  h.push_back(n);
+  shift_Up(HeapSize);
+  ++HeapSize;
+}
+
+void Heap::shift_Up(int i) {
+  while (i > 0 && h[(i - 1) / 2] > h[i]) {
+    std::swap(h[(i - 1) / 2], h[i]);
+    i = (i - 1) / 2;
+  }
+}
+
+void Heap::swift_Down(size_t i) {
+  size_t max_ind = i;
+  size_t left = 2 * i + 1;
+  if (left <= HeapSize && h[left] < h[max_ind]) {
+    max_ind = left;
+  }
+  size_t right = 2 * i + 2;
+  if (right <= HeapSize && h[right] < h[max_ind]) {
+    max_ind = right;
+  }
+  if (i != max_ind) {
+    std::swap(h[i], h[max_ind]);
+    swift_Down(max_ind);
+  }
+}
+
+int Heap::Pop() {
+  if (HeapSize == 0) throw std::out_of_range("Empty heap");
+  int result = h[0];
+  auto iter_beg = h.cbegin();
+  h.erase(iter_beg);
+  --HeapSize;
+  swift_Down(0);
+  return result;
+}
+
+size_t Heap::Size() const { return HeapSize; }
+
+void Heap::Create(const std::vector<int>& data) {
+  for (int i : data) {
+    Push(i);
+  }
+}
+
 std::vector<int> Sort(const std::vector<int>& data) {
-  std::vector<int> result = data;
-  std::sort(result.begin(), result.end());
+  std::vector<int> result;
+  Heap h;
+  h.Create(data);
+  size_t c = h.Size();
+  for (int i = 0; i < c; ++i) {
+    result.push_back(h.Pop());
+  }
   return result;
 }

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void merge(vector<int> &arr, int left, int middle, int right) {
+void Merge(vector<int> &arr, int left, int middle, int right) {
   int left_half_size = middle - left + 1;
   int right_half_size = right - middle;
 
@@ -17,7 +17,9 @@ void merge(vector<int> &arr, int left, int middle, int right) {
     right_half[i] = arr[middle + 1 + i];
   }
 
-  int i = 0, j = 0, k = left;
+  int i = 0;
+  int j = 0;
+  int k = left;
   while (i < left_half_size && j < right_half_size) {
     if (left_half[i] <= right_half[j]) {
       arr[k++] = left_half[i++];
@@ -34,18 +36,18 @@ void merge(vector<int> &arr, int left, int middle, int right) {
   }
 }
 
-void merge_sort(vector<int> &arr, int left, int right) {
+void MergeSort(vector<int> &arr, int left, int right) {
   if (left >= right) {
     return;
   }
   int middle = left + (right - left) / 2;
-  merge_sort(arr, left, middle);
-  merge_sort(arr, middle + 1, right);
-  merge(arr, left, middle, right);
+  MergeSort(arr, left, middle);
+  MergeSort(arr, middle + 1, right);
+  Merge(arr, left, middle, right);
 }
 
 vector<int> Sort(const vector<int> &data) {
   vector<int> result = data;
-  merge_sort(result, 0, result.size() - 1);
+  MergeSort(result, 0, result.size() - 1);
   return result;
 }

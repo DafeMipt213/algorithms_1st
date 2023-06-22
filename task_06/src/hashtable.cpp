@@ -1,20 +1,12 @@
 #include <cstddef>
-#include <stdexcept>  // Добавленный заголовочный файл
+#include <stdexcept>
 #include <string>
-
-class TreeNode {
- public:
-  std::string key;
-  int value;
-  TreeNode* left;
-  TreeNode* right;
-
-  TreeNode(const std::string& key, int value)
-      : key(key), value(value), left(nullptr), right(nullptr) {}
-};
+#include <vector>
 
 class HashTable {
  public:
+  static const size_t TABLE_SIZE = 100;
+
   HashTable();
   ~HashTable();
 
@@ -25,86 +17,112 @@ class HashTable {
   size_t Size() const;
 
  private:
-  TreeNode* root_;
+  struct HashNode {
+    std::string key;
+    int value;
+    bool occupied;
 
-  void DestroyTree(TreeNode* node);
-  TreeNode* Insert(TreeNode* node, const std::string& key, int value);
-  TreeNode* Find(TreeNode* node, const std::string& key) const;
+    HashNode() : occupied(false) {}
+  };
+
+  std::vector<HashNode> table_;
+
+  size_t Hash(const std::string& key) const;
 };
 
-HashTable::HashTable() : root_(nullptr) {}
+HashTable::HashTable() : table_(TABLE_SIZE) {}
 
-HashTable::~HashTable() { DestroyTree(root_); }
+HashTable::~HashTable() {}
 
-void HashTable::DestroyTree(TreeNode* node) {
-  if (node != nullptr) {
-    DestroyTree(node->left);
-    DestroyTree(node->right);
-    delete node;
+size_t HashTable::Hash(const std::string& key) const {
+  size_t hash = 0;
+  for (char c : key) {
+    hash = (hash * 31 + c) % TABLE_SIZE;
   }
+  return hash;
 }
 
 bool HashTable::Insert(const std::string& key, int value) {
-  if (Find(root_, key) != nullptr) {
-    return false;  // Key already exists
+  size_t hash = Hash(key);
+  size_t initialIndex = hash;
+
+  while (table_[hash].occupied) {
+    if (table_[hash].key == key) {
+      return false;  // Key already exists
+    }
+    hash = (hash + 1) % TABLE_SIZE;
+    if (hash == initialIndex) {
+      throw std::out_of_range("Hash table is full");
+    }
   }
 
-  root_ = Insert(root_, key, value);
+  table_[hash].key = key;
+  table_[hash].value = value;
+  table_[hash].occupied = true;
+
   return true;
 }
 
-TreeNode* HashTable::Insert(TreeNode* node, const std::string& key, int value) {
-  if (node == nullptr) {
-    return new TreeNode(key, value);
-  }
-
-  if (key < node->key) {
-    node->left = Insert(node->left, key, value);
-  } else if (key > node->key) {
-    node->right = Insert(node->right, key, value);
-  }
-
-  return node;
-}
-
 void HashTable::InsertOrUpdate(const std::string& key, int value) {
-  TreeNode* existingNode = Find(root_, key);
-  if (existingNode != nullptr) {
-    existingNode->value = value;
-  } else {
-    root_ = Insert(root_, key, value);
+  size_t hash = Hash(key);
+  size_t initialIndex = hash;
+
+  while (table_[hash].occupied) {
+    if (table_[hash].key == key) {
+      table_[hash].value = value;
+      return;
+    }
+    hash = (hash + 1) % TABLE_SIZE;
+    if (hash == initialIndex) {
+      throw std::out_of_range("Hash table is full");
+    }
   }
+
+  table_[hash].key = key;
+  table_[hash].value = value;
+  table_[hash].occupied = true;
 }
 
 void HashTable::Remove(const std::string& key) {
-  // TODO: Implement removal logic
-}
+  size_t hash = Hash(key);
+  size_t initialIndex = hash;
 
-TreeNode* HashTable::Find(TreeNode* node, const std::string& key) const {
-  if (node == nullptr || node->key == key) {
-    return node;
-  }
-
-  if (key < node->key) {
-    return Find(node->left, key);
-  } else {
-    return Find(node->right, key);
+  while (table_[hash].occupied) {
+    if (table_[hash].key == key) {
+      // Удаляем элемент из таблицы
+      table_[hash].occupied = false;
+      return;
+    }
+    hash = (hash + 1) % TABLE_SIZE;
+    if (hash == initialIndex) {
+      return;  // Элемент не найден
+    }
   }
 }
 
 int HashTable::Find(const std::string& key) const {
-  TreeNode* node = Find(root_, key);
-  if (node != nullptr) {
-    return node->value;
+  size_t hash = Hash(key);
+  size_t initialIndex = hash;
+
+  while (table_[hash].occupied) {
+    if (table_[hash].key == key) {
+      return table_[hash].value;
+    }
+    hash = (hash + 1) % TABLE_SIZE;
+    if (hash == initialIndex) {
+      break;  // Элемент не найден
+    }
   }
+
   throw std::out_of_range("Key not found");
 }
 
-size_t CountNodes(TreeNode* node) {
-  if (node == nullptr) {
-    return 0;
+size_t HashTable::Size() const {
+  size_t count = 0;
+  for (const auto& node : table_) {
+    if (node.occupied) {
+      count++;
+    }
   }
-  return 1 + CountNodes(node->left) + CountNodes(node->right);
+  return count;
 }
-
-size_t HashTable::Size() const { return CountNodes(root_); }

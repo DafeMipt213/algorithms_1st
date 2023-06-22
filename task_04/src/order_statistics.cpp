@@ -6,24 +6,24 @@ int GetOrderStatistics(std::vector<int>& data, size_t n) {
   int left = 0;
   int right = data.size() - 1;
   while (left < right) {
-    int pivotIndex = left;
-    int pivotValue = data[left];
+    int pivot_index = left;
+    int pivot_value = data[left];
     int i = left + 1;
     int j = right;
     while (i <= j) {
-      if (data[i] > pivotValue && data[j] <= pivotValue) {
+      if (data[i] > pivot_value && data[j] <= pivot_value) {
         std::swap(data[i], data[j]);
         i++;
         j--;
       }
-      if (data[i] <= pivotValue) {
+      if (data[i] <= pivot_value) {
         i++;
       }
-      if (data[j] > pivotValue) {
+      if (data[j] > pivot_value) {
         j--;
       }
     }
-    std::swap(data[pivotIndex], data[j]);
+    std::swap(data[pivot_index], data[j]);
 
     if (j == n) {
       return data[j];

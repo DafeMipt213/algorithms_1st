@@ -9,15 +9,16 @@ class Stack {
   int Pop();
 
  private:
-  std::stack<int> data_;
+  std::vector<int> data;
 };
 
 class MinStack {
  public:
-  void Push(int value);
   int Pop();
   int GetMin();
+  void Push(int value);
 
  private:
-  std::vector<int> data_;
+  int min;
+  std::vector<int> data;
 };

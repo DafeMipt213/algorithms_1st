@@ -13,8 +13,8 @@ TEST(TestGetNumbersOfSum, Simple) {
 }
 
 TEST(TestGetNumbersOfSum, Exceptions) {
-  std::vector<int> data0 = {};
-  ASSERT_ANY_THROW(GetNumbersOfSum(data0, 0));
+  std::vector<int> data = {};
+  ASSERT_ANY_THROW(GetNumbersOfSum(data, 0));
   EXPECT_THROW(GetNumbersOfSum({1}, 1), std::out_of_range);
   EXPECT_THROW(GetNumbersOfSum({1, 2, 1}, 10), std::runtime_error);
   EXPECT_THROW(GetNumbersOfSum({1, 3, 1}, 3), std::runtime_error);

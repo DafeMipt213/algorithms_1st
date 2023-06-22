@@ -1,11 +1,32 @@
 #include "tree.hpp"
 
 bool Tree::Insert(int key, int value) {
+  if (!root) {
+    root = new Node();
+    root->ChangeNode(key, value);
+    return true;
+  }
   Node *r = root;
   while (r) {
-    if (r->key == key) return false;
-    if (key > r->key) r = r->right_child;
-    r = r->left_child;
+    if (!(r->key) || !(r->value)) break;
+    if (*r->key == key) return false;
+    if (key > *r->key) {
+      if (!r->right_child) {
+        r->right_child = new Node();
+        r->AdoptChildren();
+        r = r->right_child;
+        break;
+      }
+      r = r->right_child;
+    } else {
+      if (!r->left_child) {
+        r->left_child = new Node();
+        r->AdoptChildren();
+        r = r->left_child;
+        break;
+      }
+      r = r->left_child;
+    }
   }
   r->ChangeNode(key, value);
   root->Turn();
@@ -13,25 +34,51 @@ bool Tree::Insert(int key, int value) {
 }
 
 void Tree::InsertOrUpdate(int key, int value) {
-  if (!root) {
+  if (root == nullptr) {
+    root = new Node();
     root->ChangeNode(key, value);
     return;
   }
   Node *r = root;
   while (r) {
-    if (r->key == key) r->ChangeNode(key, value);
-    if (key > r->key) r = r->right_child;
-    r = r->left_child;
+    if (!(r->key) || !(r->value)) break;
+    if (*r->key == key) {
+      r->ChangeNode(key, value);
+      break;
+    } else if (key > *r->key) {
+      if (!r->right_child) {
+        r->right_child = new Node();
+        r->AdoptChildren();
+        r = r->right_child;
+        break;
+      }
+      r = r->right_child;
+    } else {
+      if (!r->left_child) {
+        r->left_child = new Node();
+        r->AdoptChildren();
+        r = r->left_child;
+        break;
+      }
+      r = r->left_child;
+    }
   }
+  r->ChangeNode(key, value);
   root->Turn();
 }
 
 int Tree::Find(int key) const {
   Node *r = root;
   while (r) {
-    if (r->key == key) return r->value;
-    if (key > r->key) r = r->right_child;
-    r = r->left_child;
+    if (!(r->key) || !(r->value)) break;
+    if (*r->key == key) return *r->value;
+    if (key > *r->key) {
+      if (!r->right_child) break;
+      r = r->right_child;
+    } else {
+      if (!r->left_child) break;
+      r = r->left_child;
+    }
   }
   throw std::runtime_error("There is no an element with this key");
 }
@@ -75,7 +122,7 @@ void Tree::Node::RightRightTurn() {
 }
 
 void Tree::Node::Turn() {
-  int left_H = left_child->Height(), right_H = right_child->Height();
+  int left_H = LeftHeight(), right_H = RightHeight();
   if (abs(left_H - right_H) <= 1) return;
   if (abs(left_H - right_H) > 2)
     (left_H > right_H) ? left_child->Turn() : right_child->Turn();

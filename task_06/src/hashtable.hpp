@@ -19,5 +19,5 @@ class HashTable {
   std::vector<std::list<std::pair<std::string, int>>> data_;
   size_t Hash(const std::string& key) const;
   void ReHash();
-  size_t Size() const;
+  size_t size = 0;
 };

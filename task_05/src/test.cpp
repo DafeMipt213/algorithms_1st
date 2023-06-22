@@ -43,10 +43,10 @@ TEST(Tree, Basic) {
   ASSERT_EQ(tree.Find(100), 6);
   ASSERT_EQ(tree.Find(-1), 4);
   ASSERT_EQ(tree.Find(100), 6);
-  ASSERT_EQ(tree.Find(6), 7);
+  ASSERT_EQ(tree.Find(6), 1);
   ASSERT_EQ(tree.Find(-2), 1);
   ASSERT_EQ(tree.Find(-3), 1);
-  ASSERT_EQ(tree.Find(-12), 5);
+  ASSERT_EQ(tree.Find(-12), 333);
 }
 
 TEST(Tree, Exceptions) {

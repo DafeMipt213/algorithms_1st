@@ -1,4 +1,4 @@
-int MinStack::GetMin() {
+/* int MinStack::GetMin() {
   Stack finder;
   Stack reverse;
   reverse.Push(stack.Pop());
@@ -14,3 +14,5 @@ int MinStack::GetMin() {
   }
   return finder.Peak();
 }
+
+*/

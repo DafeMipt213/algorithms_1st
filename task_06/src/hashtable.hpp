@@ -1,3 +1,5 @@
+/*
+
 #pragma once
 
 #include <cstddef>
@@ -25,3 +27,6 @@ class HashTable {
   std::vector<Elem*> table;
   std::size_t size = 0;
 };
+
+
+*/

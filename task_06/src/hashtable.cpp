@@ -1,3 +1,5 @@
+/*
+
 #include "hashtable.hpp"
 
 #include <cstddef>
@@ -77,3 +79,4 @@ int HashTable::Find(const std::string& key) const {
 }
 
 size_t HashTable::Size() const { return size; }
+*/

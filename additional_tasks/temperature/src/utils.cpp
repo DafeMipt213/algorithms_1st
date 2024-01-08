@@ -3,6 +3,6 @@
 #include <algorithm>
 
 std::vector<int> CalculateDaysBeforWarmup(
-    const std::vector<float>& temerature) {
+    const std::vector<float> &temerature) {
   return {};
 }
